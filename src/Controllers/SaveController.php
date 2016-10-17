@@ -75,14 +75,14 @@ class SaveController
             filter_var(
                 strip_tags(
                     preg_replace("/<br\s?\/?>/", " ", trim(Flight::request()->data['title']))
-                ), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH
+                ), FILTER_SANITIZE_STRING
             )
         );
         $subtitle = trim(Flight::request()->data['subtitle']);
         $content = Flight::request()->data['content'];
-        $facebook = filter_var(trim(Flight::request()->data['facebook']), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
-        $description = filter_var(trim(Flight::request()->data['description']), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
-        $twitter = filter_var(trim(Flight::request()->data['twitter']), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+        $facebook = filter_var(trim(Flight::request()->data['facebook']), FILTER_SANITIZE_STRING);
+        $description = filter_var(trim(Flight::request()->data['description']), FILTER_SANITIZE_STRING);
+        $twitter = filter_var(trim(Flight::request()->data['twitter']), FILTER_SANITIZE_STRING);
         $vimeo = filter_var(trim(Flight::request()->data['vimeo']), FILTER_SANITIZE_NUMBER_INT);
 
         if (Flight::request()->data['date']) {
