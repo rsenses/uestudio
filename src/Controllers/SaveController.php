@@ -105,9 +105,9 @@ class SaveController
 
         if (!empty(Flight::request()->files['upload']['size'])) {
             $folder = $GLOBALS['config']['uploads_dir'].'images/';
-            $storage = new FileSystem($folder);
+            $storage = new FileSystem($folder.$webName.'/');
             $file = new File('upload', $storage);
-            $image = time().'_'.$this->slugify->slugify(Flight::request()->files['upload']['name']);
+            $image = time().'_'.$this->slugify->slugify($file->getName());
             $file->setName($image);
             $file->addValidations(array(
                 new Mimetype(array('image/jpeg', 'image/png', 'image/gif')),
@@ -119,13 +119,16 @@ class SaveController
                 $file->upload();
                 $imageName = $file->getNameWithExtension();
 
-                if ($GLOBALS['config']['images']) {
-                    foreach ($GLOBALS['config']['images'] as $key => $size) {
+                if (isset($GLOBALS['config']['images'][$webName])) {
+                    foreach ($GLOBALS['config']['images'][$webName] as $key => $size) {
                         $imagine = new Imagine();
-                        $resize = $imagine->open($folder.$image);
-                        $imageSize  = $resize->getSize();
-                        $resize->resize($imageSize->widen($size))
-                            ->save($folder.$key.'_'.$image);
+
+                        $resizable = $imagine->open($folder.$webName.'/'.$imageName);
+
+                        $imageSize  = $resizable->getSize();
+
+                        $resizable->resize($imageSize->widen($size))
+                            ->save($folder.$webName.'/'.$key.'_'.$imageName);
                     }
                 }
             } catch (\Exception $e) {
@@ -149,7 +152,7 @@ class SaveController
         $save->content = $content;
         $save->description = $description;
         if (isset($imageName) && $imageName) {
-            $save->image = $imageName;
+            $save->image = $webName.'/'.$imageName;
         }
         $save->vimeo = $vimeo;
         $save->twitter = $twitter;

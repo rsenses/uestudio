@@ -18,6 +18,52 @@ $GLOBALS['config'] = [
             '544' => 544,
             '282' => 282,
             'th' => 50,
+        ],
+        'innovacionensalud' => [
+            '549' => 549,
+            '225' => 225,
+            'th' => 50,
+        ],
+        'alimentatusalud' => [
+            '345' => 345,
+            'th' => 50,
+        ],
+        'extraordinarios' => [
+            '397' => 397,
+            'th' => 50,
+        ],
+        'nosvemosencasa' => [
+            '390' => 390,
+            '737' => 737,
+            'th' => 50
+        ],
+        'potenciatupyme' => [
+            '700' => 700,
+            '320' => 320,
+            '304' => 304,
+            'th' => 50
+        ],
+        'theventurespain' => [
+            '824' => 824,
+            '504' => 504,
+            '359' => 359,
+            '278' => 278,
+            'th' => 50,
+        ],
+        'unpaseoporelprado' => [
+            '495' => 495,
+            '310' => 310,
+            'th' => 50,
+        ],
+        'vivirmasymejor' => [
+            '400' => 400,
+            '305' => 305,
+            'th' => 50,
+        ],
+        'yodonabeautybrandsplace' => [
+            '544' => 544,
+            '282' => 282,
+            'th' => 50,
         ]
     ],
     'locales' => [
@@ -28,17 +74,17 @@ $GLOBALS['config'] = [
             'alimentatusalud' => 'Alimenta tu Salud',
             'copasamsung' => 'Copa Samsung',
             'pequenosjugadores' => 'Pequeños Jugadores',
-            // 'elclubdelabarba' => 'El Club de la Barba',
-            // 'entregados' => 'Entregados',
+            'elclubdelabarba' => 'El Club de la Barba',
+            'entregados' => 'Entregados',
             'extraordinarios' => 'Extraordinarios',
             'innovacionensalud' => 'Innovación en Salud',
-            // 'mastercard' => 'Mastercard',
+            'mastercard' => 'Mastercard',
             // 'nosmovemos' => 'Nos Movemos',
             'nosvemosencasa' => 'Nos Vemos en Casa',
             'otrasmanerasdevivir' => 'Otras Maneras de Vivir',
-            // 'paddockclub' => 'Paddock Club',
+            'paddockclub' => 'Paddock Club',
             'potenciatupyme' => 'Potencia tu Pyme',
-            // 'therightway' => 'The Right Way',
+            'therightway' => 'The Right Way',
             'theventurespain' => 'The Venture Spain',
             'unpaseoporelprado' => 'Un Paseo por el Prado',
             'vivirmasymejor' => 'Vivir Más y Mejor',
