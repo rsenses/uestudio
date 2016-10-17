@@ -1,0 +1,87 @@
+<?php $view->extend('layout.phtml') ?>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <form action="/users/search" method="get" name="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar usuarios..." name="term" value="<?php echo isset($searchTerm) && $searchTerm ? $searchTerm : null; ?>">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="submit">Buscar</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-12 col-sm-6 text-right">
+            <a href="/users/edit" class="btn btn-info"><i class="fa fa-plus"></i> Nuevo Usuario</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th width="40%">Mail</th>
+                        <th width="54%">Nombre</th>
+                        <th width="3%"></th>
+                        <th width="3%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($content)) : ?>
+                    <?php foreach ($content as $key => $value) : ?>
+                    <tr>
+                        <td><a href="/users/edit/<?php echo $value['id']; ?>/"><?php echo $value['email']; ?></a></td>
+                        <td><a href="/users/edit/<?php echo $value['id']; ?>/"><?php echo $value['first_name']; ?> <?php echo $value['last_name']; ?></a></td>
+                        <td><a href="/users/edit/<?php echo $value['id']; ?>/" class="editar"><i class="fa fa-pencil-square fa-lg"></i></a></td>
+                        <td><a href="/users/delete/<?php echo $value['id']; ?>/" onclick="return confirmar('¿Está seguro que desea eliminar este usuario?')" class="borrar"><i class="fa fa-trash fa-lg"></i></a></td>
+                    </tr>
+                    <?php endforeach ?>
+                    <?php else : ?>
+                    <tr>
+                        <td colspan="4">Actualmente no existe ningún contenido</td>
+                    </tr>
+                    <?php endif ?>
+                </tbody>
+            </table>
+            <?php if ($paginator && ($paginator->getPrevUrl() || $paginator->getNextUrl())) : ?>
+            <div class="row">
+                <div class="col-xs-12 paginator text-center">
+                    <ul class="pagination">
+                        <?php if ($paginator->getPrevUrl()) : ?>
+                            <li>
+                                <a href="<?php echo $paginator->getPrevUrl(); ?>">
+                                    <i class="icon-chevron-left"></i> Anterior
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php foreach ($paginator->getPages() as $page) : ?>
+                            <?php if ($page['url']) : ?>
+                                <li <?php echo $page['isCurrent'] ? 'class="active"' : ''; ?>>
+                                    <a href="<?php echo $page['url']; ?>"><?php echo $page['num']; ?></a>
+                                </li>
+                            <?php else: ?>
+                                <li class="disabled"><span><?php echo $page['num']; ?></span></li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                        <?php if ($paginator->getNextUrl()) : ?>
+                            <li><a href="<?php echo $paginator->getNextUrl(); ?>">Siguiente <i class="icon-chevron-right"></i></a></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<?php $view['slots']->start('scripts') ?>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        function confirmar(mensaje) {
+            return confirm(mensaje);
+        }
+    </script>
+<?php $view['slots']->stop() ?>

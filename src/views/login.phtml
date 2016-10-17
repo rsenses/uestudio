@@ -1,0 +1,47 @@
+<?php $view->extend('layout.phtml') ?>
+<?php $view['slots']->set('title', 'Acceso de Usuarios') ?>
+<?php $view['slots']->set('description', 'Página de acceso de usuarios a la administración de UECluster.') ?>
+<?php $view['slots']->set('header', '') ?>
+
+<section class="container">
+    <div class="row">
+        <article class="col-xs-12 col-sm-6 col-sm-offset-3">
+            <?php if (isset($_SESSION) && $message = Joelvardy\Flash::message()) : ?>
+                <?php foreach ($message as $key => $value): ?>
+                    <div class="alert alert-<?php echo $key ?> alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p><?php echo $value[0] ?></p>
+                    </div>
+                <?php endforeach ?>
+            <?php endif ?>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p><strong>Acceso de usuarios</strong></p>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="/users/login/<?php echo $url; ?>/" method="post">
+                        <input type="hidden" name="_token" value="<?php echo $token ?>">
+                        <div class="form-group hidden">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" placeholder="Enter name" name="name" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" class="form-control" placeholder="Introduce tu email" name="email" id="email" value="<?php echo $email; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña<!--  <a href="/users/forgotpassword"><small>(¿Has olvidado tu contraseña?)</small></a> --></label>
+                            <input type="password" class="form-control" placeholder="Introduce tu contraseña" name="password" id="password">
+                        </div>
+                        <button type="submit" class="btn btn-info" name="Submit">Acceder</button>
+                    </form>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+
+<?php $view['slots']->start('scripts') ?>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<?php $view['slots']->stop() ?>

@@ -1,0 +1,5 @@
+.DS_Store
+src/env.php
+vendor/
+storage/
+public/uploads/

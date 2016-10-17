@@ -1,0 +1,311 @@
+<?php $view->extend('layout.phtml') ?>
+<?php $content = $data ? $data : $content ?>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <form action="/save<?php echo $id ? '/'.$id : '' ?>" method="post" enctype="multipart/form-data" id="videoForm">
+                <div class="alert alert-warning">
+                    <div class="form-group<?php echo isset($errors['webname']) ? ' has-error' : '' ?>">
+                        <label for="web">Seleccione la página web a la que pertenece el contenido</label>
+                        <select class="form-control" id="web" name="webname" required>
+                            <option value="">-- Selecciona la web --</option>
+                            <?php foreach ($GLOBALS['config']['enum']['webs_name'] as $key => $name) : ?>
+                                <option value="<?php echo $key ?>"<?php echo $key === $content['webname'] ? ' selected' : '' ?>><?php echo $name ?></option>
+                            <?php endforeach ?>
+                        </select>
+                        <?php if (isset($errors['webname'])) : ?>
+                            <span class="help-block"><?php echo $errors['webname'][0] ?></span>
+                        <?php endif ?>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group<?php echo isset($errors['title']) ? ' has-error' : '' ?>">
+                    <label for="title">Título</label>
+                    <input class="form-control" name="title" id="title" placeholder="Título" type="text" value="<?php echo $view->escape($content['title']) ?>" required>
+                    <?php if (isset($errors['title'])) : ?>
+                        <span class="help-block"><?php echo $errors['title'][0] ?></span>
+                    <?php endif ?>
+                </div>
+                <div class="form-group<?php echo isset($errors['subtitle']) ? ' has-error' : '' ?>">
+                    <label for="subtitle">Subtítulo</label>
+                    <input class="form-control" name="subtitle" id="subtitle" placeholder="Subtítulo" type="text" value="<?php echo $view->escape($content['subtitle']) ?>">
+                    <?php if (isset($errors['subtitle'])) : ?>
+                        <span class="help-block"><?php echo $errors['subtitle'][0] ?></span>
+                    <?php endif ?>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group<?php echo isset($errors['date']) ? ' has-error' : '' ?>">
+                            <label for="date">Fecha</label>
+                            <div class="input-group">
+                                <input class="form-control" name="date" id="date" placeholder="Fecha" type="text" value="<?php echo $view->escape($content['date']) ?>">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                            </div>
+                            <?php if (isset($errors['date'])) : ?>
+                                <span class="help-block"><?php echo $errors['date'][0] ?></span>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group<?php echo isset($errors['section']) ? ' has-error' : '' ?>">
+                            <label for="sectionTag">Sección</label>
+                            <div class="input-group">
+                                <input class="form-control" name="section" id="sectionTag" placeholder="Sección" type="text" value="<?php echo $view->escape($content['section']) ?>" autocomplete="off" required>
+                                <div class="input-group-addon"><i class="fa fa-bookmark"></i></div>
+                            </div>
+                            <?php if (isset($errors['section'])) : ?>
+                                <span class="help-block"><?php echo $errors['section'][0] ?></span>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group<?php echo isset($errors['tags']) ? ' has-error' : '' ?>">
+                            <label for="tags">Etiquetas</label>
+                            <div class="input-group">
+                                <input class="form-control" name="tags" id="tags" placeholder="Etiquetas" type="text" value="<?php echo $view->escape($content['tags']) ?>" autocomplete="off">
+                                <div class="input-group-addon"><i class="fa fa-tags"></i></div>
+                            </div>
+                            <?php if (isset($errors['tags'])) : ?>
+                                <span class="help-block"><?php echo $errors['tags'][0] ?></span>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group<?php echo isset($errors['vimeo']) ? ' has-error' : '' ?>">
+                            <label for="vimeo">ID del vídeo de Vimeo</label>
+                            <div class="input-group">
+                                <input class="form-control" id="vimeo" name="vimeo" placeholder="ID del vídeo de Vimeo" type="text" value="<?php echo $view->escape($content['vimeo']) ?>">
+                                <div class="input-group-addon"><i class="fa fa-vimeo-square"></i></div>
+                            </div>
+                            <?php if (isset($errors['vimeo'])) : ?>
+                                <span class="help-block"><?php echo $errors['vimeo'][0] ?></span>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="alert <?php echo isset($errors['image']) ? 'alert-danger' : 'alert-info' ?>">
+                            <div class="form-group">
+                                <label for="image">
+                                    Imágen
+                                    <div class="size">
+                                        <span class="unpaseoporelprado">(352x199)</span>
+                                        <span class="alimentatusalud">(720x405)</span>
+                                        <span class="innovacionensalud">(768x378)</span>
+                                        <span class="pequenosjugadores">(735x413)</span>
+                                        <span class="nosvemosencasa">(1280x720)</span>
+                                        <span class="potenciatupyme">(1280x720)</span>
+                                        <span class="yodonabeautybrandsplace">(735x489)</span>
+                                        <span class="copasamsung">(1080x634)</span>
+                                        <span class="theventurespain">(1509x850); sino (824x464)</span>
+                                        <span class="vivirmasymejor">(733x489); si es CONTENT o GALLERY (400x367)</span>
+                                        <span class="extraordinarios">(980x551) si es una píldora (102x102)</span>
+                                    </div>
+                                </label>
+                                <?php if (isset($errors['image'])) : ?>
+                                    <span class="help-block"><?php echo $errors['image'][0] ?></span>
+                                <?php endif ?>
+                                <input name="upload" id="image" type="file" accept="image/jpeg,image/gif,image/png">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group<?php echo isset($errors['content']) ? ' has-error' : '' ?>">
+                    <label for="content">Contenido</label>
+                    <textarea type="text" class="form-control" id="content" name="content"><?php echo $content['content'] ?></textarea>
+                    <?php if (isset($errors['content'])) : ?>
+                        <span class="help-block"><?php echo $errors['content'][0] ?></span>
+                    <?php endif ?>
+                </div>
+                <div class="alert alert-success">
+                    <div class="form-group<?php echo isset($errors['twitter']) ? ' has-error' : '' ?>">
+                        <label for="twitter">Texto para Twitter</label>
+                        <div class="input-group">
+                            <input class="form-control" id="twitter" name="twitter" placeholder="Texto Twitter" type="text" value="<?php echo $view->escape($content['twitter']) ?>" required>
+                            <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
+                        </div>
+                        <?php if (isset($errors['twitter'])) : ?>
+                            <span class="help-block"><?php echo $errors['twitter'][0] ?></span>
+                        <?php endif ?>
+                    </div>
+                    <div class="form-group<?php echo isset($errors['facebook']) ? ' has-error' : '' ?>">
+                        <label for="facebook">Texto para Facebook</label>
+                        <textarea type="text" class="form-control" id="facebook" name="facebook" required placeholder="Texto Facebook"><?php echo $view->escape(stripslashes($content['facebook'])) ?></textarea>
+                        <?php if (isset($errors['facebook'])) : ?>
+                            <span class="help-block"><?php echo $errors['facebook'][0] ?></span>
+                        <?php endif ?>
+                    </div>
+                    <div class="form-group<?php echo isset($errors['description']) ? ' has-error' : '' ?>">
+                        <label for="description">Meta Descripción Google</label>
+                        <div class="input-group">
+                            <input class="form-control" id="description" name="description" placeholder="Meta Descripción Google" type="text" value="<?php echo $view->escape($content['description']) ?>" required>
+                            <div class="input-group-addon"><i class="fa fa-google"></i></div>
+                        </div>
+                        <?php if (isset($errors['description'])) : ?>
+                            <span class="help-block"><?php echo $errors['description'][0] ?></span>
+                        <?php endif ?>
+                    </div>
+                </div>
+                <div class="alert alert-info">
+                    <p>
+                        <strong>Opciones</strong>
+                    </p>
+                    <?php if ($content['options']) : ?>
+                        <?php foreach (json_decode($content['options'], true) as $key => $option) : ?>
+                            <div class="form-group">
+                                <div class="col-xs-6 col-sm-3">
+                                    <input class="form-control" name="option_name[]" type="text" list="options" required value="<?php echo $view->escape($key) ?>">
+                                </div>
+                                <div class="col-xs-6 col-sm-9">
+                                    <input class="form-control" name="option[]" value="<?php echo $view->escape($option) ?>" type="text" required>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        <?php endforeach ?>
+                    <?php endif ?>
+                    <datalist id="options">
+                        <?php foreach ($GLOBALS['config']['enum']['options'] as $option) : ?>
+                            <option value="<?php echo $option ?>"><?php echo $option ?></option>
+                        <?php endforeach ?>
+                    </datalist>
+                    <div class="form-group clone">
+                        <div class="col-xs-6 col-sm-3">
+                            <select class="form-control" name="option_name[]">
+                                <?php foreach ($GLOBALS['config']['enum']['options_name'] as $key => $name) : ?>
+                                    <option value="<?php echo $name ?>"><?php echo $key ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                        <div class="col-xs-6 col-sm-9">
+                            <input class="form-control option-input" name="option[]" placeholder="Opción, doble click o escribe para ver las opciones" type="text" list="options" autocomplete="off">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info btn-lg">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php $view['slots']->start('scripts') ?>
+    <!-- Autocomplete -->
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script>
+        $('#web').change(function() {
+            $('.size span').hide();
+            var section = $(this).val();
+            if (section) {
+                $('.size .'+section).show();
+            } else {
+                $('.size .default').show();
+            }
+        });
+        $(document).ready(function() {
+            var section = $('#web').val();
+            if (section) {
+                $('.size .'+section).show();
+            } else {
+                $('.size .default').show();
+            }
+        });
+    </script>
+    <script>
+    $(function() {
+        var tags = <?php echo $autocomplete ?>;
+        function split(val) {
+            return val.split(/,\s*/);
+        }
+        function extractLast(term) {
+            return split(term).pop();
+        }
+        $("#sectionTag").autocomplete({
+            source: function( request, response ) {
+            // delegate back to autocomplete, but extract the last term
+                response( $.ui.autocomplete.filter(
+                tags, extractLast( request.term ) ) );
+            },
+            focus: function() {
+                // prevent value inserted on focus
+                return false;
+            },
+            select: function(event, ui) {
+                var terms = split(this.value);
+                // remove the current input
+                terms.pop();
+                // add the selected item
+                terms.push(ui.item.value);
+                // add placeholder to get the comma-and-space at the end
+                terms.push('');
+                this.value = terms.join(', ');
+                this.value = this.value.substring(0, this.value.length -2);
+                return false;
+            }
+        });
+        $("#tags").autocomplete({
+            source: function( request, response ) {
+            // delegate back to autocomplete, but extract the last term
+                response( $.ui.autocomplete.filter(
+                tags, extractLast( request.term ) ) );
+            },
+            focus: function() {
+                // prevent value inserted on focus
+                return false;
+            },
+            select: function(event, ui) {
+                var terms = split(this.value);
+                // remove the current input
+                terms.pop();
+                // add the selected item
+                terms.push(ui.item.value);
+                // add placeholder to get the comma-and-space at the end
+                terms.push('');
+                this.value = terms.join(', ');
+                this.value = this.value.substring(0, this.value.length -2);
+                return false;
+            }
+        });
+    });
+    $('#videoForm').on('change keyup', '.option-input', function () {
+        var empty = false;
+        $('.option-input:text').each(function() {
+            if ($(this).val() === '') {
+                empty = true;
+            }
+        });
+        if (!empty) {
+            $(".clone").first().clone().find(".option-input:text").val("").end().appendTo($(".clone").parent());
+            empty = false;
+        }
+    });
+    </script>
+    <!-- markItUp! -->
+    <script src="/js/markitup/jquery.markitup.js"></script>
+    <!-- InlineUpload -->
+    <script src="/js/markitup/jquery.inlineupload.js"></script>
+    <!-- markItUp! toolbar settings -->
+    <script src="/js/markitup/sets/html/set.js"></script>
+    <!-- markItUp! Init -->
+    <script>
+    $(document).ready(function() {
+        $(".form-group #content").markItUp(mySettings);
+    });
+    </script>
+    <!-- DatePicker -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.1/compressed/picker.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.1/compressed/picker.date.js"></script>
+    <script>
+        $('#date').pickadate({
+            format: 'yyyy-mm-dd'
+        });
+    </script>
+<?php $view['slots']->stop() ?>

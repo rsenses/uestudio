@@ -1,0 +1,33 @@
+.markItUp .markItUpButton a {
+    color: #7B8A8B;
+    text-align: center;
+}
+.markItUp .markItUpButton a:hover {
+    color: #fff;
+}
+.markItUpInlineUpload {
+    position: absolute;
+    z-index: 100;
+    width: 300px;
+    background-color: #fff;
+    border: 2px solid #DCE4EC;
+    border-top-color: #fff;
+    margin: 22px 0 0 40px;
+    padding: 1em;
+}
+.markItUpInlineUpload > div {
+    position: relative;
+}
+.markItUpInlineUpload input {
+    margin-bottom: 5px;
+}
+#inline_upload_close {
+    float: right;
+    width: 16px;
+    height: 16px;
+    /*background: transparent url(images/cancel.png) 0 0 no-repeat;*/
+    cursor: pointer;
+}
+#inline_upload_iframe {
+    display: none;
+}

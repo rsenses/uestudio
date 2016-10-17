@@ -1,0 +1,101 @@
+<?php $view->extend('layout.phtml') ?>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <form action="/search" method="get" name="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar contenido..." name="term" value="<?php echo isset($searchTerm) && $searchTerm ? $searchTerm : null ?>">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="submit">Buscar</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-12 col-sm-6 text-right">
+            <a href="/edit" class="btn btn-info"><i class="fa fa-plus"></i> Nuevo Vídeo</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th width="37%">Título</th>
+                        <th width="10%">Web</th>
+                        <th width="14%">Sección</th>
+                        <th width="18%">Etiquetas</th>
+                        <th width="12%">Fecha</th>
+                        <th width="3%"></th>
+                        <th width="3%"></th>
+                        <th width="3%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($content)) : ?>
+                    <?php foreach ($content as $key => $value) : ?>
+                    <tr<?php echo $value['active'] ? null : ' class="deactivated"' ?>>
+                        <td><a href="/edit/<?php echo $view->escape($value['id']) ?>"><?php echo strip_tags(preg_replace("/<br\s?\/?>/", " ", $value['title'])) ?></a></td>
+                        <td><?php echo $view->escape($value['section']) ?></td>
+                        <td><?php echo $view->escape($value['sections']) ?></td>
+                        <td><?php echo $view->escape($value['tags']) ?></td>
+                        <td><?php echo strftime("%Y-%m-%d %H:%M", strtotime($value['date'])) ?></td>
+                        <td><a href="/edit/<?php echo $view->escape($value['id']) ?>" class="editar"><i class="fa fa-pencil-square fa-lg"></i></a></td>
+                        <td>
+                            <?php if ($value['active']) : ?>
+                                <a href="/edit/deactive/<?php echo $view->escape($value['id']) ?>" onclick="return confirmar('¿Seguro que quieres desactivar esta entrada?')" class="borrar"><i class="fa fa-eye-slash fa-lg"></i></a>
+                            <?php else : ?>
+                                <a href="/edit/active/<?php echo $view->escape($value['id']) ?>" onclick="return confirmar('¿Seguro que quieres activar esta entrada?')"><i class="fa fa-eye fa-lg"></i></a>
+                            <?php endif ?>
+                        </td>
+                        <td><a href="/delete/<?php echo $view->escape($value['id']) ?>" onclick="return confirmar('¿Estás seguro que quieres eliminar esta entrada?')" class="borrar"><i class="fa fa-trash fa-lg"></i></a></td>
+                    </tr>
+                    <?php endforeach ?>
+                    <?php else : ?>
+                    <tr>
+                        <td colspan="5">Actualmente no existe ningún contenido</td>
+                    </tr>
+                    <?php endif ?>
+                </tbody>
+            </table>
+            <?php if ($paginator && ($paginator->getPrevUrl() || $paginator->getNextUrl())) : ?>
+            <div class="row">
+                <div class="col-xs-12 paginator text-center">
+                    <ul class="pagination">
+                        <?php if ($paginator->getPrevUrl()) : ?>
+                            <li>
+                                <a href="<?php echo $paginator->getPrevUrl() ?>">
+                                    <i class="icon-chevron-left"></i> Anterior
+                                </a>
+                            </li>
+                        <?php endif ?>
+                        <?php foreach ($paginator->getPages() as $page) : ?>
+                            <?php if ($page['url']) : ?>
+                                <li <?php echo $page['isCurrent'] ? 'class="active"' : '' ?>>
+                                    <a href="<?php echo $page['url'] ?>"><?php echo $page['num'] ?></a>
+                                </li>
+                            <?php else : ?>
+                                <li class="disabled"><span><?php echo $page['num'] ?></span></li>
+                            <?php endif ?>
+                        <?php endforeach ?>
+                        <?php if ($paginator->getNextUrl()) : ?>
+                            <li><a href="<?php echo $paginator->getNextUrl() ?>">Siguiente <i class="icon-chevron-right"></i></a></li>
+                        <?php endif ?>
+                    </ul>
+                </div>
+            </div>
+            <?php endif ?>
+        </div>
+    </div>
+</div>
+
+<?php $view['slots']->start('scripts') ?>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        function confirmar(mensaje) {
+            return confirm(mensaje);
+        }
+    </script>
+<?php $view['slots']->stop() ?>

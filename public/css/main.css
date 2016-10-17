@@ -1,0 +1,65 @@
+.navbar-default .navbar-brand, h1 {
+    color: #0089c4;
+}
+.table {
+    margin-top: 20px;
+}
+.controls {
+    display: none;
+    width: 100%;
+    float: left
+}
+tr:hover .controls, tr:focus .controls {
+    display: block
+}
+.deactivated {
+    opacity: .5;
+}
+.editar {
+    color: #33486b;
+    font-size: .9em;
+    text-decoration: underline
+}
+.important {
+    color: #ff5500;
+    font-size: .9em;
+    text-decoration: underline
+}
+.borrar {
+    color: #e26464;
+    font-size: .9em;
+    text-decoration: underline
+}
+.editar:hover, .borrar:hover {
+    color: #777
+}
+.work ul, .work li {
+    margin: 0;
+    padding: 0;
+}
+.work li {
+    list-style: none;
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+.reorder-highlight {
+    background-color: #fffae3;
+    border: 1px solid #fff4c1;
+    width: 298px;
+    height: 152px;
+    margin-bottom: 6px;
+}
+.well.bg-info {
+    background-color: #D9EDF7;
+}
+textarea#content {
+    height: 300px;
+}
+
+.size {
+    display: inline-block;
+}
+.size span {
+    display: none;
+}

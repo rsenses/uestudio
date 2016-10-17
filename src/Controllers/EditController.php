@@ -1,0 +1,92 @@
+<?php
+
+namespace Expomark\Controllers;
+
+use ORM;
+use Cartalyst\Sentry\Facades\Native\Sentry as Sentry;
+use Flight;
+
+class EditController
+{
+    public function __construct()
+    {
+        Flight::db();
+        Flight::eloquent();
+        if (!Sentry::check()) {
+            Flight::redirect('/users/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+        }
+    }
+
+    // VIDEOS  **********************************************************************************************************
+    public function videosAction($id, $content = null)
+    {
+        if ($id) {
+            $content = ORM::for_table('videos')
+                ->select('videos.id')
+                ->select('videos.title')
+                ->select('videos.subtitle')
+                ->select('videos.content')
+                ->select('videos.description')
+                ->select('videos.image')
+                ->select('videos.slider')
+                ->select('videos.vertical')
+                ->select('videos.youtube')
+                ->select('videos.vimeo')
+                ->select('videos.external_url')
+                ->select('videos.twitter')
+                ->select('videos.facebook')
+                ->select('videos.styles')
+                ->select('videos.date')
+                ->select('videos.section', 'webname')
+                ->select('videos.options')
+                ->select_expr('GROUP_CONCAT(DISTINCT `tags`.`tag`)', 'tags')
+                ->select_expr('GROUP_CONCAT(DISTINCT `sectionTags`.`tag`)', 'section')
+                ->left_outer_join('tagLinks', array('tagLinks.content_id', '=', 'videos.id'))
+                ->left_outer_join('tags', array('tags.id', '=', 'tagLinks.tag_id'))
+                ->left_outer_join('section', array('section.content_id', '=', 'videos.id'))
+                ->left_outer_join('tags', array('sectionTags.id', '=', 'section.tag_id'), 'sectionTags')
+                ->group_by('videos.id')
+                ->order_by_desc('videos.id')
+                ->limit(1)
+                ->find_one($id)
+                ->as_array();
+        }
+
+        $autocomplete = ORM::for_table('tags')
+            ->select('tag')
+            ->find_many();
+        $tags = implode(', ', array_map(function ($entry) {
+            return $entry['tag'];
+        }, $autocomplete));
+        $tags = explode(', ', $tags);
+
+        // devolvemos la coleccion para que la vista la presente.
+        echo Flight::view()->render(
+            'editvideos.phtml',
+            array(
+                'section' => 'videos',
+                'autocomplete' => isset($tags) ? json_encode($tags) : null,
+                'content' => $content,
+                'id' => $id,
+            )
+        );
+    }
+
+    public static function activeAction($id)
+    {
+        $video = ORM::for_table('videos')->find_one($id);
+        $video->active = 1;
+        $video->save();
+
+        Flight::redirect(filter_var(Flight::request()->referrer, FILTER_SANITIZE_URL));
+    }
+
+    public static function deactiveAction($id)
+    {
+        $video = ORM::for_table('videos')->find_one($id);
+        $video->active = 0;
+        $video->save();
+
+        Flight::redirect(filter_var(Flight::request()->referrer, FILTER_SANITIZE_URL));
+    }
+}

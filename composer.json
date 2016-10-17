@@ -1,0 +1,32 @@
+{
+    "require": {
+        "j4mie/idiorm": "1.5.*",
+        "cocur/slugify": "1.4",
+        "codeguy/upload": "1.*",
+        "cartalyst/sentry": "2.1.*",
+        "illuminate/support": "5.0.*",
+        "illuminate/contracts": "5.0.*",
+        "illuminate/container": "5.0.*",
+        "illuminate/database": "5.0.*",
+        "jasongrimes/paginator": "1.*",
+        "joelvardy/flash": "dev-master",
+        "kunststube/csrfp": "dev-master",
+        "mikecao/flight": "^1.2",
+        "symfony/templating": "^2.8",
+        "symfony/translation": "^2.8",
+        "ircmaxell/password-compat": "^1.0",
+        "imagine/imagine": "~0.5.0",
+        "aura/filter": "^2.2",
+        "respect/validation": "^1.1"
+    },
+    "autoload": {
+        "files": [
+            "src/config.php",
+            "src/env.php",
+            "src/routes.php"
+        ],
+        "psr-4": {
+            "Expomark\\": "src/"
+        }
+    }
+}

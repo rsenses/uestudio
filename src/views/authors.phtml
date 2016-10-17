@@ -1,0 +1,89 @@
+<?php $view->extend('layout.phtml') ?>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <form action="/author/search" method="get" name="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar autores..." name="term" value="<?php echo isset($searchTerm) && $searchTerm ? $searchTerm : null ?>">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="submit">Buscar</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-12 col-sm-6 text-right">
+            <a href="/author/edit" class="btn btn-info"><i class="fa fa-plus"></i> Nuevo Author</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th width="40%">Nombre</th>
+                        <th width="25%">Cargo</th>
+                        <th width="10%">Twitter</th>
+                        <th width="17%">Web</th>
+                        <th width="3%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($authors)) : ?>
+                    <?php foreach ($authors as $key => $value) : ?>
+                    <tr>
+                        <td><a href="/author/edit/<?php echo $value->author_id ?>/"><?php echo $value->name ?></a></td>
+                        <td><?php echo $value->position ?></td>
+                        <td><?php echo $value->twitter ?></td>
+                        <td><?php echo $value->link ?></td>
+                        <td><a href="/author/edit/<?php echo $value->author_id ?>/" class="editar"><i class="fa fa-pencil-square fa-lg"></i></a></td>
+                    </tr>
+                    <?php endforeach ?>
+                    <?php else : ?>
+                    <tr>
+                        <td colspan="4">Actualmente no existe ningún contenido</td>
+                    </tr>
+                    <?php endif ?>
+                </tbody>
+            </table>
+            <?php if ($paginator && ($paginator->getPrevUrl() || $paginator->getNextUrl())) : ?>
+            <div class="row">
+                <div class="col-xs-12 paginator text-center">
+                    <ul class="pagination">
+                        <?php if ($paginator->getPrevUrl()) : ?>
+                            <li>
+                                <a href="<?php echo $paginator->getPrevUrl() ?>">
+                                    <i class="icon-chevron-left"></i> Anterior
+                                </a>
+                            </li>
+                        <?php endif ?>
+                        <?php foreach ($paginator->getPages() as $page) : ?>
+                            <?php if ($page['url']) : ?>
+                                <li <?php echo $page['isCurrent'] ? 'class="active"' : '' ?>>
+                                    <a href="<?php echo $page['url'] ?>"><?php echo $page['num'] ?></a>
+                                </li>
+                            <?php else: ?>
+                                <li class="disabled"><span><?php echo $page['num'] ?></span></li>
+                            <?php endif ?>
+                        <?php endforeach ?>
+                        <?php if ($paginator->getNextUrl()) : ?>
+                            <li><a href="<?php echo $paginator->getNextUrl() ?>">Siguiente <i class="icon-chevron-right"></i></a></li>
+                        <?php endif ?>
+                    </ul>
+                </div>
+            </div>
+            <?php endif ?>
+        </div>
+    </div>
+</div>
+
+<?php $view['slots']->start('scripts') ?>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        function confirmar(mensaje) {
+            return confirm(mensaje);
+        }
+    </script>
+<?php $view['slots']->stop() ?>
