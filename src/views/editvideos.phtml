@@ -157,6 +157,23 @@
                     <p>
                         <strong>Opciones</strong>
                     </p>
+                    <div class="form-group<?php echo isset($errors['author']) ? ' has-error' : '' ?>">
+                        <div class="col-xs-6 col-sm-3">
+                                <input class="form-control" name="author_name" type="text" value="author">
+                            </div>
+                        <div class="col-sm-9">
+                            <select class="form-control select2" name="author" id="author">
+                                <option disabled value<?php echo $content ? '' : ' selected' ?>></option>
+                                <?php foreach ($authors as $author) : ?>
+                                    <option value="<?php echo $author->author_id ?>"<?php echo $author->author_id === $content['author_id'] ? ' selected' : '' ?>><?php echo $author->name ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <?php if (isset($errors['author'])) : ?>
+                                <span class="help-block"><?php echo $errors['author'][0] ?></span>
+                            <?php endif ?>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <?php if ($content['options']) : ?>
                         <?php foreach (json_decode($content['options'], true) as $key => $option) : ?>
                             <div class="form-group">
@@ -184,7 +201,12 @@
                             </select>
                         </div>
                         <div class="col-xs-6 col-sm-9">
-                            <input class="form-control option-input" name="option[]" placeholder="Opción, doble click o escribe para ver las opciones" type="text" list="options" autocomplete="off">
+                            <select class="form-control select2" name="option[]" id="option">
+                                <option disabled selected value></option>
+                                <?php foreach ($GLOBALS['config']['enum']['options'] as $option) : ?>
+                                    <option><?php echo $option ?></option>
+                                <?php endforeach ?>
+                            </select>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -306,6 +328,12 @@
     <script>
         $('#date').pickadate({
             format: 'yyyy-mm-dd'
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".select2").select2();
         });
     </script>
 <?php $view['slots']->stop() ?>

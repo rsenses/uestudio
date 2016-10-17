@@ -43,6 +43,7 @@ class SaveController
             'section' => v::stringType()->notEmpty(),
             'tags' => v::stringType(),
             'content' => v::stringType()->notEmpty(),
+            'author' => v::intVal()->notEmpty(),
             'facebook' => v::stringType()->notEmpty()->length(1, 300),
             'description' => v::stringType()->notEmpty()->length(1, 160),
             'twitter' => v::stringType()->notEmpty()->length(1, 140),
@@ -84,6 +85,7 @@ class SaveController
         $description = filter_var(trim(Flight::request()->data['description']), FILTER_SANITIZE_STRING);
         $twitter = filter_var(trim(Flight::request()->data['twitter']), FILTER_SANITIZE_STRING);
         $vimeo = filter_var(trim(Flight::request()->data['vimeo']), FILTER_SANITIZE_NUMBER_INT);
+        $author = filter_var(trim(Flight::request()->data['author']), FILTER_SANITIZE_NUMBER_INT);
 
         if (Flight::request()->data['date']) {
             $dateTime = Flight::request()->data['date'];
@@ -157,6 +159,7 @@ class SaveController
         $save->vimeo = $vimeo;
         $save->twitter = $twitter;
         $save->facebook = $facebook;
+        $save->author_id = $author;
         $save->date = $dateTime;
         $save->section = $webName;
         $save->options = json_encode($options);

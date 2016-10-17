@@ -38,6 +38,7 @@ class EditController
                 ->select('videos.styles')
                 ->select('videos.date')
                 ->select('videos.section', 'webname')
+                ->select('videos.author_id')
                 ->select('videos.options')
                 ->select_expr('GROUP_CONCAT(DISTINCT `tags`.`tag`)', 'tags')
                 ->select_expr('GROUP_CONCAT(DISTINCT `sectionTags`.`tag`)', 'section')
@@ -60,12 +61,18 @@ class EditController
         }, $autocomplete));
         $tags = explode(', ', $tags);
 
+        $authors = ORM::for_table('author')
+            ->select('author_id')
+            ->select('name')
+            ->find_many();
+
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'editvideos.phtml',
             array(
                 'section' => 'videos',
                 'autocomplete' => isset($tags) ? json_encode($tags) : null,
+                'authors' => $authors,
                 'content' => $content,
                 'id' => $id,
             )
