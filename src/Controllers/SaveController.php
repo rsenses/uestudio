@@ -3,6 +3,7 @@
 namespace Expomark\Controllers;
 
 use ORM;
+use \DateTime;
 use Cocur\Slugify\Slugify;
 use Upload\Storage\FileSystem;
 use Upload\File;
@@ -20,7 +21,7 @@ use Expomark\Validation\Validator;
 class SaveController
 {
     private $slugify;
-    private $filter;
+    private $validator;
 
     public function __construct()
     {
@@ -39,7 +40,7 @@ class SaveController
         $validationArray = [
             'webname' => v::stringType()->noWhitespace()->notEmpty()->length(1, 255)->in(array_keys($GLOBALS['config']['enum']['webs_name'])),
             'title' => v::stringType()->notEmpty()->length(1, 255)->unique('videos', 'url', $id),
-            'subtitle' => v::stringType()->length(null, 255),
+            'subtitle' => v::stringType(),
             'section' => v::stringType()->notEmpty(),
             'tags' => v::stringType(),
             'content' => v::stringType()->notEmpty(),
@@ -105,10 +106,10 @@ class SaveController
             }
         }
 
-        if (!empty(Flight::request()->files['upload']['size'])) {
+        if (!empty(Flight::request()->files['image']['size'])) {
             $folder = $GLOBALS['config']['uploads_dir'].'images/';
             $storage = new FileSystem($folder.$webName.'/');
-            $file = new File('upload', $storage);
+            $file = new File('image', $storage);
             $image = time().'_'.$this->slugify->slugify($file->getName());
             $file->setName($image);
             $file->addValidations(array(

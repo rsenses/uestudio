@@ -145,6 +145,7 @@ class UserController
             if ($this->signer->validateSignature(Flight::request()->data['_token'])) {
                 $email = empty(Flight::request()->data['email']) ? null : (Flight::request()->data['email'] === 'Email') ? null : filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
                 $password = empty(Flight::request()->data['password']) ? null : filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
                 try {
                     // Login credentials
                     $credentials = array(
@@ -155,21 +156,12 @@ class UserController
                     // Authenticate the user
                     $user = Sentry::authenticate($credentials, true);
 
-                    //realizamos la consulta del usuario x email
-                    $user = ORM::for_table('users')
-                        ->select('id')->select('first_name')->select('last_name')
-                        ->where('email', $email)
-                        ->where('password', $password)
-                        ->limit(1)
-                        ->find_one();
-
                     if ($url) {
                         $url = base64_decode($url);
                         Flight::redirect($url);
                     } else {
                         Flight::redirect();
                     }
-                    die;
                 } catch (\Cartalyst\Sentry\Users\LoginRequiredException $e) {
                     Flash::message('danger', '<strong>Error</strong>, Login field is required.');
                 } catch (\Cartalyst\Sentry\Users\UserNotFoundException $e) {

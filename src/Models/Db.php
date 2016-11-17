@@ -7,16 +7,16 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Db
 {
-    public function __construct($dbDriver, $dbHost, $dbPort, $dbName, $dbUser, $dbPass, $set = true)
+    public function __construct($driver, $host, $port, $database, $user, $pass, $set = true)
     {
         // IdiORM Configuration
-        if ($dbDriver === 'sqlite') {
-            ORM::configure('connection_string', $dbDriver.':'.$GLOBALS['env']['paths']['sqlite'].$dbName.'.sqlite');
+        if ($driver === 'sqlite') {
+            ORM::configure('connection_string', $driver.':'.$GLOBALS['env']['paths']['sqlite'].$database.'.sqlite');
         } else {
-            ORM::configure('connection_string', $dbDriver.':host='.$dbHost.';dbname='.$dbName.';port='.$dbPort);
-            ORM::configure('username', $dbUser);
-            ORM::configure('password', $dbPass);
-            if ($dbDriver === 'mysql') {
+            ORM::configure('connection_string', $driver.':host='.$host.';dbname='.$database.';port='.$port);
+            ORM::configure('username', $user);
+            ORM::configure('password', $pass);
+            if ($driver === 'mysql') {
                 ORM::configure('driver_options', array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
             }
         }

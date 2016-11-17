@@ -3,7 +3,7 @@
 $GLOBALS['config'] = [
     'info' => [
         'owner_mail' => 'uestudio@unidadeditorial.es',
-        'owner_name' => 'Innovación en Salud',
+        'owner_name' => 'UeCluster Admin',
         'web_name' => 'innovacionensalud',
         'session_name' => 'innovacionensaludsession',
         'secret_word' => 'simbiosis',
@@ -14,6 +14,17 @@ $GLOBALS['config'] = [
     ],
     'uploads_dir' => __DIR__.'/../public/uploads/',
     'images' => [
+        'bodegasybebidas' => [
+            '2750' => 2750,
+            '670' => 670,
+            '350' => 350,
+            'th' => 50,
+        ],
+        'estrategiadigital' => [
+            '1920' => 1920,
+            '844' => 844,
+            'th' => 50,
+        ],
         'pequenosjugadores' => [
             '544' => 544,
             '282' => 282,
@@ -71,8 +82,10 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'bodegasybebidas' => 'Bodegas y Bebidas',
             'alimentatusalud' => 'Alimenta tu Salud',
             'copasamsung' => 'Copa Samsung',
+            'estrategiadigital' => 'Estrategia Digital',
             'pequenosjugadores' => 'Pequeños Jugadores',
             'elclubdelabarba' => 'El Club de la Barba',
             'entregados' => 'Entregados',

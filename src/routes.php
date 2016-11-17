@@ -34,6 +34,10 @@ Flight::route('GET /edit/deactive/@id:[0-9]+', function ($videoId) {
     $edit = new Expomark\Controllers\EditController();
     $edit->deactiveAction($videoId);
 });
+Flight::route('GET /edit/important/@id:[0-9]+', function ($videoId) {
+    $edit = new Expomark\Controllers\EditController();
+    $edit->importantAction($videoId);
+});
 
 /* ==================================== Save Routes ==================================== */
 // Save Routes. ej: /create/videos

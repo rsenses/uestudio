@@ -79,6 +79,26 @@ class EditController
         );
     }
 
+    public static function importantAction($id)
+    {
+        $video = ORM::for_table('videos')->find_one($id);
+
+        $old = ORM::for_table('videos')
+            ->where('section', $video->section)
+            ->where('important', 1)
+            ->find_one();
+
+        if ($old->id) {
+            $old->important = 0;
+            $old->save();
+        }
+
+        $video->important = 1;
+        $video->save();
+
+        Flight::redirect(filter_var(Flight::request()->referrer, FILTER_SANITIZE_URL));
+    }
+
     public static function activeAction($id)
     {
         $video = ORM::for_table('videos')->find_one($id);

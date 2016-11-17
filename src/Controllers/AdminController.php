@@ -32,6 +32,7 @@ class AdminController
             ->select('videos.date')
             ->select('videos.section')
             ->select('videos.active')
+            ->select('videos.important')
             ->select_expr('GROUP_CONCAT(DISTINCT `tags`.`tag`)', 'tags')
             ->select_expr('GROUP_CONCAT(DISTINCT `sectionTags`.`tag`)', 'sections')
             ->left_outer_join('tagLinks', array('tagLinks.content_id', '=', 'videos.id'))

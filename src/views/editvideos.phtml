@@ -35,7 +35,7 @@
                     <?php endif ?>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <div class="form-group<?php echo isset($errors['date']) ? ' has-error' : '' ?>">
                             <label for="date">Fecha</label>
                             <div class="input-group">
@@ -71,14 +71,11 @@
                             <?php endif ?>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <div class="form-group<?php echo isset($errors['vimeo']) ? ' has-error' : '' ?>">
                             <label for="vimeo">ID del vídeo de Vimeo</label>
                             <div class="input-group">
-                                <input class="form-control" id="vimeo" name="vimeo" placeholder="ID del vídeo de Vimeo" type="text" value="<?php echo $view->escape($content['vimeo']) ?>">
+                                <input class="form-control" id="vimeo" name="vimeo" placeholder="ID de Vimeo" type="text" value="<?php echo $view->escape($content['vimeo']) ?>">
                                 <div class="input-group-addon"><i class="fa fa-vimeo-square"></i></div>
                             </div>
                             <?php if (isset($errors['vimeo'])) : ?>
@@ -86,6 +83,9 @@
                             <?php endif ?>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
                     <div class="col-sm-4">
                         <div class="well">
                             <div class="form-group<?php echo isset($errors['image']) ? ' has-error' : '' ?>">
@@ -93,13 +93,14 @@
                                     Imágen
                                     <div class="size">
                                         <span class="unpaseoporelprado">(352x199)</span>
+                                        <span class="estrategiadigital">(1920x1080)</span>
                                         <span class="alimentatusalud">(720x405)</span>
+                                        <span class="bodegasybebidas">(670x400)</span>
                                         <span class="innovacionensalud">(768x378)</span>
                                         <span class="pequenosjugadores">(735x413)</span>
                                         <span class="nosvemosencasa">(1280x720)</span>
                                         <span class="potenciatupyme">(1280x720)</span>
                                         <span class="yodonabeautybrandsplace">(735x489)</span>
-                                        <span class="copasamsung">(1080x634)</span>
                                         <span class="theventurespain">(1509x850); sino (824x464)</span>
                                         <span class="vivirmasymejor">(733x489); si es CONTENT o GALLERY (400x367)</span>
                                         <span class="extraordinarios">(980x551) si es una píldora (102x102)</span>
@@ -108,7 +109,40 @@
                                 <?php if (isset($errors['image'])) : ?>
                                     <span class="help-block"><?php echo $errors['image'][0] ?></span>
                                 <?php endif ?>
-                                <input name="upload" id="image" type="file" accept="image/jpeg,image/gif,image/png">
+                                <input name="image" id="image" type="file" accept="image/jpeg,image/gif,image/png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <div class="form-group<?php echo isset($errors['slider']) ? ' has-error' : '' ?>">
+                                <label for="slider">
+                                    Slider
+                                    <div class="size">
+                                        <span class="bodegasybebidas">(2750x550) lo importante es la altura, el ancho el máximo posible</span>
+                                    </div>
+                                </label>
+                                <?php if (isset($errors['slider'])) : ?>
+                                    <span class="help-block"><?php echo $errors['slider'][0] ?></span>
+                                <?php endif ?>
+                                <input name="slider" id="slider" type="file" accept="image/jpeg,image/gif,image/png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <div class="form-group<?php echo isset($errors['vertical']) ? ' has-error' : '' ?>">
+                                <label for="vertical">
+                                    Vertical
+                                    <div class="size">
+                                        <span class="unpaseoporelprado">(380x300)</span>
+                                        <span class="bodegasybebidas">(350x508)</span>
+                                    </div>
+                                </label>
+                                <?php if (isset($errors['vertical'])) : ?>
+                                    <span class="help-block"><?php echo $errors['vertical'][0] ?></span>
+                                <?php endif ?>
+                                <input name="vertical" id="vertical" type="file" accept="image/jpeg,image/gif,image/png">
                             </div>
                         </div>
                     </div>

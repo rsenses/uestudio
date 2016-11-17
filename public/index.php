@@ -39,21 +39,21 @@ setlocale(LC_TIME, $GLOBALS['config']['locales'][$locale]);
 setlocale(LC_ALL, $GLOBALS['config']['locales'][$locale]);
 
 Flight::register('db', 'Expomark\Models\Db', [
-    $GLOBALS['env']['db']['dbdriver'],
-    $GLOBALS['env']['db']['dbhost'],
-    $GLOBALS['env']['db']['dbport'],
-    $GLOBALS['env']['db']['dbname'],
-    $GLOBALS['env']['db']['dbuser'],
-    $GLOBALS['env']['db']['dbpass'],
+    $GLOBALS['env']['db']['driver'],
+    $GLOBALS['env']['db']['host'],
+    $GLOBALS['env']['db']['port'],
+    $GLOBALS['env']['db']['database'],
+    $GLOBALS['env']['db']['user'],
+    $GLOBALS['env']['db']['pass'],
     true,
 ]);
 
 Flight::register('eloquent', 'Expomark\Models\Eloquent', [
-    $GLOBALS['env']['db']['dbdriver'],
-    $GLOBALS['env']['db']['dbhost'],
-    $GLOBALS['env']['db']['dbname'],
-    $GLOBALS['env']['db']['dbuser'],
-    $GLOBALS['env']['db']['dbpass'],
+    $GLOBALS['env']['db']['driver'],
+    $GLOBALS['env']['db']['host'],
+    $GLOBALS['env']['db']['database'],
+    $GLOBALS['env']['db']['user'],
+    $GLOBALS['env']['db']['pass'],
 ]);
 
 $loader = new Symfony\Component\Templating\Loader\FilesystemLoader(__DIR__.'/../src/views/%name%');
