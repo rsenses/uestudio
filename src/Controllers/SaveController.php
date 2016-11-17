@@ -5,21 +5,16 @@ namespace Expomark\Controllers;
 use ORM;
 use \DateTime;
 use Cocur\Slugify\Slugify;
-use Upload\Storage\FileSystem;
-use Upload\File;
-use Upload\Validation\Mimetype;
-use Upload\Validation\Size;
 use Joelvardy\Flash;
 use Cartalyst\Sentry\Facades\Native\Sentry as Sentry;
-use Imagine\Gd\Imagine;
-use Imagine\Image\Box;
-use Imagine\Image\Point;
 use Flight;
 use Respect\Validation\Validator as v;
 use Expomark\Validation\Validator;
+use Expomark\Upload\Image;
 
 class SaveController
 {
+    private $image;
     private $slugify;
     private $validator;
 
@@ -30,6 +25,8 @@ class SaveController
         if (!Sentry::check()) {
             Flight::redirect('/users/login/'.base64_encode(urlencode(Flight::request()->url)));
         }
+
+        $this->image = new Image();
         $this->validator = new Validator();
         $this->slugify = new Slugify();
     }
@@ -107,39 +104,29 @@ class SaveController
         }
 
         if (!empty(Flight::request()->files['image']['size'])) {
-            $folder = $GLOBALS['config']['uploads_dir'].'images/';
-            $storage = new FileSystem($folder.$webName.'/');
-            $file = new File('image', $storage);
-            $image = time().'_'.$this->slugify->slugify($file->getName());
-            $file->setName($image);
-            $file->addValidations(array(
-                new Mimetype(array('image/jpeg', 'image/png', 'image/gif')),
-                new Size('500K'),
-            ));
-
             try {
-                // Success!
-                $file->upload();
-                $imageName = $file->getNameWithExtension();
-
-                if (isset($GLOBALS['config']['images'][$webName])) {
-                    foreach ($GLOBALS['config']['images'][$webName] as $key => $size) {
-                        $imagine = new Imagine();
-
-                        $resizable = $imagine->open($folder.$webName.'/'.$imageName);
-
-                        $imageSize  = $resizable->getSize();
-
-                        $resizable->resize($imageSize->widen($size))
-                            ->save($folder.$webName.'/'.$key.'_'.$imageName);
-                    }
-                }
+                $imageName = $this->image->upload('image');
             } catch (\Exception $e) {
-                // Fail!
-                if (isset($file->getErrors()[0])) {
-                    Flash::message('danger', '<strong>Error!</strong>, compruebe los errores en el formulario.');
-                    $_SESSION['validationErrors']['image'] = $file->getErrors();
-                }
+                Flash::message('danger', '<strong>Error!</strong>, compruebe los errores en el formulario.');
+                $_SESSION['validationErrors']['image'] = $e->getMessage();
+            }
+        }
+
+        if (!empty(Flight::request()->files['vertical']['size'])) {
+            try {
+                $verticalName = $this->image->upload('vertical');
+            } catch (\Exception $e) {
+                Flash::message('danger', '<strong>Error!</strong>, compruebe los errores en el formulario.');
+                $_SESSION['validationErrors']['vertical'] = $e->getMessage();
+            }
+        }
+
+        if (!empty(Flight::request()->files['slider']['size'])) {
+            try {
+                $sliderName = $this->image->upload('slider');
+            } catch (\Exception $e) {
+                Flash::message('danger', '<strong>Error!</strong>, compruebe los errores en el formulario.');
+                $_SESSION['validationErrors']['slider'] = $e->getMessage();
             }
         }
 
@@ -156,6 +143,12 @@ class SaveController
         $save->description = $description;
         if (isset($imageName) && $imageName) {
             $save->image = $webName.'/'.$imageName;
+        }
+        if (isset($verticalName) && $verticalName) {
+            $save->vertical = $webName.'/'.$verticalName;
+        }
+        if (isset($sliderName) && $sliderName) {
+            $save->slider = $webName.'/'.$sliderName;
         }
         $save->vimeo = $vimeo;
         $save->twitter = $twitter;
