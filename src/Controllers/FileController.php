@@ -50,21 +50,22 @@ class FileController
         try {
             // Success!
             $file->upload();
+
             $upload = $file->getNameWithExtension();
+
             $info = getImageSize($folder.$upload);
+
             $response['status'] = 'success';
             $response['width'] = $info[0];
             $response['height'] = $info[1];
             $response['src'] = $src.$upload;
         } catch (\Exception $e) {
-            // Fail!
             $response['status'] = 'error';
             if (isset($file->getErrors()[0])) {
                 $response['msg'] = $file->getErrors()[0];
             }
         }
 
-        header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($response);
+        Flight::json($response);
     }
 }

@@ -108,6 +108,7 @@ $GLOBALS['config'] = [
             'Tipo de Contenido' => 'type',
             'Estilos' => 'styles',
             'Scripts' => 'scripts',
+            'Resumen' => 'summary',
         ],
         'options' => [
             // 'adrian-salso',

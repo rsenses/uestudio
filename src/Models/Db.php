@@ -17,9 +17,13 @@ class Db
             ORM::configure('username', $user);
             ORM::configure('password', $pass);
             if ($driver === 'mysql') {
-                ORM::configure('driver_options', array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+                ORM::configure('driver_options', [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']);
             }
         }
+
+        ORM::configure('id_column_overrides', [
+            'author' => 'author_id'
+        ]);
 
         if ($set) {
             ORM::configure('return_result_sets', false);

@@ -157,8 +157,10 @@ class SaveController
         $save->date = $dateTime;
         $save->section = $webName;
         $save->options = json_encode($options);
+
         $save->save();
-        $id = $save->id();
+
+        $id = $save->id;
 
         // Section Tags
         $section = array_map('trim', array_filter(explode(',', Flight::request()->data['section'])));
