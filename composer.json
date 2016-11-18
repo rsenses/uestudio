@@ -16,7 +16,6 @@
         "symfony/translation": "^2.8",
         "ircmaxell/password-compat": "^1.0",
         "imagine/imagine": "~0.5.0",
-        "aura/filter": "^2.2",
         "respect/validation": "^1.1"
     },
     "autoload": {
