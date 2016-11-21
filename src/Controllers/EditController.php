@@ -37,6 +37,7 @@ class EditController
                 ->select('videos.facebook')
                 ->select('videos.styles')
                 ->select('videos.date')
+                ->select('videos.author_id')
                 ->select('videos.section', 'webname')
                 ->select('videos.author_id')
                 ->select('videos.options')
@@ -64,6 +65,7 @@ class EditController
         $authors = ORM::for_table('author')
             ->select('author_id')
             ->select('name')
+            ->order_by_asc('name')
             ->find_many();
 
         // devolvemos la coleccion para que la vista la presente.

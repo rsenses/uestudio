@@ -190,7 +190,7 @@
                             <div class="form-group<?php echo isset($errors['author']) ? ' has-error' : '' ?>">
                                 <label class="control-label" for="author">Autor</label>
                                 <select class="form-control select2" name="author" id="author">
-                                    <option disabled value<?php echo $content ? '' : ' selected' ?>></option>
+                                    <option value="-1"<?php echo !$content['author_id'] ? ' selected' : '' ?>>Sin Autor</option>
                                     <?php foreach ($authors as $author) : ?>
                                         <option value="<?php echo $author->author_id ?>"<?php echo $author->author_id === $content['author_id'] ? ' selected' : '' ?>><?php echo $author->name ?></option>
                                     <?php endforeach ?>

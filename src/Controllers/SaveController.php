@@ -83,7 +83,7 @@ class SaveController
         $description = filter_var(trim(Flight::request()->data['description']), FILTER_SANITIZE_STRING);
         $twitter = filter_var(trim(Flight::request()->data['twitter']), FILTER_SANITIZE_STRING);
         $vimeo = filter_var(trim(Flight::request()->data['vimeo']), FILTER_SANITIZE_NUMBER_INT);
-        $author = filter_var(trim(Flight::request()->data['author']), FILTER_SANITIZE_NUMBER_INT);
+        $author = Flight::request()->data['author'] > 0 ? filter_var(trim(Flight::request()->data['author']), FILTER_SANITIZE_NUMBER_INT) : null;
 
         if (Flight::request()->data['date']) {
             $dateTime = Flight::request()->data['date'];
