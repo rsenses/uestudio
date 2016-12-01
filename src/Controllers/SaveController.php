@@ -47,10 +47,6 @@ class SaveController
             'twitter' => v::stringType()->notEmpty()->length(1, 140),
         ];
 
-        if (Flight::request()->data['vimeo']) {
-            $validationArray['vimeo'] = v::numeric();
-        }
-
         if (Flight::request()->data['date']) {
             $validationArray['date'] = v::date();
         }
@@ -82,7 +78,7 @@ class SaveController
         $facebook = filter_var(trim(Flight::request()->data['facebook']), FILTER_SANITIZE_STRING);
         $description = filter_var(trim(Flight::request()->data['description']), FILTER_SANITIZE_STRING);
         $twitter = filter_var(trim(Flight::request()->data['twitter']), FILTER_SANITIZE_STRING);
-        $vimeo = filter_var(trim(Flight::request()->data['vimeo']), FILTER_SANITIZE_NUMBER_INT);
+        $vimeo = filter_var(trim(Flight::request()->data['vimeo']), FILTER_SANITIZE_STRING);
         $author = Flight::request()->data['author'] > 0 ? filter_var(trim(Flight::request()->data['author']), FILTER_SANITIZE_NUMBER_INT) : null;
 
         if (Flight::request()->data['date']) {
@@ -188,7 +184,8 @@ class SaveController
             $save = ORM::for_table('section')->create();
             $save->tag_id = $section_id;
             $save->content_id = $id;
-            $save->table = $GLOBALS['config']['info']['web_name'];
+            $save->table = $webName;
+            $save->created_at = date('Y-m-d H:i:s');
             $save->save();
             $section_id = $save->id();
         }
@@ -220,7 +217,8 @@ class SaveController
                 $save = ORM::for_table('tagLinks')->create();
                 $save->tag_id = $tag_id;
                 $save->content_id = $id;
-                $save->table = $GLOBALS['config']['info']['web_name'];
+                $save->table = $webName;
+                $save->created_at = date('Y-m-d H:i:s');
                 $save->save();
                 $tag_id = $save->id();
             }

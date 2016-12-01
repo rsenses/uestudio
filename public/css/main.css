@@ -60,6 +60,6 @@ textarea#content {
 .size {
     display: inline-block;
 }
-.size span {
+.size span, .tags span {
     display: none;
 }

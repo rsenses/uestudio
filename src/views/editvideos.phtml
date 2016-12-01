@@ -59,9 +59,10 @@
                             <?php endif ?>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 tags">
                         <div class="form-group<?php echo isset($errors['tags']) ? ' has-error' : '' ?>">
                             <label for="tags">Etiquetas</label>
+                            <p class="info laprevia"><small>Las etiquetas se deben introducir estrictamente en el siguiente orden: Jornada, Aficionado 1, Aficionado 2, Equipo 1, Equipo 2</small></p>
                             <div class="input-group">
                                 <input class="form-control" name="tags" id="tags" placeholder="Etiquetas" type="text" value="<?php echo $view->escape($content['tags']) ?>" autocomplete="off">
                                 <div class="input-group-addon"><i class="fa fa-tags"></i></div>
@@ -104,6 +105,7 @@
                                         <span class="theventurespain">(1509x850); sino (824x464)</span>
                                         <span class="vivirmasymejor">(733x489); si es CONTENT o GALLERY (400x367)</span>
                                         <span class="extraordinarios">(980x551) si es una píldora (102x102)</span>
+                                        <span class="laprevia">(420x400) si es una noticia (1024x383)</span>
                                     </div>
                                 </label>
                                 <?php if (isset($errors['image'])) : ?>
@@ -136,7 +138,7 @@
                                     Vertical
                                     <div class="size">
                                         <span class="unpaseoporelprado">(380x300)</span>
-                                        <span class="bodegasybebidas">(350x508)</span>
+                                        <span class="bodegasybebidas">(350x508) si es evento (495x550)</span>
                                     </div>
                                 </label>
                                 <?php if (isset($errors['vertical'])) : ?>
@@ -233,12 +235,7 @@
                                     </select>
                                 </div>
                                 <div class="col-xs-6 col-sm-9">
-                                    <select class="form-control select2" name="option[]" id="option">
-                                        <option disabled selected value></option>
-                                        <?php foreach ($GLOBALS['config']['enum']['options'] as $option) : ?>
-                                            <option><?php echo $option ?></option>
-                                        <?php endforeach ?>
-                                    </select>
+                                    <input class="form-control option-input" name="option[]" placeholder="Opción, doble click o escribe para ver las opciones" type="text">
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -258,10 +255,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <script>
         $('#web').change(function() {
-            $('.size span').hide();
+            $('.size span, .tags .info').hide();
             var section = $(this).val();
             if (section) {
-                $('.size .'+section).show();
+                $('.size .'+section+', .tags .'+section).show();
             } else {
                 $('.size .default').show();
             }
@@ -269,7 +266,7 @@
         $(document).ready(function() {
             var section = $('#web').val();
             if (section) {
-                $('.size .'+section).show();
+                $('.size .'+section+', .tags .'+section).show();
             } else {
                 $('.size .default').show();
             }

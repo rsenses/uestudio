@@ -14,6 +14,12 @@ $GLOBALS['config'] = [
     ],
     'uploads_dir' => __DIR__.'/../public/uploads/',
     'images' => [
+        'laprevia' => [
+            '1024' => 1024,
+            '660' => 660,
+            '420' => 420,
+            'th' => 50,
+        ],
         'bodegasybebidas' => [
             '2750' => 2750,
             '670' => 670,
@@ -82,6 +88,7 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'laprevia' => 'La Previa',
             'bodegasybebidas' => 'Bodegas y Bebidas',
             'alimentatusalud' => 'Alimenta tu Salud',
             'copasamsung' => 'Copa Samsung',
@@ -104,31 +111,14 @@ $GLOBALS['config'] = [
             'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'options_name' => [
-            // 'Autor' => 'author',
             'Tipo de Contenido' => 'type',
             'Estilos' => 'styles',
             'Scripts' => 'scripts',
             'Resumen' => 'summary',
+            'Partido' => 'match',
+            'Fecha' => 'date',
         ],
         'options' => [
-            // 'adrian-salso',
-            // 'ana-martinez',
-            // 'ana-nimo',
-            // 'aurora-yanez',
-            // 'dayana-gomes',
-            // 'doctor-vicente',
-            // 'itziar-digon',
-            // 'javier-subiza',
-            // 'javier-calatrava',
-            // 'laura-calles',
-            // 'laura-lopez',
-            // 'lucia-serrano',
-            // 'melania-moya',
-            // 'michelangelo-marra',
-            // 'natalia-ageitos',
-            // 'olalla-uriarte',
-            // 'patricia-jorda',
-            // 'silvia-gonzalez',
             'video',
             'content',
             'special',
