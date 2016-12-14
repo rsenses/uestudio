@@ -5,6 +5,10 @@ Flight::route('GET /(admin(/@page:[0-9]+))', function ($page) {
     $admin = new Expomark\Controllers\AdminController();
     $admin->videosAction($page);
 });
+Flight::route('GET /section/@slug:[a-z0-9-]+(/@page:[0-9]+)', function ($slug, $page) {
+    $admin = new Expomark\Controllers\SectionController();
+    $admin->videosAction($slug, $page);
+});
 
 /* ==================================== Search Routes ==================================== */
 // Admin Search Route. ej: /admin/search/videos

@@ -60,7 +60,17 @@ $loader = new Symfony\Component\Templating\Loader\FilesystemLoader(__DIR__.'/../
 
 Flight::register('view', 'Symfony\Component\Templating\PhpEngine', array(new Symfony\Component\Templating\TemplateNameParser(), $loader), function ($templating) {
 });
+
 Flight::view()->set(new Symfony\Component\Templating\Helper\SlotsHelper());
+
+Flight::view()->setEscaper('path', function ($value) {
+    return htmlspecialchars($value, ENT_QUOTES);
+});
+
+Flight::view()->setEscaper('url', function ($value) {
+    return urlencode($value);
+});
+
 Flight::view()->addGlobal('data', Joelvardy\Flash::data());
 Flight::view()->addGlobal('errors', isset($_SESSION['validationErrors']) ? $_SESSION['validationErrors'] : null);
 unset($_SESSION['validationErrors']);
