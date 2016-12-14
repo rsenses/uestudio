@@ -37,10 +37,10 @@ class AdminController
             ->select_expr('GROUP_CONCAT(DISTINCT `sectionTags`.`tag`)', 'sections')
             ->left_outer_join('tagLinks', array('tagLinks.content_id', '=', 'videos.id'))
             ->left_outer_join('tags', array('tags.id', '=', 'tagLinks.tag_id'))
-            ->join('section', array('section.content_id', '=', 'videos.id'))
-            ->join('tags', array('sectionTags.id', '=', 'section.tag_id'), 'sectionTags')
+            ->left_outer_join('section', array('section.content_id', '=', 'videos.id'))
+            ->left_outer_join('tags', array('sectionTags.id', '=', 'section.tag_id'), 'sectionTags')
             ->group_by('videos.id')
-            ->order_by_desc('videos.id')
+            ->order_by_desc('videos.date')
             ->limit($itemsPerPage)
             ->offset(($page - 1) * $itemsPerPage)
             ->find_many();

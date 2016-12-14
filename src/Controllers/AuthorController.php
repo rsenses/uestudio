@@ -148,6 +148,7 @@ class AuthorController
             $save = ORM::for_table('author')->find_one($id);
         } else {
             $save = ORM::for_table('author')->create();
+            $save->slug = $this->slugify->slugify($name);
         }
 
         $save->name = $name;

@@ -63,3 +63,7 @@ textarea#content {
 .size span, .tags span {
     display: none;
 }
+
+.tags .info {
+    display: none;
+}
