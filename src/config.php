@@ -4,8 +4,8 @@ $GLOBALS['config'] = [
     'info' => [
         'owner_mail' => 'uestudio@unidadeditorial.es',
         'owner_name' => 'UeCluster Admin',
-        'web_name' => 'innovacionensalud',
-        'session_name' => 'innovacionensaludsession',
+        'web_name' => 'uecluster',
+        'session_name' => 'ueclustersession',
         'secret_word' => 'simbiosis',
     ],
     'security' => [

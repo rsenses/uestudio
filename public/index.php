@@ -29,6 +29,16 @@ if ($GLOBALS['env']['debug']) {
     });
 }
 
+$handler = new Expomark\Models\SessionHandler();
+
+$handler->setDbDetails($GLOBALS['env']['db']['host'], $GLOBALS['env']['db']['port'], $GLOBALS['env']['db']['user'], $GLOBALS['env']['db']['pass'], $GLOBALS['env']['db']['database']);
+$handler->setDbTable('session');
+
+// Session start
+session_name($GLOBALS['config']['info']['session_name']);
+session_set_cookie_params(14400);
+ini_set('session.gc_maxlifetime', 14400);
+session_set_save_handler($handler, true);
 session_start();
 
 // Language Initial Settings
