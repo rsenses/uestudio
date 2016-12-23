@@ -59,7 +59,7 @@
                             <?php endif ?>
                         </div>
                     </div>
-                    <div class="col-sm-4 tags">
+                    <div class="col-sm-6 hideable">
                         <div class="form-group<?php echo isset($errors['tags']) ? ' has-error' : '' ?>">
                             <label for="tags">Etiquetas</label>
                             <p class="info laprevia"><small>Las etiquetas se deben introducir estrictamente en el siguiente orden: Jornada, Aficionado 1, Aficionado 2, Equipo 1, Equipo 2</small></p>
@@ -72,9 +72,12 @@
                             <?php endif ?>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 hideable">
                         <div class="form-group<?php echo isset($errors['vimeo']) ? ' has-error' : '' ?>">
                             <label for="vimeo">ID del vídeo de Vimeo</label>
+                            <p class="info loquehayquever"><small>Url de los videos separados por coma, primero el m3u8</small></p>
                             <div class="input-group">
                                 <input class="form-control" id="vimeo" name="vimeo" placeholder="ID de Vimeo" type="text" value="<?php echo $view->escape($content['vimeo']) ?>">
                                 <div class="input-group-addon"><i class="fa fa-vimeo-square"></i></div>
@@ -99,6 +102,7 @@
                                         <span class="bodegasybebidas">(670x400)</span>
                                         <span class="innovacionensalud">(768x378)</span>
                                         <span class="pequenosjugadores">(735x413)</span>
+                                        <span class="loquehayquever">(630x557)</span>
                                         <span class="nosvemosencasa">(660x461)</span>
                                         <span class="potenciatupyme">(1280x720)</span>
                                         <span class="yodonabeautybrandsplace">(735x489)</span>
@@ -122,6 +126,7 @@
                                     Slider
                                     <div class="size">
                                         <span class="bodegasybebidas">(1900x1100)</span>
+                                        <span class="loquehayquever">(1024x576)</span>
                                     </div>
                                 </label>
                                 <?php if (isset($errors['slider'])) : ?>
@@ -255,10 +260,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <script>
         $('#web').change(function() {
-            $('.size span, .tags .info').hide();
+            $('.size span, .hideable .info').hide();
             var section = $(this).val();
             if (section) {
-                $('.size .'+section+', .tags .'+section).show();
+                $('.size .'+section+', .hideable .'+section).show();
             } else {
                 $('.size .default').show();
             }
@@ -266,7 +271,7 @@
         $(document).ready(function() {
             var section = $('#web').val();
             if (section) {
-                $('.size .'+section+', .tags .'+section).show();
+                $('.size .'+section+', .hideable .'+section).show();
             } else {
                 $('.size .default').show();
             }

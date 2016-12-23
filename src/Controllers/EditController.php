@@ -83,16 +83,19 @@ class EditController
 
     public static function importantAction($id)
     {
-        $video = ORM::for_table('videos')->find_one($id);
+        $video = ORM::for_table('videos')
+            ->find_one($id);
 
-        $old = ORM::for_table('videos')
-            ->where('section', $video->section)
-            ->where('important', 1)
-            ->find_one();
+        if ($video->section !== 'loquehayquever' && $video->section !== 'laprevia') {
+            $old = ORM::for_table('videos')
+                ->where('section', $video->section)
+                ->where('important', 1)
+                ->find_one();
 
-        if ($old->id) {
-            $old->important = 0;
-            $old->save();
+            if ($old->id) {
+                $old->important = 0;
+                $old->save();
+            }
         }
 
         $video->important = 1;

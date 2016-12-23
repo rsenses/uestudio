@@ -64,6 +64,6 @@ textarea#content {
     display: none;
 }
 
-.tags .info {
+.hideable .info {
     display: none;
 }

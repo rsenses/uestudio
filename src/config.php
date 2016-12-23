@@ -14,6 +14,11 @@ $GLOBALS['config'] = [
     ],
     'uploads_dir' => __DIR__.'/../public/uploads/',
     'images' => [
+        'loquehayquever' => [
+            '498' => 498,
+            '300' => 300,
+            'th' => 50,
+        ],
         'laprevia' => [
             '1024' => 1024,
             '728' => 728,
@@ -88,6 +93,7 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'loquehayquever' => 'Lo que hay que ver',
             'laprevia' => 'La Previa',
             'bodegasybebidas' => 'Bodegas y Bebidas',
             'alimentatusalud' => 'Alimenta tu Salud',
