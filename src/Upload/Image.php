@@ -39,7 +39,7 @@ class Image
         $file->setName($image);
         $file->addValidations(array(
             new Mimetype(array('image/jpeg', 'image/png', 'image/gif')),
-            new Size('500K'),
+            new Size('1100K'),
         ));
 
         try {
