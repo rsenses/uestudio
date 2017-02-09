@@ -14,6 +14,10 @@ $GLOBALS['config'] = [
     ],
     'uploads_dir' => __DIR__.'/../public/uploads/',
     'images' => [
+        'correresdevalientes' => [
+            '490' => 490,
+            'th' => 50,
+        ],
         'ventanaalfuturo' => [
             '593' => 593,
             'th' => 50,
@@ -98,6 +102,7 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'correresdevalientes' => '¡Correr es de valientes!',
             'ventanaalfuturo' => 'Ventana al futuro',
             'loquehayquever' => 'Lo que hay que ver',
             'laprevia' => 'La Previa',
