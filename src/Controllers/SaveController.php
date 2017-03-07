@@ -131,6 +131,7 @@ class SaveController
             $save = ORM::for_table('videos')->find_one($id);
         } else {
             $save = ORM::for_table('videos')->create();
+            $save->active = 0;
         }
         $save->title = $title;
         $save->url = $slug;
@@ -176,7 +177,7 @@ class SaveController
                 $save->tag = $sect;
                 $save->url = $this->slugify->slugify($sect);
                 $save->save();
-                $section_id = $save->id();
+                $section_id = $save->id;
             } else {
                 $section_id = $sectionExist['id'];
             }
@@ -187,7 +188,6 @@ class SaveController
             $save->table = $webName;
             $save->created_at = date('Y-m-d H:i:s');
             $save->save();
-            $section_id = $save->id();
         }
 
         // Tags
@@ -209,7 +209,7 @@ class SaveController
                     $save->tag = $tag;
                     $save->url = $this->slugify->slugify($tag);
                     $save->save();
-                    $tag_id = $save->id();
+                    $tag_id = $save->id;
                 } else {
                     $tag_id = $tagExist['id'];
                 }
@@ -220,7 +220,6 @@ class SaveController
                 $save->table = $webName;
                 $save->created_at = date('Y-m-d H:i:s');
                 $save->save();
-                $tag_id = $save->id();
             }
         }
 

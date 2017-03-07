@@ -24,6 +24,7 @@ class EditController
             $content = ORM::for_table('videos')
                 ->select('videos.id')
                 ->select('videos.title')
+                ->select('videos.url')
                 ->select('videos.subtitle')
                 ->select('videos.content')
                 ->select('videos.description')
@@ -37,12 +38,14 @@ class EditController
                 ->select('videos.facebook')
                 ->select('videos.styles')
                 ->select('videos.date')
+                ->select('videos.active')
                 ->select('videos.author_id')
                 ->select('videos.section', 'webname')
                 ->select('videos.author_id')
                 ->select('videos.options')
+                ->select('sectionTags.tag', 'section')
+                ->select('sectionTags.url', 'section_url')
                 ->select_expr('GROUP_CONCAT(DISTINCT `tags`.`tag`)', 'tags')
-                ->select_expr('GROUP_CONCAT(DISTINCT `sectionTags`.`tag`)', 'section')
                 ->left_outer_join('tagLinks', array('tagLinks.content_id', '=', 'videos.id'))
                 ->left_outer_join('tags', array('tags.id', '=', 'tagLinks.tag_id'))
                 ->left_outer_join('section', array('section.content_id', '=', 'videos.id'))
@@ -52,6 +55,12 @@ class EditController
                 ->limit(1)
                 ->find_one($id)
                 ->as_array();
+
+            if ($content['webname'] === 'potenciatupyme') {
+                $content['link'] = $GLOBALS['config']['enum']['webs_url'][$content['webname']].'video/'.$content['url'];
+            } else {
+                $content['link'] = $GLOBALS['config']['enum']['webs_url'][$content['webname']].$content['section_url'].'/'.$content['url'];
+            }
         }
 
         $autocomplete = ORM::for_table('tags')
