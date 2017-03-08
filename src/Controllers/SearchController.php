@@ -33,13 +33,15 @@ class SearchController
             ->select('videos.date')
             ->select('videos.section')
             ->select_expr('GROUP_CONCAT(`tags`.`tag`)', 'tags')
-            ->select_expr('GROUP_CONCAT(`sectionTags`.`tag`)', 'sections')
+            ->select('sectionTags.tag', 'sections')
             ->left_outer_join('tagLinks', array('tagLinks.content_id', '=', 'videos.id'))
             ->left_outer_join('tags', array('tags.id', '=', 'tagLinks.tag_id'))
-            ->join('section', array('section.content_id', '=', 'videos.id'))
-            ->join('tags', array('sectionTags.id', '=', 'section.tag_id'), 'sectionTags')
-            ->where_raw('MATCH(title, subtitle) AGAINST (?)', array($searchTerm))
-            // ->where_raw('MATCH(title, subtitle, content) AGAINST (?)', array($searchTerm))
+            ->left_outer_join('section', array('section.content_id', '=', 'videos.id'))
+            ->left_outer_join('tags', array('sectionTags.id', '=', 'section.tag_id'), 'sectionTags')
+            ->where_any_is([
+                ['videos.title' => '%'.$searchTerm.'%'],
+                ['sectionTags.tag' => '%'.$searchTerm.'%'],
+            ], ['videos.title' => 'LIKE', 'sectionTags.tag' => 'LIKE'])
             ->group_by('videos.id')
             ->order_by_desc('videos.id')
             ->find_many();
