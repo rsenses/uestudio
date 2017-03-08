@@ -1,8 +1,13 @@
 <?php
 
+namespace Deployer;
+
 // All Deployer recipes are based on `recipe/common.php`.
 // require 'recipe/common.php';
 require 'recipe/common.php';
+
+set('ssh_type', 'native');
+set('ssh_multiplexing', true);
 
 /**
  * Main task
@@ -25,25 +30,19 @@ server('ams2-uecluster', 'ams2.uecluster.com', 22)
     ->user('root')
     ->forwardAgent() // You can use identity key, ssh config, or username/password to auth on the server.
     ->stage('production')
-    ->env('deploy_path', '/var/www/admin.uecluster.com'); // Define the base path to deploy your project to.
+    ->set('deploy_path', '/var/www/admin.uecluster.com'); // Define the base path to deploy your project to.
 
 server('ams3-uecluster', 'ams3.uecluster.com', 22)
     ->user('root')
     ->forwardAgent()
     ->stage('production')
-    ->env('deploy_path', '/var/www/admin.uecluster.com');
+    ->set('deploy_path', '/var/www/admin.uecluster.com');
 
 server('nl1-uecluster', 'nl1.uecluster.com', 22)
     ->user('root')
     ->forwardAgent()
     ->stage('production')
-    ->env('deploy_path', '/var/www/admin.uecluster.com');
-
-server('vps34393-uecluster', 'vps34393.ovh.net', 22)
-    ->user('root')
-    ->forwardAgent()
-    ->stage('production')
-    ->env('deploy_path', '/var/www/admin.uecluster.com');
+    ->set('deploy_path', '/var/www/admin.uecluster.com');
 
 // Specify the repository from which to download your project's code.
 // The server needs to have git installed for this to work.
@@ -55,7 +54,7 @@ set('shared_dirs', ['storage']);
 
 set('shared_files', ['src/env.php']);
 
-set('http_user', 'uecluster');
+set('http_user', 'www-data');
 
 set('composer_command', '/usr/local/bin/composer');
 
@@ -66,11 +65,11 @@ task('uploads:link', function () {
 });
 
 task('folder:permissions', function () {
-    run('chown -R uecluster:www-data /var/www/admin.uecluster.com');
+    run('chown -R www-data:www-data /var/www/admin.uecluster.com');
 });
 
 task('reload:server', function () {
-    run('service php5-fpm restart');
+    run('service php7.0-fpm restart');
 });
 
 after('deploy', 'uploads:link');
