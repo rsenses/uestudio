@@ -1,4 +1,5 @@
-<?php include 'partials/header.phtml' ?>
+<?php $view->extend('layout.phtml') ?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
@@ -45,4 +46,14 @@
         </div>
     </div>
 </div>
-<?php include 'partials/footer.phtml' ?>
+
+<?php $view['slots']->start('scripts') ?>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        function confirmar(mensaje) {
+            return confirm(mensaje);
+        }
+    </script>
+<?php $view['slots']->stop() ?>
