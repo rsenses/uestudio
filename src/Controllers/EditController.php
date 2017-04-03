@@ -95,7 +95,7 @@ class EditController
         $video = ORM::for_table('videos')
             ->find_one($id);
 
-        if ($video->section !== 'loquehayquever' && $video->section !== 'laprevia' && $video->section !== 'yodonabeautybrandsplace') {
+        if ($video->section !== 'loquehayquever' && $video->section !== 'laprevia' && $video->section !== 'yodonabeautybrandsplace' && $video->section !== 'unpaseoporelprado') {
             $old = ORM::for_table('videos')
                 ->where('section', $video->section)
                 ->where('important', 1)
