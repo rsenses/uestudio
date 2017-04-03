@@ -48,7 +48,7 @@ server('nl1-uecluster', 'nl1.uecluster.com', 22)
 // The server needs to have git installed for this to work.
 // If you're not using a forward agent, then the server has to be able to clone
 // your project from this repository.
-set('repository', 'git@bitbucket.org:expomark/admin-uecluster.git');
+set('repository', 'git@bitbucket.org:uestudio/admin-uecluster.git');
 
 set('shared_dirs', ['storage']);
 
