@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/../vendor/autoload.php';
+date_default_timezone_set('Europe/Madrid');
 
 // Errores en archivo log o en pantalla si estamos en desarrollo
 error_reporting(-1);
@@ -10,6 +10,9 @@ ini_set('ignore_repeated_errors', 1); // do not log repeating errors
 // source of error plays role in determining if errors are different
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__.'/../storage/logs/'.date('Y-m-d').'_error.log');
+
+require __DIR__.'/../vendor/autoload.php';
+
 if ($GLOBALS['env']['debug']) {
     ini_set('display_errors', 1); // Mostramos los errores en pantalla
     ini_set('display_startup_errors', 1);
@@ -35,14 +38,14 @@ $handler->setDbDetails($GLOBALS['env']['db']['host'], $GLOBALS['env']['db']['por
 $handler->setDbTable('session');
 
 // Session start
-session_name($GLOBALS['config']['info']['session_name']);
-session_set_cookie_params(14400);
+ini_set('session.use_strict_mode', true);
+ini_set('session.cache_limiter', 'private');
 ini_set('session.gc_maxlifetime', 14400);
+session_name($GLOBALS['config']['info']['session_name']);
 session_set_save_handler($handler, true);
 session_start();
 
 // Language Initial Settings
-date_default_timezone_set('Europe/Madrid');
 $locale = array_keys($GLOBALS['config']['locales'])[0];
 Flight::set('locale', $locale);
 setlocale(LC_TIME, $GLOBALS['config']['locales'][$locale]);

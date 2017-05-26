@@ -100,6 +100,7 @@ class UserController
     public function searchAction()
     {
         $searchTerm = Flight::request()->query['term'];
+
         if (empty($searchTerm)) {
             Flight::notFound();
             die;
@@ -110,7 +111,11 @@ class UserController
             ->select('email')
             ->select('first_name')
             ->select('last_name')
-            ->where_raw('MATCH(email, first_name, last_name) AGAINST (?)', array($searchTerm))
+            ->where_any_is([
+                ['email' => '%'.$searchTerm.'%'],
+                ['first_name' => '%'.$searchTerm.'%'],
+                ['last_name' => '%'.$searchTerm.'%'],
+            ], ['email' => 'LIKE', 'first_name' => 'LIKE', 'last_name' => 'LIKE'])
             ->group_by('id')
             ->order_by_desc('id')
             ->find_many();

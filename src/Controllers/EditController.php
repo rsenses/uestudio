@@ -107,7 +107,8 @@ class EditController
             }
         }
 
-        $video->important = 1;
+        $video->important = !$video->important;
+
         $video->save();
 
         Flight::redirect(filter_var(Flight::request()->referrer, FILTER_SANITIZE_URL));

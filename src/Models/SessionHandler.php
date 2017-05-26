@@ -79,7 +79,7 @@ class SessionHandler implements \SessionHandlerInterface
         if ($result = $stmt->fetch()) {
             return $result['data'];
         } else {
-            return false;
+            return '';
         }
     }
 

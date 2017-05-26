@@ -39,7 +39,7 @@ class AuthorController
         // Datos necesarios para el paginador
         $page = $page ?: 1;
         $itemsPerPage = 20;
-        $urlPattern = '/users/(:num)';
+        $urlPattern = '/author/(:num)';
 
         //realizamos la consulta de todos los items
         $authors = ORM::for_table('author')
@@ -48,7 +48,7 @@ class AuthorController
             ->offset(($page - 1) * $itemsPerPage)
             ->find_many();
 
-        $totalItems = ORM::for_table('users')
+        $totalItems = ORM::for_table('author')
             ->count();
 
         // devolvemos la coleccion para que la vista la presente.
@@ -89,19 +89,19 @@ class AuthorController
             die;
         }
 
-        $content = ORM::for_table('author')
-            ->where_raw('MATCH(name) AGAINST (?)', array($searchTerm))
+        $authors = ORM::for_table('author')
+            ->where_like('name', "%$searchTerm%")
             ->order_by_asc('name')
             ->find_many();
 
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
-            'users.phtml',
+            'authors.phtml',
             array(
-                'section' => 'users',
+                'section' => 'author',
                 'searchTerm' => $searchTerm,
                 'paginator' => null,
-                'content' => $content,
+                'authors' => $authors,
             )
         );
     }

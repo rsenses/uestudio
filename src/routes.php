@@ -73,6 +73,11 @@ Flight::route('GET /users/delete/@id:[0-9]+', function ($userId) {
     $users = new Expomark\Controllers\UserController();
     $users->deleteAction($userId);
 });
+// Admin Search Route. ej: /users/search
+Flight::route('GET /users/search', function () {
+    $users = new Expomark\Controllers\UserController();
+    $users->searchAction();
+});
 // Users TimeOut Route. ej: /users/timeout/lala@lala.com/[base64 referer url]
 Flight::route('GET /users/timeout/@email/@url', function ($email, $url) {
     $users = new Expomark\Controllers\UserController();
