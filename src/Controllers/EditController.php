@@ -53,13 +53,12 @@ class EditController
                 ->group_by('videos.id')
                 ->order_by_desc('videos.id')
                 ->limit(1)
-                ->find_one($id)
-                ->as_array();
+                ->find_one($id);
 
-            if ($content['webname'] === 'potenciatupyme') {
-                $content['link'] = $GLOBALS['config']['enum']['webs_url'][$content['webname']].'video/'.$content['url'];
+            if ($content->webname === 'potenciatupyme') {
+                $content->link = $GLOBALS['config']['enum']['webs_url'][$content->webname].'video/'.$content->url;
             } else {
-                $content['link'] = $GLOBALS['config']['enum']['webs_url'][$content['webname']].$content['section_url'].'/'.$content['url'];
+                $content->link = $GLOBALS['config']['enum']['webs_url'][$content->webname].$content->section_url.'/'.$content->url;
             }
         }
 
