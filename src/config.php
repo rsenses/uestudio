@@ -14,6 +14,14 @@ $GLOBALS['config'] = [
     ],
     'uploads_dir' => __DIR__.'/../public/uploads/',
     'images' => [
+        'futurosostenible' => [
+            'th' => 50,
+        ],
+        'caminosalternativos' => [
+            '370' => 370,
+            '140' => 140,
+            'th' => 50,
+        ],
         'correresdevalientes' => [
             '490' => 490,
             'th' => 50,
@@ -102,6 +110,8 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'futurosostenible' => 'Futuro Sostenible',
+            'caminosalternativos' => 'Caminos Alternativos',
             'correresdevalientes' => '¡Correr es de valientes!',
             'ventanaalfuturo' => 'Ventana al futuro',
             'loquehayquever' => 'Lo que hay que ver',
@@ -128,6 +138,8 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'webs_url' => [
+            'futurosostenible' => 'http://www.futurosostenible.elmundo.es/',
+            'caminosalternativos' => 'http://www.caminosalternativos.elmundo.es/',
             'correresdevalientes' => 'http://www.correresdevalientes.elmundo.es/',
             'ventanaalfuturo' => 'http://www.ventanaalfuturo.elmundo.es/',
             'loquehayquever' => 'http://www.loquehayquever.elmundo.es/',
