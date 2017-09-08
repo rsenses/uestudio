@@ -26,21 +26,21 @@ after('deploy', 'success');
 
 // Define a server for deployment.
 // Let's name it "prod" and use port 22.
-server('ams2-uecluster', 'ams2.uecluster.com', 22)
+host('ams2.uecluster.com')
     ->user('root')
-    ->forwardAgent() // You can use identity key, ssh config, or username/password to auth on the server.
+    // ->forwardAgent() // You can use identity key, ssh config, or username/password to auth on the server.
     ->stage('production')
     ->set('deploy_path', '/var/www/admin.uecluster.com'); // Define the base path to deploy your project to.
 
-server('ams3-uecluster', 'ams3.uecluster.com', 22)
+host('ams3.uecluster.com')
     ->user('root')
-    ->forwardAgent()
+    // ->forwardAgent()
     ->stage('production')
     ->set('deploy_path', '/var/www/admin.uecluster.com');
 
-server('nl1-uecluster', 'nl1.uecluster.com', 22)
+host('nl1.uecluster.com')
     ->user('root')
-    ->forwardAgent()
+    // ->forwardAgent()
     ->stage('production')
     ->set('deploy_path', '/var/www/admin.uecluster.com');
 

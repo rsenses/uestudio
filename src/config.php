@@ -167,6 +167,7 @@ $GLOBALS['config'] = [
         ],
         'options_name' => [
             'Tipo de Contenido' => 'type',
+            'Formato' => 'format',
             'Estilos' => 'styles',
             'Scripts' => 'scripts',
             'Resumen' => 'summary',
@@ -205,6 +206,13 @@ $GLOBALS['config'] = [
             'content',
             'special',
             'gallery',
+            'album',
+            'noticia',
+            'galeria',
+            'infografia',
+            'texto',
+            'video',
+            'encuesta',
             'list',
         ]
     ],
