@@ -12,6 +12,11 @@ use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
 use Cocur\Slugify\Slugify;
+use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
+use MicrosoftAzure\Storage\Blob\Models\ListContainersOptions;
+use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+use MicrosoftAzure\Storage\Common\ServiceException;
+use MicrosoftAzure\Storage\Blob\Models\PublicAccessType;
 
 class Image
 {
@@ -24,11 +29,31 @@ class Image
         $this->slugify = new Slugify();
     }
 
+    public function isExternalCdnEnaled() {
+        if(isset($GLOBALS['env']['azure']['enable'])) {
+            return $GLOBALS['env']['azure']['enable'];
+        }
+        return false;
+    }
+
     public function upload($input)
     {
+
         $webName = filter_var(Flight::request()->data['webname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 
+        if($this->isExternalCdnEnaled()) {
+            $connectionString = 'DefaultEndpointsProtocol=https;AccountName='.$GLOBALS['env']['azure']['blob']['AccountName'].';AccountKey='.$GLOBALS['env']['azure']['blob']['AccountKey'];
+            $blobClient = BlobRestProxy::createBlobService($connectionString);
+            $container = $webName;
+
+            $this->createContainerIfNotExists($container, $blobClient);
+        }
+
         $folder = $GLOBALS['config']['uploads_dir'].'images/';
+
+        if (!file_exists($folder.$webName)) {
+            mkdir($folder.$webName, 0775);
+        }
 
         $storage = new FileSystem($folder.$webName.'/');
 
@@ -47,6 +72,11 @@ class Image
             $file->upload();
             $imageName = $file->getNameWithExtension();
 
+            if($this->isExternalCdnEnaled()) {
+                $content = fopen($folder.$webName.'/'.$imageName, "r");
+                $this->uploadBlob($container, $imageName, $content, $blobClient);
+            }
+
             if (isset($GLOBALS['config']['images'][$webName])) {
                 foreach ($GLOBALS['config']['images'][$webName] as $key => $size) {
                     $resizable = $this->imagine->open($folder.$webName.'/'.$imageName);
@@ -55,7 +85,17 @@ class Image
 
                     $resizable->resize($imageSize->widen($size))
                         ->save($folder.$webName.'/'.$key.'_'.$imageName);
+
+                    if($this->isExternalCdnEnaled()) {
+                        $content = fopen($folder.$webName.'/'.$key.'_'.$imageName, "r");
+                        $this->uploadBlob($container, $key.'_'.$imageName, $content, $blobClient);
+                        unlink($folder.$webName.'/'.$key.'_'.$imageName);
+                    }
                 }
+            }
+
+            if($this->isExternalCdnEnaled()) {
+                unlink($folder.$webName.'/'.$imageName);
             }
 
             return $imageName;
@@ -66,6 +106,64 @@ class Image
                 throw new Exception($e->getMessage());
             }
 
+        }
+    }
+
+    function uploadBlob($container, $blob_name, $content, $blobClient)
+    {
+        
+        try {
+            //Upload blob
+            $blobClient->createBlockBlob($container, $blob_name, $content);
+        } catch (ServiceException $e) {
+            $code = $e->getCode();
+            $error_message = $e->getMessage();
+            echo $code.": ".$error_message.PHP_EOL;
+        }
+    }
+
+    function createContainerIfNotExists($containerName,$blobClient)
+    {
+        // See if the container already exists.
+        $listContainersOptions = new ListContainersOptions;
+        $listContainersOptions->setPrefix($containerName);
+        $listContainersResult = $blobClient->listContainers($listContainersOptions);
+        $containerExists = false;
+        $containers = $listContainersResult->getContainers();
+        foreach ( $containers as $container)
+        {
+            if ($container->getName() == $containerName)
+            {
+                // The container exists.
+                $containerExists = true;
+                // No need to keep checking.
+                break;
+            }
+        }
+        if (!$containerExists)
+        {
+            $this->createContainer($containerName,$blobClient);
+        }
+    }
+
+    function createContainer($containerName,$blobClient)
+    {
+        // OPTIONAL: Set public access policy and metadata.
+        // Create container options object.
+        $createContainerOptions = new CreateContainerOptions();
+        // Set public access policy. Possible values are
+        // PublicAccessType::CONTAINER_AND_BLOBS and PublicAccessType::BLOBS_ONLY.
+        // CONTAINER_AND_BLOBS: full public read access for container and blob data.
+        // BLOBS_ONLY: public read access for blobs. Container data not available.
+        // If this value is not specified, container data is private to the account owner.
+        $createContainerOptions->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
+        try {
+            // Create container.
+            $blobClient->createContainer($containerName, $createContainerOptions);
+        } catch (ServiceException $e) {
+            $code = $e->getCode();
+            $error_message = $e->getMessage();
+            echo $code.": ".$error_message.PHP_EOL;
         }
     }
 }

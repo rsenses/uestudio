@@ -13,6 +13,8 @@ $GLOBALS['config'] = [
         'cookie_minutes' => 120,
     ],
     'uploads_dir' => __DIR__.'/../public/uploads/',
+    //'cdn_url' => '/uploads/images',
+    'cdn_url' => 'https://adminuestudio.blob.core.windows.net',
     'images' => [
         'impulsodigital' => [
             '800' => 800,
