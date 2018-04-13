@@ -1,7 +1,7 @@
 version: '3'
 services:
-  azure-vote-front-1:
-    image: .
+  uecluster-admin:
+    build: .
     container_name: uecluster-admin
     ports:
         - "8002:80"
