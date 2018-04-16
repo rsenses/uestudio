@@ -19,6 +19,10 @@ $GLOBALS['config'] = [
             '300' => 300,
             'th' => 50,
         ],
+        'revivetupelo' => [
+            '547' => 547,
+            'th' => 50,
+        ],
         'futurosostenible' => [
             'th' => 50,
         ],
@@ -115,6 +119,7 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'revivetupelo' => 'Revive tu Pelo',
             'impulsodigital' => 'Impulso Digital',
             'futurosostenible' => 'Futuro Sostenible',
             'caminosalternativos' => 'Caminos Alternativos',
