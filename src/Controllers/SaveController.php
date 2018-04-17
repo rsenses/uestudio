@@ -38,7 +38,7 @@ class SaveController
             'webname' => v::stringType()->noWhitespace()->notEmpty()->length(1, 255)->in(array_keys($GLOBALS['config']['enum']['webs_name'])),
             'title' => v::stringType()->notEmpty()->length(1, 255)->unique('videos', 'url', $id),
             'subtitle' => v::stringType(),
-            'section' => v::stringType()->notEmpty(),
+            'section' => v::stringType(),
             'tags' => v::stringType(),
             'content' => v::stringType()->notEmpty(),
             'author' => v::intVal()->notEmpty(),

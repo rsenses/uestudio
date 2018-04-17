@@ -51,7 +51,7 @@
                         <div class="form-group<?php echo isset($errors['section']) ? ' has-error' : '' ?>">
                             <label for="sectionTag">Sección</label>
                             <div class="input-group">
-                                <input class="form-control" name="section" id="sectionTag" placeholder="Sección" type="text" value="<?php echo $view->escape($content['section']) ?>" autocomplete="off" required>
+                                <input class="form-control" name="section" id="sectionTag" placeholder="Sección" type="text" value="<?php echo $view->escape($content['section']) ?>" autocomplete="off">
                                 <div class="input-group-addon"><i class="fa fa-bookmark"></i></div>
                             </div>
                             <?php if (isset($errors['section'])) : ?>
