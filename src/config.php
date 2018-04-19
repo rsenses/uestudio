@@ -149,6 +149,7 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'webs_url' => [
+            'revivetupelo' => 'http://www.revivetupelo.telva.com/',
             'impulsodigital' => 'http://www.impulsodigital.elmundo.es/',
             'futurosostenible' => 'http://www.futurosostenible.elmundo.es/',
             'caminosalternativos' => 'http://www.caminosalternativos.elmundo.es/',
