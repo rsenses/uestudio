@@ -12,6 +12,8 @@ RUN apt-get install -y git zip unzip
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install bcmath
 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # Add php.ini for production
 #COPY config/php.ini $PHP_INI_DIR/php.ini
 #COPY config/apache2.conf /etc/apache2/apache2.conf
@@ -20,6 +22,8 @@ RUN docker-php-ext-install bcmath
 ADD . /var/www/html
 
 WORKDIR /var/www/html
+
+RUN composer install
 #RUN php composer.phar install 
 
 #RUN chmod -R 777 /var/www/html/var
