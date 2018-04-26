@@ -1,0 +1,23 @@
+<?php
+#configurations file
+$GLOBALS['env'] = [
+    'debug' => true,
+    'db' => [
+        'driver' => 'mysql',
+        'host' => getenv('UECLUSTER_DB_HOST'),
+        'port' => getenv('UECLUSTER_DB_PORT'),
+        'database' => getenv('UECLUSTER_DB_NAME'),
+        'user' => getenv('UECLUSTER_DB_USER'),
+        'pass' => getenv('UECLUSTER_DB_PASSWORD'),
+    ],
+    'azure' => array(
+        'enable' => true,
+        'blob' => array(
+            'AccountName' => getenv('UECLUSTER_AZURE_ACCOUNT_NAME'),
+            'AccountKey' => getenv('UECLUSTER_AZURE_ACCOUNT_KEY'),
+        )
+    ),
+    'memcached' => [
+        ['localhost', 11211, 33],
+    ],
+];
