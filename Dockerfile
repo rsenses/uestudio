@@ -11,6 +11,24 @@ RUN apt-get update -y
 RUN apt-get install -y git zip unzip
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install bcmath
+# Install modules : GD mcrypt iconv
+RUN apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+    && docker-php-ext-install iconv \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install gd
+
+# memcached module
+RUN apt-get install -y libmemcached-dev
+RUN curl -o /root/memcached.zip https://github.com/php-memcached-dev/php-memcached/archive/php7.zip -L
+RUN cd /root && unzip memcached.zip && rm memcached.zip && \
+ cd php-memcached-php7 && \
+ phpize && ./configure --enable-sasl && make && make install && \
+ cd /root && rm -rf /root/php-memcached-* && \
+ echo "extension=memcached.so" > /usr/local/etc/php/conf.d/memcached.ini  && \
+ echo "memcached.use_sasl = 1" >> /usr/local/etc/php/conf.d/memcached.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
