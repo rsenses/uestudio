@@ -1,8 +1,8 @@
 version: '3.6'
 services:
   uecluster-admin:
-    image: 'uecluster.azurecr.io/php'
+    image: 'uecluster.azurecr.io/ue-studio/uecluster_admin-uecluster'
     deploy:
      replicas: 2
     ports:
-        - "8003:80"
+        - "8080:80"
