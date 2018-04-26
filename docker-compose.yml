@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   uecluster-admin:
-    image: 'uecluster.azurecr.io/ue-studio/uecluster_admin-uecluster'
+    image: 'SET_CURRENT_IMAGE'
     deploy:
      replicas: 2
     ports:
