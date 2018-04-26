@@ -70,6 +70,8 @@ ENV UECLUSTER_DB_PASSWORD SET_UECLUSTER_DB_PASSWORD
 ENV UECLUSTER_AZURE_ACCOUNT_NAME SET_UECLUSTER_AZURE_ACCOUNT_NAME
 ENV UECLUSTER_AZURE_ACCOUNT_KEY SET_UECLUSTER_AZURE_ACCOUNT_KEY
 
+ADD config/apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+
 # Update the default apache site with the config we created.
 #ADD config/apache/apache-config.conf.dev /etc/apache2/sites-enabled/000-default.conf
 
