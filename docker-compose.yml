@@ -4,7 +4,5 @@ services:
     image: 'uecluster.azurecr.io/php'
     deploy:
      replicas: 2
-    build: .
-    container_name: uecluster-admin
     ports:
-        - "8002:80"
+        - "8003:80"
