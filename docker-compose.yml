@@ -1,6 +1,9 @@
-version: '2'
+version: '3.6'
 services:
   uecluster-admin:
+    image: 'uecluster.azurecr.io/php'
+    deploy:
+     replicas: 2
     build: .
     container_name: uecluster-admin
     ports:

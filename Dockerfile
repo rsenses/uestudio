@@ -9,14 +9,15 @@ RUN apt-get update -y
 #RUN apt-get update && apt-get -y upgrade && DEBIAN_FRONTEND=noninteractive apt-get -y install \
 #    apache2 php7.0 php7.0-mysql libapache2-mod-php7.0 curl lynx-cur php7.0-xml
 RUN apt-get install -y git zip unzip
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install bcmath
 
 # Add php.ini for production
 #COPY config/php.ini $PHP_INI_DIR/php.ini
 #COPY config/apache2.conf /etc/apache2/apache2.conf
 
 # Install app
-#RUN rm -rf /var/www/html/*
-ADD src /var/www/html
+ADD . /var/www/html
 
 WORKDIR /var/www/html
 #RUN php composer.phar install 
@@ -57,6 +58,13 @@ ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
 ENV MODE dev
+ENV UECLUSTER_DB_HOST test-db-uecluster.mysql.database.azure.com
+ENV UECLUSTER_DB_PORT 3306
+ENV UECLUSTER_DB_NAME ueformaciononline
+ENV UECLUSTER_DB_USER uecluster@test-db-uecluster
+ENV UECLUSTER_DB_PASSWORD Ue5TuDi02018
+ENV UECLUSTER_AZURE_ACCOUNT_NAME dev
+ENV UECLUSTER_AZURE_ACCOUNT_KEY dev
 
 # Update the default apache site with the config we created.
 #ADD config/apache/apache-config.conf.dev /etc/apache2/sites-enabled/000-default.conf
