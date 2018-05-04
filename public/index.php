@@ -1,5 +1,7 @@
 <?php
 
+echo 'hola';
+
 date_default_timezone_set('Europe/Madrid');
 
 // Errores en archivo log o en pantalla si estamos en desarrollo
