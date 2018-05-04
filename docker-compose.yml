@@ -14,4 +14,4 @@ services:
     deploy:
      replicas: SET_REPLICAS
     ports:
-        - "8080:80"
+        - "SET_PORT:80"
