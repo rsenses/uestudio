@@ -3,7 +3,7 @@
 namespace Expomark\Controllers;
 
 use ORM;
-use \DateTime;
+use DateTime;
 use Cocur\Slugify\Slugify;
 use Joelvardy\Flash;
 use Cartalyst\Sentry\Facades\Native\Sentry as Sentry;
@@ -23,7 +23,7 @@ class SaveController
         Flight::db()->memcached();
         Flight::eloquent();
         if (!Sentry::check()) {
-            Flight::redirect('/users/login/'.base64_encode(urlencode(Flight::request()->url)));
+            Flight::redirect('/users/login/' . base64_encode(urlencode(Flight::request()->url)));
         }
 
         $this->image = new Image();
@@ -57,7 +57,7 @@ class SaveController
             Flash::message('danger', '<strong>Error!</strong>, compruebe los errores en el formulario.');
             Flash::data(Flight::request()->data);
             if ($id) {
-                Flight::redirect('/edit/'.$id);
+                Flight::redirect('/edit/' . $id);
             } else {
                 Flight::redirect('/edit');
             }
@@ -67,10 +67,8 @@ class SaveController
         $webName = filter_var(Flight::request()->data['webname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
         $title = trim(Flight::request()->data['title']);
         $slug = $this->slugify->slugify(
-            filter_var(
-                strip_tags(
-                    preg_replace("/<br\s?\/?>/", " ", trim(Flight::request()->data['title']))
-                ), FILTER_SANITIZE_STRING
+            strip_tags(
+                preg_replace("/<br\s?\/?>/", ' ', trim(Flight::request()->data['title']))
             )
         );
         $subtitle = trim(Flight::request()->data['subtitle']);
@@ -126,7 +124,7 @@ class SaveController
             }
         }
 
-        /* Guarda en la tabla normal */
+        // Guarda en la tabla normal
         if ($id) {
             $save = ORM::for_table('videos')->find_one($id);
         } else {
@@ -139,13 +137,13 @@ class SaveController
         $save->content = $content;
         $save->description = $description;
         if (isset($imageName) && $imageName) {
-            $save->image = $webName.'/'.$imageName;
+            $save->image = $webName . '/' . $imageName;
         }
         if (isset($verticalName) && $verticalName) {
-            $save->vertical = $webName.'/'.$verticalName;
+            $save->vertical = $webName . '/' . $verticalName;
         }
         if (isset($sliderName) && $sliderName) {
-            $save->slider = $webName.'/'.$sliderName;
+            $save->slider = $webName . '/' . $sliderName;
         }
         $save->vimeo = $vimeo;
         $save->twitter = $twitter;
@@ -223,6 +221,6 @@ class SaveController
             }
         }
 
-        Flight::redirect('/edit/'.$id);
+        Flight::redirect('/edit/' . $id);
     }
 }
