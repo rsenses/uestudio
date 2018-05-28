@@ -6,7 +6,7 @@ use ORM;
 use Cartalyst\Sentry\Facades\Native\Sentry as Sentry;
 use Cocur\Slugify\Slugify;
 use JasonGrimes\Paginator;
-use Kunststube\CSRFP\SignatureGenerator;
+use Volnix\CSRF\CSRF
 use Joelvardy\Flash;
 use Flight;
 use Respect\Validation\Validator as v;
@@ -17,7 +17,6 @@ class AuthorController
 {
     private $image;
     private $slugify;
-    private $signer;
     private $validator;
 
     public function __construct()
@@ -31,7 +30,6 @@ class AuthorController
         $this->image = new AuthorImage();
         $this->validator = new Validator();
         $this->slugify = new Slugify();
-        $this->signer = new SignatureGenerator($GLOBALS['config']['info']['secret_word']);
     }
 
     public function indexAction($page = null)

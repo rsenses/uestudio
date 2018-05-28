@@ -6,21 +6,19 @@ use ORM;
 use Cartalyst\Sentry\Facades\Native\Sentry as Sentry;
 use Cocur\Slugify\Slugify;
 use JasonGrimes\Paginator;
-use Kunststube\CSRFP\SignatureGenerator;
+use Volnix\CSRF\CSRF;
 use Joelvardy\Flash;
 use Flight;
 
 class UserController
 {
     private $slugify;
-    private $signer;
 
     public function __construct()
     {
         Flight::db();
         Flight::eloquent();
         $this->slugify = new Slugify();
-        $this->signer = new SignatureGenerator($GLOBALS['config']['info']['secret_word']);
     }
 
     public function indexAction($page = null)
@@ -138,7 +136,6 @@ class UserController
             'login.phtml',
             array(
                 'url' => $url,
-                'token' => $this->signer->getSignature(),
                 'email' => $email,
             )
         );
@@ -147,7 +144,7 @@ class UserController
     public function loginAction($url)
     {
         if (isset(Flight::request()->data['Submit']) && empty(Flight::request()->data['name'])) {
-            if ($this->signer->validateSignature(Flight::request()->data['_token'])) {
+            if (CSRF::validate($_POST)) {
                 $email = empty(Flight::request()->data['email']) ? null : (Flight::request()->data['email'] === 'Email') ? null : filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
                 $password = empty(Flight::request()->data['password']) ? null : filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 

@@ -20,7 +20,7 @@ class SaveController
 
     public function __construct()
     {
-        Flight::db()->memcached();
+        Flight::db();
         Flight::eloquent();
         if (!Sentry::check()) {
             Flight::redirect('/users/login/' . base64_encode(urlencode(Flight::request()->url)));
