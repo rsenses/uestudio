@@ -25,65 +25,81 @@ var InlineUpload = {
         },
         submit: {
             id: 'inline_upload_submit',
-            value: 'upload',
+            value: 'upload'
         },
         close: 'inline_upload_close',
         iframe: 'inline_upload_iframe'
     },
     image: function(hash) {
         var self = this;
-        this.offset = $(hash.textarea).prev('.markItUpHeader').offset();
-        this.dialog = $([
-            '<div class="',
-            this.options.container_class,
-            '"><div><form id="',
-            this.options.form_id,
-            '" action="',
-            this.options.action,
-            '" target="',
-            this.options.iframe,
-            '" method="post" enctype="multipart/form-data"><div class="form-group"><label class="control-label" for="',
-            this.options.inputs.alt.id,
-            '">',
-            this.options.inputs.alt.label,
-            '</label><input name="',
-            this.options.inputs.alt.name,
-            '" id="',
-            this.options.inputs.alt.id,
-            '" type="text" class="form-control"></div><div class="form-group"><label class="control-label" for="',
-            this.options.inputs.file.id,
-            '">',
-            this.options.inputs.file.label,
-            '</label><input name="',
-            this.options.inputs.file.name,
-            '" id="',
-            this.options.inputs.file.id,
-            '" type="file"></div><div class="form-group"><input id="',
-            this.options.submit.id,
-            '" type="button" class="btn btn-info btn-block" value="',
-            this.options.submit.value,
-            '"></div></form><div id="',
-            this.options.close,
-            '"><i class="fa fa-times"></i></div><iframe id="',
-            this.options.iframe,
-            '" name="',
-            this.options.iframe,
-            '" src="about:blank"></iframe></div></div>',
-        ].join('')).appendTo(document.body).hide().css('top', this.offset.top).css('left', this.offset.left);
+        this.offset = $(hash.textarea)
+            .prev('.markItUpHeader')
+            .offset();
+        this.webname = $('#web').val();
+        this.dialog = $(
+            [
+                '<div class="',
+                this.options.container_class,
+                '"><div><form id="',
+                this.options.form_id,
+                '" action="',
+                this.options.action,
+                '" target="',
+                this.options.iframe,
+                '" method="post" enctype="multipart/form-data"><input type="hidden" name="webname" class="markitup-webname" value="',
+                this.webname,
+                '"><div class="form-group"><label class="control-label" for="',
+                this.options.inputs.alt.id,
+                '">',
+                this.options.inputs.alt.label,
+                '</label><input name="',
+                this.options.inputs.alt.name,
+                '" id="',
+                this.options.inputs.alt.id,
+                '" type="text" class="form-control"></div><div class="form-group"><label class="control-label" for="',
+                this.options.inputs.file.id,
+                '">',
+                this.options.inputs.file.label,
+                '</label><input name="',
+                this.options.inputs.file.name,
+                '" id="',
+                this.options.inputs.file.id,
+                '" type="file"></div><div class="form-group"><input id="',
+                this.options.submit.id,
+                '" type="button" class="btn btn-info btn-block" value="',
+                this.options.submit.value,
+                '"></div></form><div id="',
+                this.options.close,
+                '"><i class="fa fa-times"></i></div><iframe id="',
+                this.options.iframe,
+                '" name="',
+                this.options.iframe,
+                '" src="about:blank"></iframe></div></div>'
+            ].join('')
+        )
+            .appendTo(document.body)
+            .hide()
+            .css('top', this.offset.top)
+            .css('left', this.offset.left);
         $('#' + this.options.submit.id).click(function() {
             if ($('#inline_upload_file1').val() == '') {
                 alert('Please select a file to upload');
                 return false;
             }
             upload = true;
-            $('#' + self.options.form_id).submit().fadeTo('fast', 0.2);
+            $('#' + self.options.form_id)
+                .submit()
+                .fadeTo('fast', 0.2);
         });
         $('#' + this.options.close).click(this.cleanUp);
         $('#' + this.options.iframe).bind('load', function() {
-            var result = document.getElementById('' + self.options.iframe).contentWindow.document.body.innerHTML;
+            var result = document.getElementById('' + self.options.iframe)
+                .contentWindow.document.body.innerHTML;
             console.log(result);
             if (result !== '') {
-                var response = jQuery.parseJSON(result.replace(/<(?:.|\n)*?>/gm, ''));
+                var response = jQuery.parseJSON(
+                    result.replace(/<(?:.|\n)*?>/gm, '')
+                );
                 if (response.status == 'success') {
                     this.block = [
                         '<img src="',
@@ -106,57 +122,73 @@ var InlineUpload = {
     },
     file: function(hash) {
         var self = this;
-        this.offset = $(hash.textarea).prev('.markItUpHeader').offset();
-        this.dialog = $([
-            '<div class="',
-            this.options.container_class,
-            '"><div><form id="',
-            this.options.form_id,
-            '" action="',
-            this.options.action,
-            '" target="',
-            this.options.iframe,
-            '" method="post" enctype="multipart/form-data"><div class="form-group"><label class="control-label" for="',
-            this.options.inputs.rel.id,
-            '">',
-            this.options.inputs.rel.label,
-            '</label><input name="',
-            this.options.inputs.rel.name,
-            '" id="',
-            this.options.inputs.rel.id,
-            '" type="text" class="form-control"></div><div class="form-group"><label class="control-label" for="',
-            this.options.inputs.file.id,
-            '">',
-            this.options.inputs.file.label,
-            '</label><input name="',
-            this.options.inputs.file.name,
-            '" id="',
-            this.options.inputs.file.id,
-            '" type="file"></div><div class="form-group"><input id="',
-            this.options.submit.id,
-            '" type="button" class="btn btn-info btn-block" value="',
-            this.options.submit.value,
-            '"></div></form><div id="',
-            this.options.close,
-            '"></div><iframe id="',
-            this.options.iframe,
-            '" name="',
-            this.options.iframe,
-            '" src="about:blank"></iframe></div></div>',
-        ].join('')).appendTo(document.body).hide().css('top', this.offset.top).css('left', this.offset.left);
+        this.offset = $(hash.textarea)
+            .prev('.markItUpHeader')
+            .offset();
+        this.webname = $('#web').val();
+        this.dialog = $(
+            [
+                '<div class="',
+                this.options.container_class,
+                '"><div><form id="',
+                this.options.form_id,
+                '" action="',
+                this.options.action,
+                '" target="',
+                this.options.iframe,
+                '" method="post" enctype="multipart/form-data"><input type="hidden" name="webname" class="markitup-webname" value="',
+                this.webname,
+                '"><div class="form-group"><label class="control-label" for="',
+                this.options.inputs.rel.id,
+                '">',
+                this.options.inputs.rel.label,
+                '</label><input name="',
+                this.options.inputs.rel.name,
+                '" id="',
+                this.options.inputs.rel.id,
+                '" type="text" class="form-control"></div><div class="form-group"><label class="control-label" for="',
+                this.options.inputs.file.id,
+                '">',
+                this.options.inputs.file.label,
+                '</label><input name="',
+                this.options.inputs.file.name,
+                '" id="',
+                this.options.inputs.file.id,
+                '" type="file"></div><div class="form-group"><input id="',
+                this.options.submit.id,
+                '" type="button" class="btn btn-info btn-block" value="',
+                this.options.submit.value,
+                '"></div></form><div id="',
+                this.options.close,
+                '"></div><iframe id="',
+                this.options.iframe,
+                '" name="',
+                this.options.iframe,
+                '" src="about:blank"></iframe></div></div>'
+            ].join('')
+        )
+            .appendTo(document.body)
+            .hide()
+            .css('top', this.offset.top)
+            .css('left', this.offset.left);
         $('#' + this.options.submit.id).click(function() {
             if ($('#inline_upload_file1').val() == '') {
                 alert('Please select a file to upload');
                 return false;
             }
             upload = true;
-            $('#' + self.options.form_id).submit().fadeTo('fast', 0.2);
+            $('#' + self.options.form_id)
+                .submit()
+                .fadeTo('fast', 0.2);
         });
         $('#' + this.options.close).click(this.cleanUp);
         $('#' + this.options.iframe).bind('load', function() {
-            var result = document.getElementById('' + self.options.iframe).contentWindow.document.body.innerHTML;
+            var result = document.getElementById('' + self.options.iframe)
+                .contentWindow.document.body.innerHTML;
             if (result !== '') {
-                var response = jQuery.parseJSON(result.replace(/<(?:.|\n)*?>/gm, ''));
+                var response = jQuery.parseJSON(
+                    result.replace(/<(?:.|\n)*?>/gm, '')
+                );
                 if (response.status == 'success') {
                     this.block = [
                         '<a href="',

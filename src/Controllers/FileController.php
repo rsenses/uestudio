@@ -2,17 +2,12 @@
 
 namespace Expomark\Controllers;
 
-use Cocur\Slugify\Slugify;
-use Upload\Storage\FileSystem;
-use Upload\File;
-use Upload\Validation\Mimetype;
-use Upload\Validation\Size;
 use Cartalyst\Sentry\Facades\Native\Sentry as Sentry;
+use Expomark\Upload\Image;
 use Flight;
 
 class FileController
 {
-    private $slugify;
 
     public function __construct()
     {
@@ -21,48 +16,23 @@ class FileController
         if (!Sentry::check()) {
             Flight::redirect('/users/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
-        $this->slugify = new Slugify();
+        $this->image = new Image();
     }
 
     public function uploadAction()
     {
-        if ($_FILES['inline_upload_file']['type'] == 'image/jpeg' || $_FILES['inline_upload_file']['type'] == 'image/gif' || $_FILES['inline_upload_file']['type'] == 'image/png') {
-            $folder = $GLOBALS['config']['uploads_dir'].'images/';
-            $src = '/uploads/images/';
-            $response['type'] = 'image';
-        } else {
-            $folder = $GLOBALS['config']['uploads_dir'].'files/';
-            $src = '/uploads/files/';
-            $response['type'] = 'file';
-        }
+        $response['status'] = 'error';
 
-        $storage = new FileSystem($folder);
-        $file = new File('inline_upload_file', $storage);
-        $upload = time().'_'.$this->slugify->slugify($_FILES['inline_upload_file']['name']);
-        $file->setName($upload);
-        $file->addValidations(array(
-            new Mimetype(
-                array('image/png', 'image/gif', 'image/jpeg', 'image/svg+xml', 'application/pdf', 'application/x-pdf')
-            ),
-            new Size('600K'),
-        ));
+        if (!empty(Flight::request()->files['inline_upload_file']['size'])) {
+            try {
+                $webName = filter_var(Flight::request()->data['webname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 
-        try {
-            // Success!
-            $file->upload();
+                $imageName = $this->image->upload('inline_upload_file');
 
-            $upload = $file->getNameWithExtension();
-
-            $info = getImageSize($folder.$upload);
-
-            $response['status'] = 'success';
-            $response['width'] = $info[0];
-            $response['height'] = $info[1];
-            $response['src'] = $src.$upload;
-        } catch (\Exception $e) {
-            $response['status'] = 'error';
-            if (isset($file->getErrors()[0])) {
-                $response['msg'] = $file->getErrors()[0];
+                $response['status'] = 'success';
+                $response['src'] = $GLOBALS['config']['cdn_url'].'/'.$webName.'/'.$imageName;
+            } catch (\Exception $e) {
+                $response['msg'] = $e->getMessage();
             }
         }
 
