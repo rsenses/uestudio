@@ -38,7 +38,6 @@ class Image
 
     public function upload($input)
     {
-
         $webName = filter_var(Flight::request()->data['webname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 
         if($this->isExternalCdnEnaled()) {
@@ -51,11 +50,7 @@ class Image
 
         $folder = $GLOBALS['config']['uploads_dir'].'images/';
 
-        if (!file_exists($folder.$webName)) {
-            mkdir($folder.$webName, 0775);
-        }
-
-        $storage = new FileSystem($folder.$webName.'/');
+        $storage = new FileSystem($folder.'/');
 
         $file = new File($input, $storage);
 
@@ -73,29 +68,29 @@ class Image
             $imageName = $file->getNameWithExtension();
 
             if($this->isExternalCdnEnaled()) {
-                $content = fopen($folder.$webName.'/'.$imageName, "r");
+                $content = fopen($folder.'/'.$imageName, "r");
                 $this->uploadBlob($container, $imageName, $content, $blobClient);
             }
 
             if (isset($GLOBALS['config']['images'][$webName])) {
                 foreach ($GLOBALS['config']['images'][$webName] as $key => $size) {
-                    $resizable = $this->imagine->open($folder.$webName.'/'.$imageName);
+                    $resizable = $this->imagine->open($folder.'/'.$imageName);
 
                     $imageSize  = $resizable->getSize();
 
                     $resizable->resize($imageSize->widen($size))
-                        ->save($folder.$webName.'/'.$key.'_'.$imageName);
+                        ->save($folder.'/'.$key.'_'.$imageName);
 
                     if($this->isExternalCdnEnaled()) {
-                        $content = fopen($folder.$webName.'/'.$key.'_'.$imageName, "r");
+                        $content = fopen($folder.'/'.$key.'_'.$imageName, "r");
                         $this->uploadBlob($container, $key.'_'.$imageName, $content, $blobClient);
-                        unlink($folder.$webName.'/'.$key.'_'.$imageName);
+                        unlink($folder.'/'.$key.'_'.$imageName);
                     }
                 }
             }
 
             if($this->isExternalCdnEnaled()) {
-                unlink($folder.$webName.'/'.$imageName);
+                unlink($folder.'/'.$imageName);
             }
 
             return $imageName;
@@ -110,8 +105,7 @@ class Image
     }
 
     function uploadBlob($container, $blob_name, $content, $blobClient)
-    {
-        
+    {       
         try {
             //Upload blob
             $blobClient->createBlockBlob($container, $blob_name, $content);
@@ -140,6 +134,7 @@ class Image
                 break;
             }
         }
+        
         if (!$containerExists)
         {
             $this->createContainer($containerName,$blobClient);

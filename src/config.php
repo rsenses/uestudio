@@ -14,7 +14,7 @@ $GLOBALS['config'] = [
     ],
     'uploads_dir' => __DIR__.'/../public/uploads/',
     //'cdn_url' => '/uploads/images',
-    'cdn_url' => 'https://adminuestudio.blob.core.windows.net',
+    'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
         'impulsodigital' => [
             '800' => 800,
