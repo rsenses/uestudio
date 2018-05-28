@@ -118,7 +118,7 @@
                                         <span class="laprevia">(420x400) si es una noticia (1024x383)</span>
                                     </div>
                                     <?php if ($content['image']): ?>
-                                        <a href="/uploads/images/<?php echo $view->escape($content['image']) ?>" target="_blank">
+                                        <a href="<?php echo $GLOBALS['config']['cdn_url'] ?>/<?php echo $view->escape($content['image']) ?>" target="_blank">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                     <?php endif ?>
@@ -144,7 +144,7 @@
                                         <span class="yodonabeautybrandsplace">(1920x846)</span>
                                     </div>
                                     <?php if ($content['slider']): ?>
-                                        <a href="/uploads/images/<?php echo $view->escape($content['slider']) ?>" target="_blank">
+                                        <a href="<?php echo $GLOBALS['config']['cdn_url'] ?>/<?php echo $view->escape($content['slider']) ?>" target="_blank">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                     <?php endif ?>
@@ -168,7 +168,7 @@
                                             <span class="yodonabeautybrandsplace">Neceser VIP (1284x707); Objecto de Deseo y Experto (700x700); el resto no subirla</span>
                                         </div>
                                         <?php if ($content['vertical']): ?>
-                                            <a href="/uploads/images/<?php echo $view->escape($content['vertical']) ?>" target="_blank">
+                                            <a href="<?php echo $GLOBALS['config']['cdn_url'] ?>/<?php echo $view->escape($content['vertical']) ?>" target="_blank">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
                                         <?php endif ?>

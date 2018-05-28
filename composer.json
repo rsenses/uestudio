@@ -16,7 +16,11 @@
         "ircmaxell/password-compat": "^1.0",
         "imagine/imagine": "~0.5.0",
         "respect/validation": "^1.1",
-        "volnix/csrf": "^1.2"
+        "volnix/csrf": "^1.2",
+        "microsoft/azure-storage-blob": "*",
+        "microsoft/azure-storage-table": "*",
+        "microsoft/azure-storage-queue": "*",
+        "microsoft/azure-storage-file": "*"
     },
     "autoload": {
         "files": [
