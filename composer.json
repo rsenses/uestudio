@@ -4,6 +4,7 @@
         "cocur/slugify": "1.4",
         "codeguy/upload": "1.*",
         "cartalyst/sentry": "2.1.*",
+        "doctrine/inflector": "1.2.*",
         "illuminate/support": "5.0.*",
         "illuminate/contracts": "5.0.*",
         "illuminate/container": "5.0.*",
