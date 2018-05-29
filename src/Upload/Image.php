@@ -9,8 +9,6 @@ use Upload\File;
 use Upload\Validation\Mimetype;
 use Upload\Validation\Size;
 use Imagine\Gd\Imagine;
-use Imagine\Image\Box;
-use Imagine\Image\Point;
 use Cocur\Slugify\Slugify;
 use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
 use MicrosoftAzure\Storage\Blob\Models\ListContainersOptions;
@@ -29,8 +27,9 @@ class Image
         $this->slugify = new Slugify();
     }
 
-    public function isExternalCdnEnaled() {
-        if(isset($GLOBALS['env']['azure']['enable'])) {
+    public function isExternalCdnEnaled()
+    {
+        if (isset($GLOBALS['env']['azure']['enable'])) {
             return $GLOBALS['env']['azure']['enable'];
         }
         return false;
@@ -40,57 +39,57 @@ class Image
     {
         $webName = filter_var(Flight::request()->data['webname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 
-        if($this->isExternalCdnEnaled()) {
-            $connectionString = 'DefaultEndpointsProtocol=https;AccountName='.$GLOBALS['env']['azure']['blob']['AccountName'].';AccountKey='.$GLOBALS['env']['azure']['blob']['AccountKey'];
+        if ($this->isExternalCdnEnaled()) {
+            $connectionString = 'DefaultEndpointsProtocol=https;AccountName=' . $GLOBALS['env']['azure']['blob']['AccountName'] . ';AccountKey=' . $GLOBALS['env']['azure']['blob']['AccountKey'];
             $blobClient = BlobRestProxy::createBlobService($connectionString);
-            $container = $webName;
+            $container = 'images';
 
             $this->createContainerIfNotExists($container, $blobClient);
         }
 
-        $folder = $GLOBALS['config']['uploads_dir'].'images/';
+        $folder = $GLOBALS['config']['uploads_dir'] . 'images/';
 
-        $storage = new FileSystem($folder.'/');
+        $storage = new FileSystem($folder . '/');
 
         $file = new File($input, $storage);
 
-        $image = time().'_'.$this->slugify->slugify($file->getName());
+        $image = time() . '_' . $this->slugify->slugify($file->getName());
 
         $file->setName($image);
-        $file->addValidations(array(
-            new Mimetype(array('image/jpeg', 'image/png', 'image/gif')),
+        $file->addValidations([
+            new Mimetype(['image/jpeg', 'image/png', 'image/gif']),
             new Size('1100K'),
-        ));
+        ]);
 
         try {
             // Success!
             $file->upload();
             $imageName = $file->getNameWithExtension();
 
-            if($this->isExternalCdnEnaled()) {
-                $content = fopen($folder.'/'.$imageName, "r");
-                $this->uploadBlob($container, $imageName, $content, $blobClient);
+            if ($this->isExternalCdnEnaled()) {
+                $content = fopen($folder . '/' . $imageName, 'r');
+                $this->uploadBlob($container, $webName . '/' . $imageName, $content, $blobClient);
             }
 
             if (isset($GLOBALS['config']['images'][$webName])) {
                 foreach ($GLOBALS['config']['images'][$webName] as $key => $size) {
-                    $resizable = $this->imagine->open($folder.'/'.$imageName);
+                    $resizable = $this->imagine->open($folder . '/' . $imageName);
 
-                    $imageSize  = $resizable->getSize();
+                    $imageSize = $resizable->getSize();
 
                     $resizable->resize($imageSize->widen($size))
-                        ->save($folder.'/'.$key.'_'.$imageName);
+                        ->save($folder . '/' . $key . '_' . $imageName);
 
-                    if($this->isExternalCdnEnaled()) {
-                        $content = fopen($folder.'/'.$key.'_'.$imageName, "r");
-                        $this->uploadBlob($container, $key.'_'.$imageName, $content, $blobClient);
-                        unlink($folder.'/'.$key.'_'.$imageName);
+                    if ($this->isExternalCdnEnaled()) {
+                        $content = fopen($folder . '/' . $key . '_' . $imageName, 'r');
+                        $this->uploadBlob($container, $webName . '/' . $key . '_' . $imageName, $content, $blobClient);
+                        unlink($folder . '/' . $key . '_' . $imageName);
                     }
                 }
             }
 
-            if($this->isExternalCdnEnaled()) {
-                unlink($folder.'/'.$imageName);
+            if ($this->isExternalCdnEnaled()) {
+                unlink($folder . '/' . $imageName);
             }
 
             return $imageName;
@@ -100,48 +99,44 @@ class Image
             } else {
                 throw new Exception($e->getMessage());
             }
-
         }
     }
 
-    function uploadBlob($container, $blob_name, $content, $blobClient)
-    {       
+    public function uploadBlob($container, $blob_name, $content, $blobClient)
+    {
         try {
             //Upload blob
             $blobClient->createBlockBlob($container, $blob_name, $content);
         } catch (ServiceException $e) {
             $code = $e->getCode();
             $error_message = $e->getMessage();
-            echo $code.": ".$error_message.PHP_EOL;
+            echo $code . ': ' . $error_message . PHP_EOL;
         }
     }
 
-    function createContainerIfNotExists($containerName,$blobClient)
+    public function createContainerIfNotExists($containerName, $blobClient)
     {
         // See if the container already exists.
-        $listContainersOptions = new ListContainersOptions;
+        $listContainersOptions = new ListContainersOptions();
         $listContainersOptions->setPrefix($containerName);
         $listContainersResult = $blobClient->listContainers($listContainersOptions);
         $containerExists = false;
         $containers = $listContainersResult->getContainers();
-        foreach ( $containers as $container)
-        {
-            if ($container->getName() == $containerName)
-            {
+        foreach ($containers as $container) {
+            if ($container->getName() == $containerName) {
                 // The container exists.
                 $containerExists = true;
                 // No need to keep checking.
                 break;
             }
         }
-        
-        if (!$containerExists)
-        {
-            $this->createContainer($containerName,$blobClient);
+
+        if (!$containerExists) {
+            $this->createContainer($containerName, $blobClient);
         }
     }
 
-    function createContainer($containerName,$blobClient)
+    public function createContainer($containerName, $blobClient)
     {
         // OPTIONAL: Set public access policy and metadata.
         // Create container options object.
@@ -158,7 +153,7 @@ class Image
         } catch (ServiceException $e) {
             $code = $e->getCode();
             $error_message = $e->getMessage();
-            echo $code.": ".$error_message.PHP_EOL;
+            echo $code . ': ' . $error_message . PHP_EOL;
         }
     }
 }

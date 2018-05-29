@@ -24,7 +24,7 @@ class UserController
     public function indexAction($page = null)
     {
         if (!Sentry::check()) {
-            Flight::redirect('/users/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
 
         // Datos necesarios para el paginador
@@ -49,18 +49,18 @@ class UserController
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'users.phtml',
-            array(
+            [
                 'section' => 'users',
                 'paginator' => new Paginator($totalItems, $itemsPerPage, $page, $urlPattern),
                 'content' => $content,
-            )
+            ]
         );
     }
 
     public function editAction($id = null, $content = null, $errors = null)
     {
         if (!Sentry::check()) {
-            Flight::redirect('/users/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
 
         if ($id) {
@@ -72,18 +72,18 @@ class UserController
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'editusers.phtml',
-            array(
+            [
                 'section' => 'users',
                 'errors' => $errors,
                 'content' => $content,
-            )
+            ]
         );
     }
 
     public function deleteAction($id)
     {
         if (!Sentry::check()) {
-            Flight::redirect('/users/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
 
         // Find the user using the user id
@@ -110,9 +110,9 @@ class UserController
             ->select('first_name')
             ->select('last_name')
             ->where_any_is([
-                ['email' => '%'.$searchTerm.'%'],
-                ['first_name' => '%'.$searchTerm.'%'],
-                ['last_name' => '%'.$searchTerm.'%'],
+                ['email' => '%' . $searchTerm . '%'],
+                ['first_name' => '%' . $searchTerm . '%'],
+                ['last_name' => '%' . $searchTerm . '%'],
             ], ['email' => 'LIKE', 'first_name' => 'LIKE', 'last_name' => 'LIKE'])
             ->group_by('id')
             ->order_by_desc('id')
@@ -121,12 +121,12 @@ class UserController
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'users.phtml',
-            array(
+            [
                 'section' => 'users',
                 'searchTerm' => $searchTerm,
                 'paginator' => null,
                 'content' => $content,
-            )
+            ]
         );
     }
 
@@ -134,10 +134,10 @@ class UserController
     {
         echo Flight::view()->render(
             'login.phtml',
-            array(
+            [
                 'url' => $url,
                 'email' => $email,
-            )
+            ]
         );
     }
 
@@ -150,10 +150,10 @@ class UserController
 
                 try {
                     // Login credentials
-                    $credentials = array(
+                    $credentials = [
                         'email' => $email,
                         'password' => $password,
-                    );
+                    ];
 
                     // Authenticate the user
                     $user = Sentry::authenticate($credentials, true);
@@ -184,17 +184,17 @@ class UserController
 
     public function timeoutAction($email, $url)
     {
-        $inactiveTime = $GLOBALS['config']['security']['cookie_minutes'] > 1 ? $GLOBALS['config']['security']['cookie_minutes'].' minutos' : $GLOBALS['config']['security']['cookie_minutes'].'minuto';
+        $inactiveTime = $GLOBALS['config']['security']['cookie_minutes'] > 1 ? $GLOBALS['config']['security']['cookie_minutes'] . ' minutos' : $GLOBALS['config']['security']['cookie_minutes'] . 'minuto';
 
-        Flash::message('danger', 'Ha sido desconectado por permanecer mas de '.$inactiveTime.' inactivo. Disculpe las molestias.');
+        Flash::message('danger', 'Ha sido desconectado por permanecer mas de ' . $inactiveTime . ' inactivo. Disculpe las molestias.');
 
         //devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'login.phtml',
-            array(
+            [
                 'url' => $url,
                 'email' => base64_decode($email),
-            )
+            ]
         );
     }
 
@@ -207,7 +207,7 @@ class UserController
     public function saveAction($id)
     {
         if (!Sentry::check()) {
-            Flight::redirect('/users/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
 
         if (isset(Flight::request()->data['Submit'])) {
@@ -284,21 +284,21 @@ class UserController
                 } else {
                     try {
                         // Create the user
-                        $user = Sentry::createUser(array(
+                        $user = Sentry::createUser([
                             'email' => $email,
                             'first_name' => Flight::request()->data['first_name'],
                             'last_name' => Flight::request()->data['last_name'],
                             'password' => Flight::request()->data['password'],
-                            'permissions' => array(
+                            'permissions' => [
                                 'admin.view' => 1,
                                 'admin.add' => 1,
                                 'admin.edit' => 1,
                                 'admin.delete' => 1,
-                            ),
+                            ],
                             'activated' => true,
                             'activated_at' => date('Y-m-d H:i:s'),
                             'created_at' => date('Y-m-d H:i:s'),
-                        ));
+                        ]);
                         $this->editAction($user['attributes']['id']);
                     } catch (\Cartalyst\Sentry\Users\LoginRequiredException $e) {
                         Flash::message('danger', '<strong>Error</strong>, email requerido.');
@@ -318,14 +318,14 @@ class UserController
                 if ($id) {
                     $this->editAction($id);
                 } else {
-                    $user = array(
+                    $user = [
                         'id' => null,
                         'email' => Flight::request()->data['email'],
                         'password' => Flight::request()->data['password'],
                         'confirmPassword' => Flight::request()->data['confirmPassword'],
                         'first_name' => Flight::request()->data['first_name'],
                         'last_name' => Flight::request()->data['last_name'],
-                    );
+                    ];
                     $this->editAction(0, $user);
                 }
             }
