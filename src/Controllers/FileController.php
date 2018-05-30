@@ -8,13 +8,12 @@ use Flight;
 
 class FileController
 {
-
     public function __construct()
     {
         Flight::db();
         Flight::eloquent();
         if (!Sentry::check()) {
-            Flight::redirect('/users/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
         $this->image = new Image();
     }
@@ -30,7 +29,7 @@ class FileController
                 $imageName = $this->image->upload('inline_upload_file');
 
                 $response['status'] = 'success';
-                $response['src'] = $GLOBALS['config']['cdn_url'].'/'.$webName.'/'.$imageName;
+                $response['src'] = $GLOBALS['config']['cdn_url'] . '/images/' . $webName . '/' . $imageName;
             } catch (\Exception $e) {
                 $response['msg'] = $e->getMessage();
             }
