@@ -6,7 +6,6 @@ use ORM;
 use Cartalyst\Sentry\Facades\Native\Sentry as Sentry;
 use Cocur\Slugify\Slugify;
 use JasonGrimes\Paginator;
-use Volnix\CSRF\CSRF
 use Joelvardy\Flash;
 use Flight;
 use Respect\Validation\Validator as v;
@@ -24,7 +23,7 @@ class AuthorController
         Flight::db();
         Flight::eloquent();
         if (!Sentry::check()) {
-            Flight::redirect('/author/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            Flight::redirect('/author/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
 
         $this->image = new AuthorImage();
@@ -52,11 +51,11 @@ class AuthorController
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'authors.phtml',
-            array(
+            [
                 'section' => 'author',
                 'paginator' => new Paginator($totalItems, $itemsPerPage, $page, $urlPattern),
                 'authors' => $authors,
-            )
+            ]
         );
     }
 
@@ -71,11 +70,11 @@ class AuthorController
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'editauthor.phtml',
-            array(
+            [
                 'section' => 'author',
                 'author' => $author,
                 'id' => $id,
-            )
+            ]
         );
     }
 
@@ -95,12 +94,12 @@ class AuthorController
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'authors.phtml',
-            array(
+            [
                 'section' => 'author',
                 'searchTerm' => $searchTerm,
                 'paginator' => null,
                 'authors' => $authors,
-            )
+            ]
         );
     }
 
@@ -120,7 +119,7 @@ class AuthorController
             Flash::data(Flight::request()->data);
 
             if ($id) {
-                Flight::redirect('/author/edit/'.$id);
+                Flight::redirect('/author/edit/' . $id);
             } else {
                 Flight::redirect('/author/create');
             }
@@ -141,7 +140,7 @@ class AuthorController
             }
         }
 
-        /* Guarda en la tabla normal */
+        // Guarda en la tabla normal
         if ($id) {
             $save = ORM::for_table('author')->find_one($id);
         } else {
@@ -159,6 +158,6 @@ class AuthorController
 
         $save->save();
 
-        Flight::redirect('/author/edit/'.$save->id());
+        Flight::redirect('/author/edit/' . $save->id());
     }
 }
