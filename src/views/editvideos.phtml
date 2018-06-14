@@ -20,6 +20,9 @@
                     </div>
                 </div>
                 <hr>
+                <p>
+                    <strong>Valoración media</strong>: <span class="label label-warning" style="font-size: 18px;"><?php echo $view->escape($ratingSum / $ratingCount) ?></span> (<?php echo $view->escape($ratingCount) ?> valoraciones).
+                </p>
                 <div class="form-group<?php echo isset($errors['title']) ? ' has-error' : '' ?>">
                     <label for="title">Título</label>
                     <input class="form-control" name="title" id="title" placeholder="Título" type="text" value="<?php echo $view->escape($content['title']) ?>" required>

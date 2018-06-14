@@ -32,6 +32,7 @@ class Image
         if (isset($GLOBALS['env']['azure']['enable'])) {
             return $GLOBALS['env']['azure']['enable'];
         }
+
         return false;
     }
 

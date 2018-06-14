@@ -13,7 +13,7 @@ class EditController
         Flight::db();
         Flight::eloquent();
         if (!Sentry::check()) {
-            Flight::redirect('/users/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
     }
 
@@ -46,19 +46,32 @@ class EditController
                 ->select('sectionTags.tag', 'section')
                 ->select('sectionTags.url', 'section_url')
                 ->select_expr('GROUP_CONCAT(DISTINCT `tags`.`tag`)', 'tags')
-                ->left_outer_join('tagLinks', array('tagLinks.content_id', '=', 'videos.id'))
-                ->left_outer_join('tags', array('tags.id', '=', 'tagLinks.tag_id'))
-                ->left_outer_join('section', array('section.content_id', '=', 'videos.id'))
-                ->left_outer_join('tags', array('sectionTags.id', '=', 'section.tag_id'), 'sectionTags')
+                ->left_outer_join('tagLinks', ['tagLinks.content_id', '=', 'videos.id'])
+                ->left_outer_join('tags', ['tags.id', '=', 'tagLinks.tag_id'])
+                ->left_outer_join('section', ['section.content_id', '=', 'videos.id'])
+                ->left_outer_join('tags', ['sectionTags.id', '=', 'section.tag_id'], 'sectionTags')
                 ->group_by('videos.id')
                 ->order_by_desc('videos.id')
                 ->limit(1)
                 ->find_one($id);
 
             if ($content->webname === 'potenciatupyme') {
-                $content->link = $GLOBALS['config']['enum']['webs_url'][$content->webname].'video/'.$content->url;
+                $content->link = $GLOBALS['config']['enum']['webs_url'][$content->webname] . 'video/' . $content->url;
             } else {
-                $content->link = $GLOBALS['config']['enum']['webs_url'][$content->webname].$content->section_url.'/'.$content->url;
+                $content->link = $GLOBALS['config']['enum']['webs_url'][$content->webname] . $content->section_url . '/' . $content->url;
+            }
+
+            $rating = ORM::for_table('ratings')
+                ->where('video_id', $content->id)
+                ->find_many();
+
+            if ($rating) {
+                $ratingSum = array_reduce($rating, function ($carry, $item) {
+                    $carry += $item->rating;
+                    return $carry;
+                });
+
+                $ratingCount = count($rating);
             }
         }
 
@@ -79,13 +92,15 @@ class EditController
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'editvideos.phtml',
-            array(
+            [
                 'section' => 'videos',
                 'autocomplete' => isset($tags) ? json_encode($tags) : null,
                 'authors' => $authors,
                 'content' => $content,
                 'id' => $id,
-            )
+                'ratingSum' => $ratingSum ?? null,
+                'ratingCount' => $ratingCount ?? null,
+            ]
         );
     }
 
