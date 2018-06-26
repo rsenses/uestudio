@@ -21,7 +21,7 @@
                 </div>
                 <hr>
                 <p>
-                    <strong>Valoración media</strong>: <span class="label label-warning" style="font-size: 18px;"><?php echo $ratingCount && $ratingSum ? $view->escape($ratingSum / $ratingCount) : '' ?></span> (<?php echo (int)$ratingCount ?> valoraciones).
+                    <strong>Valoración media</strong>: <span class="label label-warning" style="font-size: 18px;"><?php echo $ratingCount && $ratingSum ? round((int) $ratingSum / (int )$ratingCount, 2) : '' ?></span> (<?php echo (int)$ratingCount ?> valoraciones).
                 </p>
                 <div class="form-group<?php echo isset($errors['title']) ? ' has-error' : '' ?>">
                     <label for="title">Título</label>
