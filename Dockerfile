@@ -38,6 +38,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Install app
 ADD . /var/www/html
+COPY src/env.php.dist /var/www/html/src/env.php
 
 WORKDIR /var/www/html
 
