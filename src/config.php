@@ -1,5 +1,6 @@
 <?php
-#configurations file
+
+//configurations file
 $GLOBALS['config'] = [
     'info' => [
         'owner_mail' => 'uestudio@unidadeditorial.es',
@@ -10,9 +11,9 @@ $GLOBALS['config'] = [
     ],
     'security' => [
         'min_level' => 3,
-        'cookie_minutes' => 120,
+        'cookie_minutes' => 121,
     ],
-    'uploads_dir' => __DIR__.'/../public/uploads/',
+    'uploads_dir' => __DIR__ . '/../public/uploads/',
     //'cdn_url' => '/uploads/images',
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
