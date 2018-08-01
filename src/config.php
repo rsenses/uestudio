@@ -17,9 +17,21 @@ $GLOBALS['config'] = [
     //'cdn_url' => '/uploads/images',
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
+        'estardondeestes' => [
+            '990' => 990,
+            '650' => 650,
+            '329' => 329,
+            '310' => 310,
+            'th' => 50,
+        ],
         'impulsodigital' => [
             '800' => 800,
             '300' => 300,
+            'th' => 50,
+        ],
+        'saludesvida' => [
+            '690' => 690,
+            '270' => 270,
             'th' => 50,
         ],
         'revivetupelo' => [
@@ -122,6 +134,8 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'estardondeestes' => 'Estar donde Estés',
+            'saludesvida' => 'Salud es Vida',
             'revivetupelo' => 'Revive tu Pelo',
             'impulsodigital' => 'Impulso Digital',
             'futurosostenible' => 'Futuro Sostenible',
@@ -152,6 +166,7 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'webs_url' => [
+            'saludesvida' => 'http://www.saludesvida.marca.com/',
             'revivetupelo' => 'http://www.revivetupelo.telva.com/',
             'impulsodigital' => 'http://www.impulsodigital.elmundo.es/',
             'futurosostenible' => 'http://www.futurosostenible.elmundo.es/',
@@ -190,6 +205,7 @@ $GLOBALS['config'] = [
             'Partido' => 'match',
             'Fecha' => 'date',
             'Autor' => 'author',
+            'Patrocinador' => 'partner',
         ],
         'options' => [
             'adrian-salso',
