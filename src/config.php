@@ -167,6 +167,7 @@ $GLOBALS['config'] = [
         ],
         'webs_url' => [
             'saludesvida' => 'http://www.saludesvida.marca.com/',
+            'estardondeestes' => 'http://www.estardondeestes.elmundo.es/',
             'revivetupelo' => 'http://www.revivetupelo.telva.com/',
             'impulsodigital' => 'http://www.impulsodigital.elmundo.es/',
             'futurosostenible' => 'http://www.futurosostenible.elmundo.es/',
