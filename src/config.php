@@ -17,6 +17,11 @@ $GLOBALS['config'] = [
     //'cdn_url' => '/uploads/images',
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
+        'planetainteligente' => [
+            '1143' => 1143,
+            '380' => 380,
+            'th' => 50,
+        ],
         'estardondeestes' => [
             '990' => 990,
             '650' => 650,
@@ -135,6 +140,7 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'planetainteligente' => 'Planeta Inteligente',
             'estardondeestes' => 'Estar donde Estés',
             'saludesvida' => 'Salud es Vida',
             'revivetupelo' => 'Revive tu Pelo',
@@ -167,6 +173,7 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'webs_url' => [
+            'planetainteligente' => 'http://www.planetainteligente.elmundo.es/',
             'saludesvida' => 'http://www.saludesvida.marca.com/',
             'estardondeestes' => 'http://www.estardondeestes.elmundo.es/',
             'revivetupelo' => 'http://www.revivetupelo.telva.com/',
