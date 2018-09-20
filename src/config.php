@@ -19,6 +19,7 @@ $GLOBALS['config'] = [
     'images' => [
         'planetainteligente' => [
             '1143' => 1143,
+            '514' => 514,
             '380' => 380,
             'th' => 50,
         ],
