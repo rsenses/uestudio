@@ -216,6 +216,7 @@ $GLOBALS['config'] = [
             'Fecha' => 'date',
             'Autor' => 'author',
             'Patrocinador' => 'partner',
+            'Podcast' => 'podcast',
         ],
         'options' => [
             'adrian-salso',
