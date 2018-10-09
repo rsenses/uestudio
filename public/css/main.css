@@ -1,4 +1,5 @@
-.navbar-default .navbar-brand, h1 {
+.navbar-default .navbar-brand,
+h1 {
     color: #0089c4;
 }
 .table {
@@ -7,33 +8,36 @@
 .controls {
     display: none;
     width: 100%;
-    float: left
+    float: left;
 }
-tr:hover .controls, tr:focus .controls {
-    display: block
+tr:hover .controls,
+tr:focus .controls {
+    display: block;
 }
 .deactivated {
-    opacity: .5;
+    opacity: 0.5;
 }
 .editar {
     color: #33486b;
-    font-size: .9em;
-    text-decoration: underline
+    font-size: 0.9em;
+    text-decoration: underline;
 }
 .important {
     color: #ff5500;
-    font-size: .9em;
-    text-decoration: underline
+    font-size: 0.9em;
+    text-decoration: underline;
 }
 .borrar {
     color: #e26464;
-    font-size: .9em;
-    text-decoration: underline
+    font-size: 0.9em;
+    text-decoration: underline;
 }
-.editar:hover, .borrar:hover {
-    color: #777
+.editar:hover,
+.borrar:hover {
+    color: #777;
 }
-.work ul, .work li {
+.work ul,
+.work li {
     margin: 0;
     padding: 0;
 }
@@ -51,7 +55,7 @@ tr:hover .controls, tr:focus .controls {
     margin-bottom: 6px;
 }
 .well.bg-info {
-    background-color: #D9EDF7;
+    background-color: #d9edf7;
 }
 textarea#content {
     height: 300px;
@@ -60,10 +64,22 @@ textarea#content {
 .size {
     display: inline-block;
 }
-.size span, .tags span {
+.size span,
+.tags span {
     display: none;
 }
 
 .hideable .info {
     display: none;
+}
+.error-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+.error-actions {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.error-actions .btn {
+    margin-right: 10px;
 }

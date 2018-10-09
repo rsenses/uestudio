@@ -13,8 +13,9 @@ class SectionController
     {
         Flight::db();
         Flight::eloquent();
+
         if (!Sentry::check()) {
-            Flight::redirect('/users/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
     }
 
@@ -35,10 +36,10 @@ class SectionController
             ->select('videos.important')
             ->select_expr('GROUP_CONCAT(DISTINCT `tags`.`tag`)', 'tags')
             ->select_expr('GROUP_CONCAT(DISTINCT `sectionTags`.`tag`)', 'sections')
-            ->left_outer_join('tagLinks', array('tagLinks.content_id', '=', 'videos.id'))
-            ->left_outer_join('tags', array('tags.id', '=', 'tagLinks.tag_id'))
-            ->left_outer_join('section', array('section.content_id', '=', 'videos.id'))
-            ->left_outer_join('tags', array('sectionTags.id', '=', 'section.tag_id'), 'sectionTags')
+            ->left_outer_join('tagLinks', ['tagLinks.content_id', '=', 'videos.id'])
+            ->left_outer_join('tags', ['tags.id', '=', 'tagLinks.tag_id'])
+            ->left_outer_join('section', ['section.content_id', '=', 'videos.id'])
+            ->left_outer_join('tags', ['sectionTags.id', '=', 'section.tag_id'], 'sectionTags')
             ->where('videos.section', $slug)
             ->group_by('videos.id')
             ->order_by_desc('videos.date')
@@ -53,11 +54,11 @@ class SectionController
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'videos.phtml',
-            array(
+            [
                 'section' => 'videos',
                 'paginator' => new Paginator($totalItems, $itemsPerPage, $page, $urlPattern),
                 'content' => $content,
-            )
+            ]
         );
     }
 }

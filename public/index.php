@@ -9,9 +9,9 @@ ini_set('ignore_repeated_source', 0);
 ini_set('ignore_repeated_errors', 1); // do not log repeating errors
 // source of error plays role in determining if errors are different
 ini_set('log_errors', 1);
-ini_set('error_log', __DIR__.'/../storage/logs/'.date('Y-m-d').'_error.log');
+ini_set('error_log', __DIR__ . '/../storage/logs/' . date('Y-m-d') . '_error.log');
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 if ($GLOBALS['env']['debug']) {
     ini_set('display_errors', 1); // Mostramos los errores en pantalla
@@ -20,15 +20,25 @@ if ($GLOBALS['env']['debug']) {
 } else {
     ini_set('display_errors', 0);
     ini_set('display_startup_errors', 0);
+
     Flight::map('notFound', function () {
-        $error = new Controllers\NotFoundController();
-        $error->indexAction();
-        die;
+        $error = new Expomark\Controllers\NotFoundController();
+
+        Flight::response()
+            ->clear()
+            ->status(404)
+            ->write($error->indexAction())
+            ->send();
     });
+
     Flight::map('error', function () {
-        $error = new Controllers\NotFoundController();
-        $error->indexAction();
-        die;
+        $error = new Expomark\Controllers\NotFoundController();
+
+        Flight::response()
+            ->clear()
+            ->status(500)
+            ->write($error->indexAction())
+            ->send();
     });
 }
 
@@ -69,9 +79,9 @@ Flight::register('eloquent', 'Expomark\Models\Eloquent', [
     $GLOBALS['env']['db']['pass'],
 ]);
 
-$loader = new Symfony\Component\Templating\Loader\FilesystemLoader(__DIR__.'/../src/views/%name%');
+$loader = new Symfony\Component\Templating\Loader\FilesystemLoader(__DIR__ . '/../src/views/%name%');
 
-Flight::register('view', 'Symfony\Component\Templating\PhpEngine', array(new Symfony\Component\Templating\TemplateNameParser(), $loader), function ($templating) {
+Flight::register('view', 'Symfony\Component\Templating\PhpEngine', [new Symfony\Component\Templating\TemplateNameParser(), $loader], function ($templating) {
 });
 
 Flight::view()->set(new Symfony\Component\Templating\Helper\SlotsHelper());

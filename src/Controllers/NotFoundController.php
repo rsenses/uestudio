@@ -8,7 +8,7 @@ class NotFoundController
 {
     public function indexAction()
     {
-        echo Flight::view()->render(
+        return Flight::view()->render(
             '404.phtml',
             []
         );

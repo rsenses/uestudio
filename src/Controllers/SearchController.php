@@ -4,7 +4,6 @@ namespace Expomark\Controllers;
 
 use ORM;
 use Cartalyst\Sentry\Facades\Native\Sentry as Sentry;
-use JasonGrimes\Paginator;
 use Flight;
 
 class SearchController
@@ -13,8 +12,9 @@ class SearchController
     {
         Flight::db();
         Flight::eloquent();
+
         if (!Sentry::check()) {
-            Flight::redirect('/users/login/'.base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
     }
 
@@ -34,13 +34,13 @@ class SearchController
             ->select('videos.section')
             ->select_expr('GROUP_CONCAT(`tags`.`tag`)', 'tags')
             ->select('sectionTags.tag', 'sections')
-            ->left_outer_join('tagLinks', array('tagLinks.content_id', '=', 'videos.id'))
-            ->left_outer_join('tags', array('tags.id', '=', 'tagLinks.tag_id'))
-            ->left_outer_join('section', array('section.content_id', '=', 'videos.id'))
-            ->left_outer_join('tags', array('sectionTags.id', '=', 'section.tag_id'), 'sectionTags')
+            ->left_outer_join('tagLinks', ['tagLinks.content_id', '=', 'videos.id'])
+            ->left_outer_join('tags', ['tags.id', '=', 'tagLinks.tag_id'])
+            ->left_outer_join('section', ['section.content_id', '=', 'videos.id'])
+            ->left_outer_join('tags', ['sectionTags.id', '=', 'section.tag_id'], 'sectionTags')
             ->where_any_is([
-                ['videos.title' => '%'.$searchTerm.'%'],
-                ['sectionTags.tag' => '%'.$searchTerm.'%'],
+                ['videos.title' => '%' . $searchTerm . '%'],
+                ['sectionTags.tag' => '%' . $searchTerm . '%'],
             ], ['videos.title' => 'LIKE', 'sectionTags.tag' => 'LIKE'])
             ->group_by('videos.id')
             ->order_by_desc('videos.id')
@@ -49,12 +49,12 @@ class SearchController
         // devolvemos la coleccion para que la vista la presente.
         echo Flight::view()->render(
             'videos.phtml',
-            array(
+            [
                 'section' => 'videos',
                 'searchTerm' => $searchTerm,
                 'paginator' => null,
                 'content' => $content,
-            )
+            ]
         );
     }
 }
