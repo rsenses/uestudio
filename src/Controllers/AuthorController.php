@@ -22,6 +22,7 @@ class AuthorController
     {
         Flight::db();
         Flight::eloquent();
+
         if (!Sentry::check()) {
             Flight::redirect('/author/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }

@@ -22,6 +22,7 @@ class SaveController
     {
         Flight::db();
         Flight::eloquent();
+
         if (!Sentry::check()) {
             Flight::redirect('/users/login/' . base64_encode(urlencode(Flight::request()->url)));
         }
@@ -145,7 +146,7 @@ class SaveController
         if (isset($sliderName) && $sliderName) {
             $save->slider = $webName . '/' . $sliderName;
         }
-        
+
         $save->vimeo = $vimeo;
         $save->twitter = $twitter;
         $save->facebook = $facebook;
