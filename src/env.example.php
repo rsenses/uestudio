@@ -1,7 +1,7 @@
 <?php
 #configurations file
 $GLOBALS['env'] = [
-    'debug' => true,
+    'debug' => false,
     'db' => [
         'driver' => 'mysql',
         'host' => 'localhost',
