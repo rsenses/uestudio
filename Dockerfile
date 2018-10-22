@@ -21,14 +21,14 @@ RUN apt-get install -y \
     && docker-php-ext-install gd
 
 # memcached module
-RUN apt-get install -y libmemcached-dev
-RUN curl -o /root/memcached.zip https://github.com/php-memcached-dev/php-memcached/archive/php7.zip -L
-RUN cd /root && unzip memcached.zip && rm memcached.zip && \
- cd php-memcached-php7 && \
- phpize && ./configure --enable-sasl && make && make install && \
- cd /root && rm -rf /root/php-memcached-* && \
- echo "extension=memcached.so" > /usr/local/etc/php/conf.d/memcached.ini  && \
- echo "memcached.use_sasl = 1" >> /usr/local/etc/php/conf.d/memcached.ini
+# RUN apt-get install -y libmemcached-dev
+# RUN curl -o /root/memcached.zip https://github.com/php-memcached-dev/php-memcached/archive/php7.zip -L
+# RUN cd /root && unzip memcached.zip && rm memcached.zip && \
+#  cd php-memcached-php7 && \
+#  phpize && ./configure --enable-sasl && make && make install && \
+#  cd /root && rm -rf /root/php-memcached-* && \
+#  echo "extension=memcached.so" > /usr/local/etc/php/conf.d/memcached.ini  && \
+#  echo "memcached.use_sasl = 1" >> /usr/local/etc/php/conf.d/memcached.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -39,13 +39,14 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Install app
 ADD . /var/www/html
 COPY src/env.php.dist /var/www/html/src/env.php
-RUN mkdir /var/www/html/public/uploads
-RUN mkdir /var/www/html/public/uploads/images
-RUN chown -R www-data:www-data /var/www/html/public/uploads
+# RUN mkdir /var/www/html/public/uploads
+# RUN mkdir /var/www/html/public/uploads/images
+# RUN chown -R www-data:www-data /var/www/html/public/uploads
 
 WORKDIR /var/www/html
 
 RUN composer install
+RUN composer dump-autoload
 #RUN php composer.phar install 
 
 #RUN chmod -R 777 /var/www/html/var

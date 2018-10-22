@@ -3,24 +3,25 @@
 date_default_timezone_set('Europe/Madrid');
 
 // Errores en archivo log o en pantalla si estamos en desarrollo
-error_reporting(-1);
+error_reporting(E_ALL);
 // Errores en archivo log o en pantalla si estamos en desarrollo
 ini_set('ignore_repeated_source', 0);
 ini_set('ignore_repeated_errors', 1); // do not log repeating errors
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
 // source of error plays role in determining if errors are different
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/../storage/logs/' . date('Y-m-d') . '_error.log');
 
 require __DIR__ . '/../vendor/autoload.php';
 
+Flight::set('flight.log_errors', false);
+
 if ($GLOBALS['env']['debug']) {
+    Flight::set('flight.handle_errors', false);
     ini_set('display_errors', 1); // Mostramos los errores en pantalla
     ini_set('display_startup_errors', 1);
-    Flight::set('flight.handle_errors', false);
 } else {
-    ini_set('display_errors', 0);
-    ini_set('display_startup_errors', 0);
-
     Flight::map('notFound', function () {
         $error = new Expomark\Controllers\NotFoundController();
 
@@ -42,17 +43,17 @@ if ($GLOBALS['env']['debug']) {
     });
 }
 
-$handler = new Expomark\Models\SessionHandler();
+// $handler = new Expomark\Models\SessionHandler();
 
-$handler->setDbDetails($GLOBALS['env']['db']['host'], $GLOBALS['env']['db']['port'], $GLOBALS['env']['db']['user'], $GLOBALS['env']['db']['pass'], $GLOBALS['env']['db']['database']);
-$handler->setDbTable('session');
+// $handler->setDbDetails($GLOBALS['env']['db']['host'], $GLOBALS['env']['db']['port'], $GLOBALS['env']['db']['user'], $GLOBALS['env']['db']['pass'], $GLOBALS['env']['db']['database']);
+// $handler->setDbTable('session');
 
 // Session start
-ini_set('session.use_strict_mode', true);
-ini_set('session.cache_limiter', 'private');
-ini_set('session.gc_maxlifetime', 14400);
+// ini_set('session.use_strict_mode', true);
+// ini_set('session.cache_limiter', 'private');
+// ini_set('session.gc_maxlifetime', 14400);
 session_name($GLOBALS['config']['info']['session_name']);
-session_set_save_handler($handler, true);
+// session_set_save_handler($handler, true);
 session_start();
 
 // Language Initial Settings
