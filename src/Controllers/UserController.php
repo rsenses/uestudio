@@ -86,8 +86,8 @@ class UserController
             Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
         }
 
-        // Find the user using the user id
-        $user = Sentry::findUserById($id);
+        $user = ORM::for_table('users')
+            ->find_one($id);
 
         // Delete the user
         $user->delete();
