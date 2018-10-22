@@ -7,5 +7,5 @@ AuthType Basic
 AuthName "Restricted Files"
 # (Following line optional)
 AuthBasicProvider file
-AuthUserFile "/var/www/html/public/.passwords"
+AuthUserFile "/var/www/html/public/.htpasswd"
 Require user admin
