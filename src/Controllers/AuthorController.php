@@ -25,6 +25,7 @@ class AuthorController
 
         if (!Sentry::check()) {
             Flight::redirect('/author/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            die;
         }
 
         $this->image = new AuthorImage();
@@ -124,6 +125,7 @@ class AuthorController
             } else {
                 Flight::redirect('/author/create');
             }
+            die;
         }
 
         // Validated Rules
@@ -160,5 +162,6 @@ class AuthorController
         $save->save();
 
         Flight::redirect('/author/edit/' . $save->id());
+        die;
     }
 }

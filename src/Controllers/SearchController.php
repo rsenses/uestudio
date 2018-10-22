@@ -15,6 +15,7 @@ class SearchController
 
         if (!Sentry::check()) {
             Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            die;
         }
     }
 
@@ -24,6 +25,7 @@ class SearchController
         $searchTerm = Flight::request()->query['term'];
         if (!$searchTerm) {
             Flight::redirect(filter_var(Flight::request()->referrer, FILTER_SANITIZE_URL));
+            die;
         }
 
         $content = ORM::for_table('videos')

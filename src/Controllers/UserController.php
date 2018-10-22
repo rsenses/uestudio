@@ -25,6 +25,7 @@ class UserController
     {
         if (!Sentry::check()) {
             Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            die;
         }
 
         // Datos necesarios para el paginador
@@ -61,6 +62,7 @@ class UserController
     {
         if (!Sentry::check()) {
             Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            die;
         }
 
         if ($id) {
@@ -84,6 +86,7 @@ class UserController
     {
         if (!Sentry::check()) {
             Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            die;
         }
 
         $user = ORM::for_table('users')
@@ -93,6 +96,7 @@ class UserController
         $user->delete();
 
         Flight::redirect('/users/');
+        die;
     }
 
     public function searchAction()
@@ -164,6 +168,7 @@ class UserController
                     } else {
                         Flight::redirect();
                     }
+                    die;
                 } catch (\Cartalyst\Sentry\Users\LoginRequiredException $e) {
                     Flash::message('danger', '<strong>Error</strong>, Login field is required.');
                 } catch (\Cartalyst\Sentry\Users\UserNotFoundException $e) {
@@ -202,12 +207,14 @@ class UserController
     {
         Sentry::logout();
         Flight::redirect('/');
+        die;
     }
 
     public function saveAction($id)
     {
         if (!Sentry::check()) {
             Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            die;
         }
 
         if (isset(Flight::request()->data['Submit'])) {

@@ -15,6 +15,7 @@ class FileController
 
         if (!Sentry::check()) {
             Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            die;
         }
 
         $this->image = new Image();

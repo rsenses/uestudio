@@ -15,6 +15,7 @@ class EditController
 
         if (!Sentry::check()) {
             Flight::redirect('/users/login/' . base64_encode(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING)));
+            die;
         }
     }
 
@@ -127,6 +128,7 @@ class EditController
         $video->save();
 
         Flight::redirect(filter_var(Flight::request()->referrer, FILTER_SANITIZE_URL));
+        die;
     }
 
     public static function activeAction($id)
@@ -136,6 +138,7 @@ class EditController
         $video->save();
 
         Flight::redirect(filter_var(Flight::request()->referrer, FILTER_SANITIZE_URL));
+        die;
     }
 
     public static function deactiveAction($id)
@@ -145,5 +148,6 @@ class EditController
         $video->save();
 
         Flight::redirect(filter_var(Flight::request()->referrer, FILTER_SANITIZE_URL));
+        die;
     }
 }

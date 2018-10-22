@@ -25,6 +25,7 @@ class SaveController
 
         if (!Sentry::check()) {
             Flight::redirect('/users/login/' . base64_encode(urlencode(Flight::request()->url)));
+            die;
         }
 
         $this->image = new Image();
@@ -62,6 +63,7 @@ class SaveController
             } else {
                 Flight::redirect('/edit');
             }
+            die;
         }
 
         // Validated Rules
@@ -224,5 +226,6 @@ class SaveController
         }
 
         Flight::redirect('/edit/' . $id);
+        die;
     }
 }
