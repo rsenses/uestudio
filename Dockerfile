@@ -39,9 +39,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Install app
 ADD . /var/www/html
 COPY src/env.php.dist /var/www/html/src/env.php
-# RUN mkdir /var/www/html/public/uploads
-# RUN mkdir /var/www/html/public/uploads/images
-# RUN chown -R www-data:www-data /var/www/html/public/uploads
+RUN mkdir /var/www/html/public/uploads
+RUN mkdir /var/www/html/public/uploads/images
+RUN chown -R www-data:www-data /var/www/html/public/uploads
 
 WORKDIR /var/www/html
 
