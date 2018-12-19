@@ -82,6 +82,7 @@ class SaveController
         $vimeo = filter_var(trim(Flight::request()->data['vimeo']), FILTER_SANITIZE_STRING);
         $author = Flight::request()->data['author'] > 0 ? filter_var(trim(Flight::request()->data['author']), FILTER_SANITIZE_NUMBER_INT) : null;
 
+
         if (Flight::request()->data['date']) {
             $dateTime = Flight::request()->data['date'];
         } else {

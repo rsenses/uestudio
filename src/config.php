@@ -17,6 +17,10 @@ $GLOBALS['config'] = [
     //'cdn_url' => '/uploads/images',
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
+        'noesfutboleslaliga' => [
+            '640' => 640,
+            'th' => 50,
+        ],
         'planetainteligente' => [
             '1143' => 1143,
             '514' => 514,
@@ -148,6 +152,7 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'noesfutboleslaliga' => 'No es Fútbol es LaLiga',
             'planetainteligente' => 'Planeta Inteligente',
             'estardondeestes' => 'Estar donde Estés',
             'espiritufilantropico' => 'Espíritu Filantrópico',
@@ -182,6 +187,7 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'webs_url' => [
+            'noesfutboleslaliga' => 'http://noesfutboleslaliga.elmundo.es/',
             'planetainteligente' => 'http://www.planetainteligente.elmundo.es/',
             'saludesvida' => 'http://www.saludesvida.marca.com/',
             'estardondeestes' => 'http://www.estardondeestes.elmundo.es/',
