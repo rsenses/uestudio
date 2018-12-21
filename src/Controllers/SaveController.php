@@ -46,7 +46,7 @@ class SaveController
             'author' => v::intVal()->notEmpty(),
             'facebook' => v::stringType()->notEmpty()->length(1, 300),
             'description' => v::stringType()->notEmpty()->length(1, 160),
-            'twitter' => v::stringType()->notEmpty()->length(1, 140),
+            'twitter' => v::stringType()->notEmpty()->length(1, 255),
         ];
 
         if (Flight::request()->data['date']) {
