@@ -18,6 +18,7 @@ $GLOBALS['config'] = [
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
         'noesfutboleslaliga' => [
+            '1056' => 1056,
             '640' => 640,
             'th' => 50,
         ],
