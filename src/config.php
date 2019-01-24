@@ -28,6 +28,13 @@ $GLOBALS['config'] = [
             '380' => 380,
             'th' => 50,
         ],
+        'porunusolove' => [
+            '784' => 784,
+            '650' => 650,
+            '329' => 329,
+            '310' => 310,
+            'th' => 50,
+        ],
         'espiritufilantropico' => [
             '784' => 784,
             '650' => 650,
@@ -153,6 +160,7 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'porunusolove' => 'Por un uso Love',
             'noesfutboleslaliga' => 'No es Fútbol es LaLiga',
             'planetainteligente' => 'Planeta Inteligente',
             'estardondeestes' => 'Estar donde Estés',
@@ -188,6 +196,7 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'webs_url' => [
+            'porunusolove' => 'http://porunusolove.elmundo.es/',
             'noesfutboleslaliga' => 'http://noesfutboleslaliga.elmundo.es/',
             'planetainteligente' => 'http://www.planetainteligente.elmundo.es/',
             'saludesvida' => 'http://www.saludesvida.marca.com/',
@@ -234,6 +243,7 @@ $GLOBALS['config'] = [
             'Patrocinador' => 'partner',
             'Podcast' => 'podcast',
             'Pixel' => 'pixel',
+            'URL' => 'url',
         ],
         'options' => [
             'adrian-salso',
