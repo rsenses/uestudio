@@ -26,21 +26,20 @@ class DumpController
         $pass = $GLOBALS['env']['db']['pass'];
         $host = $GLOBALS['env']['db']['host'];
         $filename = 'backup-' . date('d-m-Y') . '.sql.gz';
-        $dir = __DIR__ . '/../../public/uploads/files/' . $filename;
+        $dir = '/tmp/' . $filename;
 
         // echo "<h3>Backing up database to `<code>{$dir}</code>`</h3>";
 
-        // exec("mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} 2>&1", $output);
+        // $output = shell_exec("mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} 2>&1");
 
         // var_dump($output);
-        // die;
 
         $mime = 'application/x-gzip';
 
         header('Content-Type: ' . $mime);
         header('Content-Disposition: attachment; filename="' . $filename . '"');
 
-        $cmd = "mysqldump -u $user --password=$pass $database | gzip --best";
+        $cmd = "mysqldump --user=$user --password=$pass --host={$host} $database | gzip --best";
 
         passthru($cmd);
 
