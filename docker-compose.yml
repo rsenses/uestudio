@@ -12,6 +12,6 @@ services:
       - UECLUSTER_AZURE_ACCOUNT_NAME=SET_UECLUSTER_AZURE_ACCOUNT_NAME
       - UECLUSTER_AZURE_ACCOUNT_KEY=SET_UECLUSTER_AZURE_ACCOUNT_KEY
     deploy:
-     replicas: SET_REPLICAS
+     mode: global
     ports:
         - "SET_PORT:80"
