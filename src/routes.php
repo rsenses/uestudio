@@ -1,5 +1,6 @@
 <?php
-/* ==================================== Admin Routes ==================================== */
+
+// ==================================== Admin Routes ====================================
 // Admin Section Route. ej: /admin/videos
 Flight::route('GET /(admin(/@page:[0-9]+))', function ($page) {
     $admin = new Expomark\Controllers\AdminController();
@@ -10,21 +11,28 @@ Flight::route('GET /section/@slug:[a-z0-9-]+(/@page:[0-9]+)', function ($slug, $
     $admin->videosAction($slug, $page);
 });
 
-/* ==================================== Search Routes ==================================== */
+// ==================================== Search Routes ====================================
 // Admin Search Route. ej: /admin/search/videos
 Flight::route('GET /search', function () {
     $admin = new Expomark\Controllers\SearchController();
     $admin->videosAction();
 });
 
-/* ==================================== Uploads Routes ==================================== */
+// ==================================== Dump Mysql ====================================
+// Admin Search Route. ej: /admin/search/videos
+Flight::route('GET /dump', function () {
+    $admin = new Expomark\Controllers\DumpController();
+    $admin->indexAction();
+});
+
+// ==================================== Uploads Routes ====================================
 // Uploads Route
 Flight::route('POST /files/upload', function () {
     $file = new Expomark\Controllers\FileController();
     $file->uploadAction();
 });
 
-/* ==================================== Edit Routes ==================================== */
+// ==================================== Edit Routes ====================================
 // Edit Routes. ej: /edit/videos/34
 Flight::route('GET /edit(/@id:[0-9]+)', function ($videoId) {
     $edit = new Expomark\Controllers\EditController();
@@ -43,21 +51,21 @@ Flight::route('GET /edit/important/@id:[0-9]+', function ($videoId) {
     $edit->importantAction($videoId);
 });
 
-/* ==================================== Save Routes ==================================== */
+// ==================================== Save Routes ====================================
 // Save Routes. ej: /create/videos
 Flight::route('POST /save(/@id:[0-9]+)', function ($videoId) {
     $save = new Expomark\Controllers\SaveController();
     $save->videosAction($videoId);
 });
 
-/* ==================================== Delete Routes ==================================== */
+// ==================================== Delete Routes ====================================
 // Delete Routes. ej: /edit/videos/34
 Flight::route('GET /delete/@id:[0-9]+', function ($videoId) {
     $delete = new Expomark\Controllers\DeleteController();
     $delete->videosAction($videoId);
 });
 
-/* ==================================== Users Routes ==================================== */
+// ==================================== Users Routes ====================================
 // Users Edit Route. ej: /users/edit/1
 Flight::route('GET /users/edit/@id:[0-9]+', function ($userId) {
     $users = new Expomark\Controllers\UserController();
@@ -109,7 +117,7 @@ Flight::route('GET /users(/@page:[0-9]+)', function ($page) {
     $users->indexAction($page);
 });
 
-/* ==================================== Authors Routes ==================================== */
+// ==================================== Authors Routes ====================================
 // author Edit Route. ej: /author/edit/1
 Flight::route('GET /author/edit/@id:[0-9]+', function ($userId) {
     $author = new Expomark\Controllers\AuthorController();
