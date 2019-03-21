@@ -45,4 +45,12 @@ class DumpController
 
         exit(0);
     }
+
+    // BUSCAR ********************************************************
+    public function infoAction()
+    {
+        var_dump($GLOBALS['env']['db']);
+
+        exit(0);
+    }
 }

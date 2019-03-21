@@ -24,6 +24,11 @@ Flight::route('GET /dump', function () {
     $admin = new Expomark\Controllers\DumpController();
     $admin->indexAction();
 });
+// Admin Search Route. ej: /admin/search/videos
+Flight::route('GET /dump/info', function () {
+    $admin = new Expomark\Controllers\DumpController();
+    $admin->infoAction();
+});
 
 // ==================================== Uploads Routes ====================================
 // Uploads Route

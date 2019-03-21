@@ -136,8 +136,7 @@ $GLOBALS['config'] = [
             'th' => 50,
         ],
         'unpaseoporelprado' => [
-            '495' => 495,
-            '310' => 310,
+            '940' => 940,
             'th' => 50,
         ],
         'vivirmasymejor' => [
