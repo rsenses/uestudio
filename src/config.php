@@ -33,6 +33,11 @@ $GLOBALS['config'] = [
             '310' => 310,
             'th' => 50,
         ],
+        'nacidosparaserautonomos' => [
+            '720' => 720,
+            '310' => 310,
+            'th' => 50,
+        ],
         'espiritufilantropico' => [
             '784' => 784,
             '650' => 650,
@@ -158,6 +163,7 @@ $GLOBALS['config'] = [
     'enum' => [
         'webs_name' => [
             'porunusolove' => 'Por un uso Love',
+            'nacidosparaserautonomos' => 'Nacidos para ser Autónomos',
             'noesfutboleslaliga' => 'No es Fútbol es LaLiga',
             'planetainteligente' => 'Planeta Inteligente',
             'estardondeestes' => 'Estar donde Estés',
@@ -194,6 +200,7 @@ $GLOBALS['config'] = [
         ],
         'webs_url' => [
             'porunusolove' => 'http://porunusolove.elmundo.es/',
+            'nacidosparaserautonomos' => 'http://nacidosparaserautonomos.elmundo.es/',
             'noesfutboleslaliga' => 'http://noesfutboleslaliga.elmundo.es/',
             'planetainteligente' => 'http://www.planetainteligente.elmundo.es/',
             'saludesvida' => 'http://www.saludesvida.marca.com/',
