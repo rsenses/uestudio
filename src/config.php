@@ -38,6 +38,11 @@ $GLOBALS['config'] = [
             '310' => 310,
             'th' => 50,
         ],
+        'efectopositivo' => [
+            '720' => 720,
+            '310' => 310,
+            'th' => 50,
+        ],
         'espiritufilantropico' => [
             '784' => 784,
             '650' => 650,
@@ -201,6 +206,7 @@ $GLOBALS['config'] = [
         'webs_url' => [
             'porunusolove' => 'http://porunusolove.elmundo.es/',
             'nacidosparaserautonomos' => 'http://nacidosparaserautonomos.elmundo.es/',
+            'efectopositivo' => 'http://efectopositivo.elmundo.es/',
             'noesfutboleslaliga' => 'http://noesfutboleslaliga.elmundo.es/',
             'planetainteligente' => 'http://www.planetainteligente.elmundo.es/',
             'saludesvida' => 'http://www.saludesvida.marca.com/',
