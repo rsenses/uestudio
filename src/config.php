@@ -169,6 +169,7 @@ $GLOBALS['config'] = [
         'webs_name' => [
             'porunusolove' => 'Por un uso Love',
             'nacidosparaserautonomos' => 'Nacidos para ser Autónomos',
+            'efectopositivo' => 'Efecto Positivo',
             'noesfutboleslaliga' => 'No es Fútbol es LaLiga',
             'planetainteligente' => 'Planeta Inteligente',
             'estardondeestes' => 'Estar donde Estés',
