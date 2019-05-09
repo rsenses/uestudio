@@ -255,6 +255,7 @@ $GLOBALS['config'] = [
             'Podcast' => 'podcast',
             'Pixel' => 'pixel',
             'URL' => 'url',
+            'Caption' => 'caption',
         ],
         'options' => [
             'adrian-salso',
