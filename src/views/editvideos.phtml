@@ -314,16 +314,25 @@
     <script>
         $('#web').change(function() {
             $('.size span, .hideable .info').hide();
+            $('.size').parents('.col-sm-4').hide();
+            
             var section = $(this).val();
+
             if (section) {
+                $('.size .'+section).parents('.col-sm-4').show();
+                $('.size .'+section).parents('.col-sm-4').find('input').prop('required',true);
                 $('.size .'+section+', .hideable .'+section).show();
             } else {
                 $('.size .default').show();
             }
         });
         $(document).ready(function() {
+            $('.size').parents('.col-sm-4').hide();
+            
             var section = $('#web').val();
             if (section) {
+                $('.size .'+section).parents('.col-sm-4').show();
+                $('.size .'+section).parents('.col-sm-4').find('input').prop('required',true);
                 $('.size .'+section+', .hideable .'+section).show();
             } else {
                 $('.size .default').show();
