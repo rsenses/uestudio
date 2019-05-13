@@ -131,6 +131,10 @@ class SaveController
         // Guarda en la tabla normal
         if ($id) {
             $save = ORM::for_table('videos')->find_one($id);
+
+            if ($save->active == 0) {
+                $save->url = $slug;
+            }
         } else {
             $save = ORM::for_table('videos')->create();
             $save->active = 0;
