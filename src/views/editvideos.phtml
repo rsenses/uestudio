@@ -320,8 +320,10 @@
 
             if (section) {
                 $('.size .'+section).parents('.col-sm-4').show();
-                $('.size .'+section).parents('.col-sm-4').find('input').prop('required',true);
                 $('.size .'+section+', .hideable .'+section).show();
+                if ($('.size').parents('label').find('a').length === 0) {
+                    $('.size .'+section).parents('.col-sm-4').find('input').prop('required',true);
+                }
             } else {
                 $('.size .default').show();
             }
@@ -332,8 +334,10 @@
             var section = $('#web').val();
             if (section) {
                 $('.size .'+section).parents('.col-sm-4').show();
-                $('.size .'+section).parents('.col-sm-4').find('input').prop('required',true);
                 $('.size .'+section+', .hideable .'+section).show();
+                if ($('.size').parents('label').find('a').length === 0) {
+                    $('.size .'+section).parents('.col-sm-4').find('input').prop('required',true);
+                }
             } else {
                 $('.size .default').show();
             }
