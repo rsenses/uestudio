@@ -134,9 +134,9 @@ class SaveController
         } else {
             $save = ORM::for_table('videos')->create();
             $save->active = 0;
+            $save->url = $slug;
         }
         $save->title = $title;
-        $save->url = $slug;
         $save->subtitle = $subtitle;
         $save->content = $content;
         $save->description = $description;
