@@ -31,8 +31,17 @@ class FileController
 
                 $imageName = $this->image->upload('inline_upload_file');
 
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mime = finfo_file($finfo, Flight::request()->files['inline_upload_file']['tmp_name']);
+
+                if (in_array($mime, ['image/jpeg', 'image/png', 'image/gif'])) {
+                    $mimeType = 'images';
+                } else {
+                    $mimeType = 'files';
+                }
+
                 $response['status'] = 'success';
-                $response['src'] = $GLOBALS['config']['cdn_url'] . '/images/' . $webName . '/' . $imageName;
+                $response['src'] = $GLOBALS['config']['cdn_url'] . '/' . $mimeType . '/' . $webName . '/' . $imageName;
             } catch (\Exception $e) {
                 $response['msg'] = $e->getMessage();
             }

@@ -36,47 +36,7 @@ var InlineUpload = {
             .prev('.markItUpHeader')
             .offset();
         this.webname = $('#web').val();
-        this.dialog = $(
-            [
-                '<div class="',
-                this.options.container_class,
-                '"><div><form id="',
-                this.options.form_id,
-                '" action="',
-                this.options.action,
-                '" target="',
-                this.options.iframe,
-                '" method="post" enctype="multipart/form-data"><input type="hidden" name="webname" class="markitup-webname" value="',
-                this.webname,
-                '"><div class="form-group"><label class="control-label" for="',
-                this.options.inputs.alt.id,
-                '">',
-                this.options.inputs.alt.label,
-                '</label><input name="',
-                this.options.inputs.alt.name,
-                '" id="',
-                this.options.inputs.alt.id,
-                '" type="text" class="form-control"></div><div class="form-group"><label class="control-label" for="',
-                this.options.inputs.file.id,
-                '">',
-                this.options.inputs.file.label,
-                '</label><input name="',
-                this.options.inputs.file.name,
-                '" id="',
-                this.options.inputs.file.id,
-                '" type="file"></div><div class="form-group"><input id="',
-                this.options.submit.id,
-                '" type="button" class="btn btn-info btn-block" value="',
-                this.options.submit.value,
-                '"></div></form><div id="',
-                this.options.close,
-                '"><i class="fa fa-times"></i></div><iframe id="',
-                this.options.iframe,
-                '" name="',
-                this.options.iframe,
-                '" src="about:blank"></iframe></div></div>'
-            ].join('')
-        )
+        this.dialog = $(['<div class="', this.options.container_class, '"><div><form id="', this.options.form_id, '" action="', this.options.action, '" target="', this.options.iframe, '" method="post" enctype="multipart/form-data"><input type="hidden" name="webname" class="markitup-webname" value="', this.webname, '"><div class="form-group"><label class="control-label" for="', this.options.inputs.alt.id, '">', this.options.inputs.alt.label, '</label><input name="', this.options.inputs.alt.name, '" id="', this.options.inputs.alt.id, '" type="text" class="form-control"></div><div class="form-group"><label class="control-label" for="', this.options.inputs.file.id, '">', this.options.inputs.file.label, '</label><input name="', this.options.inputs.file.name, '" id="', this.options.inputs.file.id, '" type="file"></div><div class="form-group"><input id="', this.options.submit.id, '" type="button" class="btn btn-info btn-block" value="', this.options.submit.value, '"></div></form><div id="', this.options.close, '"><i class="fa fa-times"></i></div><iframe id="', this.options.iframe, '" name="', this.options.iframe, '" src="about:blank"></iframe></div></div>'].join(''))
             .appendTo(document.body)
             .hide()
             .css('top', this.offset.top)
@@ -93,21 +53,12 @@ var InlineUpload = {
         });
         $('#' + this.options.close).click(this.cleanUp);
         $('#' + this.options.iframe).bind('load', function() {
-            var result = document.getElementById('' + self.options.iframe)
-                .contentWindow.document.body.innerHTML;
+            var result = document.getElementById('' + self.options.iframe).contentWindow.document.body.innerHTML;
             console.log(result);
             if (result !== '') {
-                var response = jQuery.parseJSON(
-                    result.replace(/<(?:.|\n)*?>/gm, '')
-                );
+                var response = jQuery.parseJSON(result.replace(/<(?:.|\n)*?>/gm, ''));
                 if (response.status == 'success') {
-                    this.block = [
-                        '<img src="',
-                        response.src,
-                        '" alt="',
-                        $('#' + self.options.inputs.alt.id).val(),
-                        '">'
-                    ];
+                    this.block = ['<img src="', response.src, '" alt="', $('#' + self.options.inputs.alt.id).val(), '">'];
                     self.cleanUp();
                     $.markItUp({
                         replaceWith: this.block.join('')
@@ -126,47 +77,7 @@ var InlineUpload = {
             .prev('.markItUpHeader')
             .offset();
         this.webname = $('#web').val();
-        this.dialog = $(
-            [
-                '<div class="',
-                this.options.container_class,
-                '"><div><form id="',
-                this.options.form_id,
-                '" action="',
-                this.options.action,
-                '" target="',
-                this.options.iframe,
-                '" method="post" enctype="multipart/form-data"><input type="hidden" name="webname" class="markitup-webname" value="',
-                this.webname,
-                '"><div class="form-group"><label class="control-label" for="',
-                this.options.inputs.rel.id,
-                '">',
-                this.options.inputs.rel.label,
-                '</label><input name="',
-                this.options.inputs.rel.name,
-                '" id="',
-                this.options.inputs.rel.id,
-                '" type="text" class="form-control"></div><div class="form-group"><label class="control-label" for="',
-                this.options.inputs.file.id,
-                '">',
-                this.options.inputs.file.label,
-                '</label><input name="',
-                this.options.inputs.file.name,
-                '" id="',
-                this.options.inputs.file.id,
-                '" type="file"></div><div class="form-group"><input id="',
-                this.options.submit.id,
-                '" type="button" class="btn btn-info btn-block" value="',
-                this.options.submit.value,
-                '"></div></form><div id="',
-                this.options.close,
-                '"></div><iframe id="',
-                this.options.iframe,
-                '" name="',
-                this.options.iframe,
-                '" src="about:blank"></iframe></div></div>'
-            ].join('')
-        )
+        this.dialog = $(['<div class="', this.options.container_class, '"><div><form id="', this.options.form_id, '" action="', this.options.action, '" target="', this.options.iframe, '" method="post" enctype="multipart/form-data"><input type="hidden" name="webname" class="markitup-webname" value="', this.webname, '"><div class="form-group"><label class="control-label" for="', this.options.inputs.rel.id, '">', this.options.inputs.rel.label, '</label><input name="', this.options.inputs.rel.name, '" id="', this.options.inputs.rel.id, '" type="text" class="form-control"></div><div class="form-group"><label class="control-label" for="', this.options.inputs.file.id, '">', this.options.inputs.file.label, '</label><input name="', this.options.inputs.file.name, '" id="', this.options.inputs.file.id, '" type="file"></div><div class="form-group"><input id="', this.options.submit.id, '" type="button" class="btn btn-info btn-block" value="', this.options.submit.value, '"></div></form><div id="', this.options.close, '"></div><iframe id="', this.options.iframe, '" name="', this.options.iframe, '" src="about:blank"></iframe></div></div>'].join(''))
             .appendTo(document.body)
             .hide()
             .css('top', this.offset.top)
@@ -183,22 +94,12 @@ var InlineUpload = {
         });
         $('#' + this.options.close).click(this.cleanUp);
         $('#' + this.options.iframe).bind('load', function() {
-            var result = document.getElementById('' + self.options.iframe)
-                .contentWindow.document.body.innerHTML;
+            var result = document.getElementById('' + self.options.iframe).contentWindow.document.body.innerHTML;
             if (result !== '') {
-                var response = jQuery.parseJSON(
-                    result.replace(/<(?:.|\n)*?>/gm, '')
-                );
+                var response = jQuery.parseJSON(result.replace(/<(?:.|\n)*?>/gm, ''));
+                console.log(response);
                 if (response.status == 'success') {
-                    this.block = [
-                        '<a href="',
-                        response.src,
-                        '" target="',
-                        $('#' + self.options.inputs.rel.id).val(),
-                        '">',
-                        hash.selection,
-                        '</a>'
-                    ];
+                    this.block = ['<a href="', response.src, '" target="', $('#' + self.options.inputs.rel.id).val(), '">', hash.selection, '</a>'];
                     self.cleanUp();
                     $.markItUp({
                         replaceWith: this.block.join('')
