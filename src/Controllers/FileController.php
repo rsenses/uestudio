@@ -27,12 +27,12 @@ class FileController
 
         if (!empty(Flight::request()->files['inline_upload_file']['size'])) {
             try {
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mime = finfo_file($finfo, Flight::request()->files['inline_upload_file']['tmp_name']);
+
                 $webName = filter_var(Flight::request()->data['webname'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 
                 $imageName = $this->image->upload('inline_upload_file');
-
-                $finfo = finfo_open(FILEINFO_MIME_TYPE);
-                $mime = finfo_file($finfo, Flight::request()->files['inline_upload_file']['tmp_name']);
 
                 if (in_array($mime, ['image/jpeg', 'image/png', 'image/gif'])) {
                     $mimeType = 'images';

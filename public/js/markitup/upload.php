@@ -1,10 +1,11 @@
 <?php
+
 //error_reporting(E_ALL | E_STRICT);
 //ini_set('display_errors', E_ALL | E_STRICT);
 function reemplazo($url = null)
 {
     //Reemplazamos caracteres especiales latinos en Mayúscula por culpa de un bug con strtolower
-    $table = array(
+    $table = [
         'Á' => 'A',
         'Ç' => 'c',
         'É' => 'e',
@@ -19,7 +20,7 @@ function reemplazo($url = null)
         'ñ' => 'n',
         'ó' => 'o',
         'ú' => 'u',
-    );
+    ];
     $url = strtr($url, $table);
     //Añadimos los guiones
     $url = strtolower(trim($url));
@@ -35,19 +36,19 @@ function reemplazo($url = null)
  * submitted along with the uploaded image.
  */
 if ($_FILES['inline_upload_file']['type'] == 'image/jpeg' || $_FILES['inline_upload_file']['type'] == 'image/gif' || $_FILES['inline_upload_file']['type'] == 'image/pjpeg' || $_FILES['inline_upload_file']['type'] == 'image/png') {
-    $upload_dir = $_SERVER['DOCUMENT_ROOT'].'/uploads/images/';
+    $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/images/';
     $response['type'] = 'image';
 } else {
-    $upload_dir = $_SERVER['DOCUMENT_ROOT'].'/uploads/files/';
+    $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/files/';
     $response['type'] = 'file';
 }
 $name = reemplazo(basename($_FILES['inline_upload_file']['name']));
-$upload_path = $upload_dir.$name;
+$upload_path = $upload_dir . $name;
 
-$response = array();
+$response = [];
 
 if (move_uploaded_file($_FILES['inline_upload_file']['tmp_name'], $upload_path)) {
-    $info = getImageSize($upload_path);
+    $info = getimagesize($upload_path);
 
     $response['status'] = 'success';
     $response['width'] = $info[0];
