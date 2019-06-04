@@ -243,7 +243,7 @@ $GLOBALS['config'] = [
             'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'options_name' => [
-            // 'Tipo de Contenido' => 'type',
+            'Tipo de Contenido' => 'type',
             // 'Formato' => 'format',
             // 'Partido' => 'match',
             // 'Fecha' => 'date',
