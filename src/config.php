@@ -17,6 +17,11 @@ $GLOBALS['config'] = [
     //'cdn_url' => '/uploads/images',
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
+        'feliziudad' => [
+            '1056' => 1056,
+            '640' => 640,
+            'th' => 50,
+        ],
         'noesfutboleslaliga' => [
             '1056' => 1056,
             '640' => 640,
@@ -177,6 +182,7 @@ $GLOBALS['config'] = [
             // 'entregados' => 'Entregados',
             'espiritufilantropico' => 'Espíritu Filantrópico',
             'estardondeestes' => 'Estar donde Estés',
+            'feliziudad' => 'FeliZiudad',
             // 'estrategiadigital' => 'Estrategia Digital',
             // 'extraordinarios' => 'Extraordinarios',
             // 'futurosostenible' => 'Futuro Sostenible',
@@ -205,6 +211,7 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'webs_url' => [
+            'feliziudad' => 'https://feliziudad.marca.com/',
             'bodegasybebidas' => 'http://www.bodegasybebidas.fueradeserie.com/',
             'porunusolove' => 'http://porunusolove.elmundo.es/',
             'nacidosparaserautonomos' => 'http://nacidosparaserautonomos.elmundo.es/',
