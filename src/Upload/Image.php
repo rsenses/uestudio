@@ -43,7 +43,7 @@ class Image
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime = finfo_file($finfo, $_FILES[$input]['tmp_name']);
 
-        if (in_array($mime, ['image/jpeg', 'image/png', 'image/gif'])) {
+        if (in_array($mime, ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'])) {
             $container = 'images';
         } else {
             $container = 'files';
@@ -58,7 +58,7 @@ class Image
 
         $folder = $GLOBALS['config']['uploads_dir'] . $container . '/';
 
-        $storage = new FileSystem($folder . '/');
+        $storage = new FileSystem($folder);
 
         $file = new File($input, $storage);
 
@@ -66,7 +66,7 @@ class Image
 
         $file->setName($image);
         $file->addValidations([
-            new Mimetype(['image/jpeg', 'image/png', 'image/gif', 'text/plain', 'application/pdf', 'text/css', 'text/html', 'text/javascript']),
+            new Mimetype(['image/jpeg', 'image/png', 'image/gif', 'text/plain', 'application/pdf', 'text/css', 'text/html', 'text/javascript', 'image/svg+xml']),
             new Size('1100K'),
         ]);
 
@@ -76,29 +76,29 @@ class Image
             $imageName = $file->getNameWithExtension();
 
             if ($this->isExternalCdnEnaled()) {
-                $content = fopen($folder . '/' . $imageName, 'r');
+                $content = fopen($folder . $imageName, 'r');
                 $this->uploadBlob($container, $webName . '/' . $imageName, $content, $blobClient);
             }
 
-            if (isset($GLOBALS['config']['images'][$webName]) && $container === 'images') {
+            if (isset($GLOBALS['config']['images'][$webName]) && $container === 'images' && $mime != 'image/svg+xml') {
                 foreach ($GLOBALS['config']['images'][$webName] as $key => $size) {
-                    $resizable = $this->imagine->open($folder . '/' . $imageName);
+                    $resizable = $this->imagine->open($folder . $imageName);
 
                     $imageSize = $resizable->getSize();
 
                     $resizable->resize($imageSize->widen($size))
-                        ->save($folder . '/' . $key . '_' . $imageName);
+                        ->save($folder . $key . '_' . $imageName);
 
                     if ($this->isExternalCdnEnaled()) {
-                        $content = fopen($folder . '/' . $key . '_' . $imageName, 'r');
+                        $content = fopen($folder . $key . '_' . $imageName, 'r');
                         $this->uploadBlob($container, $webName . '/' . $key . '_' . $imageName, $content, $blobClient);
-                        unlink($folder . '/' . $key . '_' . $imageName);
+                        unlink($folder . $key . '_' . $imageName);
                     }
                 }
             }
 
             if ($this->isExternalCdnEnaled()) {
-                unlink($folder . '/' . $imageName);
+                unlink($folder . $imageName);
             }
 
             return $imageName;
