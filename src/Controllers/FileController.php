@@ -34,7 +34,8 @@ class FileController
 
                 $imageName = $this->image->upload('inline_upload_file');
 
-                if (in_array($mime, ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'])) {
+
+                if (in_array($mime, ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/svg'])) {
                     $mimeType = 'images';
                 } else {
                     $mimeType = 'files';

@@ -43,7 +43,7 @@ class Image
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime = finfo_file($finfo, $_FILES[$input]['tmp_name']);
 
-        if (in_array($mime, ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'])) {
+        if (in_array($mime, ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/svg'])) {
             $container = 'images';
         } else {
             $container = 'files';
@@ -66,7 +66,7 @@ class Image
 
         $file->setName($image);
         $file->addValidations([
-            new Mimetype(['image/jpeg', 'image/png', 'image/gif', 'text/plain', 'application/pdf', 'text/css', 'text/html', 'text/javascript', 'image/svg+xml']),
+            new Mimetype(['image/jpeg', 'image/png', 'image/gif', 'text/plain', 'application/pdf', 'text/css', 'text/html', 'text/javascript', 'image/svg+xml', 'image/svg']),
             new Size('1100K'),
         ]);
 
@@ -80,7 +80,7 @@ class Image
                 $this->uploadBlob($container, $webName . '/' . $imageName, $content, $blobClient);
             }
 
-            if (isset($GLOBALS['config']['images'][$webName]) && $container === 'images' && $mime != 'image/svg+xml') {
+            if (isset($GLOBALS['config']['images'][$webName]) && $container === 'images' && $mime != 'image/svg+xml' && $mime != 'image/svg') {
                 foreach ($GLOBALS['config']['images'][$webName] as $key => $size) {
                     $resizable = $this->imagine->open($folder . $imageName);
 
