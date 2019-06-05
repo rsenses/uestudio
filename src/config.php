@@ -265,6 +265,7 @@ $GLOBALS['config'] = [
             'Scripts' => 'scripts',
             'Título Alt.' => 'headline',
             'URL' => 'url',
+            'Quedada' => 'meeting',
         ],
         'options' => [
             'adrian-salso',
