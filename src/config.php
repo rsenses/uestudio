@@ -211,7 +211,7 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'webs_url' => [
-            'feliziudad' => 'https://feliziudad.marca.com/',
+            'feliziudad' => 'https://feliziudad.marca.com',
             'bodegasybebidas' => 'http://www.bodegasybebidas.fueradeserie.com/',
             'porunusolove' => 'http://porunusolove.elmundo.es/',
             'nacidosparaserautonomos' => 'http://nacidosparaserautonomos.elmundo.es/',
