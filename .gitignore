@@ -1,5 +1,6 @@
 .DS_Store
 vendor/
 storage/
-public/uploads/
+public/uploads/files/
+public/uploads/images/
 src/env.php

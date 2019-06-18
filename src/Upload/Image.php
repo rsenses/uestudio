@@ -75,8 +75,6 @@ class Image
             $file->upload();
             $imageName = $file->getNameWithExtension();
 
-            return $imageName;
-
             if ($this->isExternalCdnEnaled()) {
                 $content = fopen($folder . $imageName, 'r');
                 $this->uploadBlob($container, $webName . '/' . $imageName, $content, $blobClient);
@@ -105,7 +103,6 @@ class Image
 
             return $imageName;
         } catch (\Exception $e) {
-            die(var_dump($e, $file));
             if ($file->getErrors()) {
                 throw new Exception($file->getErrors()[0]);
             } else {
