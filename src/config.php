@@ -43,6 +43,11 @@ $GLOBALS['config'] = [
             '310' => 310,
             'th' => 50,
         ],
+        'hablemosdefuturo' => [
+            '720' => 720,
+            '310' => 310,
+            'th' => 50,
+        ],
         'efectopositivo' => [
             '720' => 720,
             '310' => 310,
@@ -186,6 +191,7 @@ $GLOBALS['config'] = [
             // 'estrategiadigital' => 'Estrategia Digital',
             // 'extraordinarios' => 'Extraordinarios',
             // 'futurosostenible' => 'Futuro Sostenible',
+            'hablemosdefuturo' => 'Hablemos del Futuro',
             'impulsodigital' => 'Impulso Digital',
             // 'innovacionensalud' => 'Innovación en Salud',
             // 'laprevia' => 'La Previa',
@@ -214,6 +220,7 @@ $GLOBALS['config'] = [
             'feliziudad' => 'https://feliziudad.marca.com',
             'bodegasybebidas' => 'http://www.bodegasybebidas.fueradeserie.com/',
             'porunusolove' => 'http://porunusolove.elmundo.es/',
+            'hablemosdefuturo' => 'http://hablemosdefuturo.expansion.com/',
             'nacidosparaserautonomos' => 'http://nacidosparaserautonomos.elmundo.es/',
             'efectopositivo' => 'http://efectopositivo.elmundo.es/',
             'noesfutboleslaliga' => 'http://noesfutboleslaliga.elmundo.es/',
