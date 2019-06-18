@@ -75,6 +75,8 @@ class Image
             $file->upload();
             $imageName = $file->getNameWithExtension();
 
+            return $imageName;
+
             if ($this->isExternalCdnEnaled()) {
                 $content = fopen($folder . $imageName, 'r');
                 $this->uploadBlob($container, $webName . '/' . $imageName, $content, $blobClient);
