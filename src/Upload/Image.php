@@ -105,6 +105,7 @@ class Image
 
             return $imageName;
         } catch (\Exception $e) {
+            die(var_dump($e, $file));
             if ($file->getErrors()) {
                 throw new Exception($file->getErrors()[0]);
             } else {
