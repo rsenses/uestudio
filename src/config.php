@@ -53,6 +53,11 @@ $GLOBALS['config'] = [
             '310' => 310,
             'th' => 50,
         ],
+        'electrificate' => [
+            '720' => 720,
+            '310' => 310,
+            'th' => 50,
+        ],
         'espiritufilantropico' => [
             '784' => 784,
             '650' => 650,
@@ -183,6 +188,7 @@ $GLOBALS['config'] = [
             // 'copasamsung' => 'Copa Samsung',
             'correresdevalientes' => '¡Correr es de valientes!',
             'efectopositivo' => 'Efecto Positivo',
+            'electrificate' => 'Electrificate',
             // 'elclubdelabarba' => 'El Club de la Barba',
             // 'entregados' => 'Entregados',
             'espiritufilantropico' => 'Espíritu Filantrópico',
@@ -223,6 +229,7 @@ $GLOBALS['config'] = [
             'hablemosdefuturo' => 'http://hablemosdefuturo.expansion.com/',
             'nacidosparaserautonomos' => 'http://nacidosparaserautonomos.elmundo.es/',
             'efectopositivo' => 'http://efectopositivo.elmundo.es/',
+            'electrificate' => 'http://electrificate.elmundo.es/',
             'noesfutboleslaliga' => 'http://noesfutboleslaliga.elmundo.es/',
             'planetainteligente' => 'http://www.planetainteligente.elmundo.es/',
             'saludesvida' => 'http://www.saludesvida.marca.com/',
