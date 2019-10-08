@@ -39,6 +39,10 @@ Flight::route('POST /files/upload', function () {
 
 // ==================================== Edit Routes ====================================
 // Edit Routes. ej: /edit/videos/34
+Flight::route('GET /export/@id:[0-9]+', function ($videoId) {
+    $edit = new Expomark\Controllers\ExportController();
+    $edit->indexAction($videoId);
+});
 Flight::route('GET /edit(/@id:[0-9]+)', function ($videoId) {
     $edit = new Expomark\Controllers\EditController();
     $edit->videosAction($videoId);

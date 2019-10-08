@@ -299,6 +299,9 @@
                 </div>
                 <div class="form-group">
                     <?php if ($id) : ?>
+                        <?php if ($id == 11023) : ?>
+                            <a href="/export/<?php echo $view->escape($content['id']) ?>" class="btn btn-link btn-lg">Inscripciones</a>
+                        <?php endif ?>
                         <?php if ($content['active'] == 0) : ?>
                             <a href="/edit/active/<?php echo $view->escape($content['id']) ?>" class="btn btn-success btn-lg">Activar</a>
                         <?php else : ?>
