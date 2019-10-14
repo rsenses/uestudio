@@ -281,6 +281,7 @@ $GLOBALS['config'] = [
             'URL' => 'url',
             'Quedada' => 'meeting',
             'Trackit' => 'trackit_id',
+            'Footer' => 'footer',
         ],
         'options' => [
             'adrian-salso',
