@@ -18,7 +18,6 @@ $GLOBALS['config'] = [
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
         'haranhistoria' => [
-            '500' => 500,
             'th' => 50,
         ],
         'feliziudad' => [
