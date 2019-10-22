@@ -17,6 +17,10 @@ $GLOBALS['config'] = [
     //'cdn_url' => '/uploads/images',
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
+        'haranhistoria' => [
+            '500' => 500,
+            'th' => 50,
+        ],
         'feliziudad' => [
             '1330' => 1330,
             '506' => 506,
@@ -198,6 +202,7 @@ $GLOBALS['config'] = [
             // 'extraordinarios' => 'Extraordinarios',
             // 'futurosostenible' => 'Futuro Sostenible',
             'hablemosdefuturo' => 'Hablemos del Futuro',
+            'haranhistoria' => 'Harán Historia',
             'impulsodigital' => 'Impulso Digital',
             // 'innovacionensalud' => 'Innovación en Salud',
             // 'laprevia' => 'La Previa',
@@ -223,6 +228,7 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'webs_url' => [
+            'haranhistoria' => 'https://haranhistoria.elmundo.es',
             'feliziudad' => 'https://feliziudad.marca.com',
             'bodegasybebidas' => 'http://www.bodegasybebidas.fueradeserie.com/',
             'porunusolove' => 'http://porunusolove.elmundo.es/',
@@ -282,6 +288,8 @@ $GLOBALS['config'] = [
             'Quedada' => 'meeting',
             'Trackit' => 'trackit_id',
             'Footer' => 'footer',
+            'Video' => 'video',
+            'Info' => 'info',
         ],
         'options' => [
             'adrian-salso',
