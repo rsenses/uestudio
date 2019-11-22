@@ -227,7 +227,7 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
         ],
         'webs_url' => [
-            'haranhistoria' => 'https://haranhistoria.elmundo.es',
+            'haranhistoria' => 'https://haranhistoria.elmundo.es/',
             'feliziudad' => 'https://feliziudad.marca.com',
             'bodegasybebidas' => 'http://www.bodegasybebidas.fueradeserie.com/',
             'porunusolove' => 'http://porunusolove.elmundo.es/',
