@@ -1,5 +1,5 @@
 .markItUp .markItUpButton a {
-    color: #7B8A8B;
+    color: #7b8a8b;
     text-align: center;
 }
 .markItUp .markItUpButton a:hover {
@@ -10,7 +10,7 @@
     z-index: 100;
     width: 300px;
     background-color: #fff;
-    border: 2px solid #DCE4EC;
+    border: 2px solid #dce4ec;
     border-top-color: #fff;
     margin: 22px 0 0 40px;
     padding: 1em;
@@ -25,7 +25,7 @@
     float: right;
     width: 16px;
     height: 16px;
-    /*background: transparent url(images/cancel.png) 0 0 no-repeat;*/
+    background: transparent url(images/cancel.png) 0 0 no-repeat;
     cursor: pointer;
 }
 #inline_upload_iframe {
