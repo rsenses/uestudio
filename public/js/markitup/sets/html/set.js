@@ -141,85 +141,90 @@ mySettings = {
             text: '<i class="fa fa-pencil"></i>',
             replaceWith: 'class="[![Class]!]"',
             dropMenu: [
+                // {
+                //     name: 'Align left',
+                //     text: 'Align left',
+                //     replaceWith: 'class="text-left"'
+                // },
+                // {
+                //     name: 'Align right',
+                //     text: 'Align right',
+                //     replaceWith: 'class="text-right"'
+                // },
+                // {
+                //     name: 'Align center',
+                //     text: 'Align center',
+                //     replaceWith: 'class="text-center"'
+                // },
+                // {
+                //     name: 'Align justify',
+                //     text: 'Align justify',
+                //     replaceWith: 'class="text-justify"'
+                // },
+                // {
+                //     name: 'No wrap text',
+                //     text: 'No wrap text',
+                //     replaceWith: 'class="text-nowrap"'
+                // },
+                // {
+                //     name: 'Text muted',
+                //     text: 'Text muted',
+                //     replaceWith: 'class="text-muted"'
+                // },
+                // {
+                //     name: 'Text primary',
+                //     text: 'Text primary',
+                //     replaceWith: 'class="text-primary"'
+                // },
+                // {
+                //     name: 'Text success',
+                //     text: 'Text success',
+                //     replaceWith: 'class="text-success"'
+                // },
+                // {
+                //     name: 'Text info',
+                //     text: 'Text info',
+                //     replaceWith: 'class="text-info"'
+                // },
+                // {
+                //     name: 'Text warning',
+                //     text: 'Text warning',
+                //     replaceWith: 'class="text-warning"'
+                // },
+                // {
+                //     name: 'Text danger',
+                //     text: 'Text danger',
+                //     replaceWith: 'class="text-danger"'
+                // },
+                // {
+                //     name: 'Background primary',
+                //     text: 'Background primary',
+                //     replaceWith: 'class="bg-primary"'
+                // },
+                // {
+                //     name: 'Background success',
+                //     text: 'Background success',
+                //     replaceWith: 'class="bg-success"'
+                // },
+                // {
+                //     name: 'Background info',
+                //     text: 'Background info',
+                //     replaceWith: 'class="bg-info"'
+                // },
+                // {
+                //     name: 'Background warning',
+                //     text: 'Background warning',
+                //     replaceWith: 'class="bg-warning"'
+                // },
+                // {
+                //     name: 'Background danger',
+                //     text: 'Background danger',
+                //     replaceWith: 'class="bg-danger"'
+                // },
                 {
-                    name: 'Align left',
-                    text: 'Align left',
-                    replaceWith: 'class="text-left"'
-                },
-                {
-                    name: 'Align right',
-                    text: 'Align right',
-                    replaceWith: 'class="text-right"'
-                },
-                {
-                    name: 'Align center',
-                    text: 'Align center',
-                    replaceWith: 'class="text-center"'
-                },
-                {
-                    name: 'Align justify',
-                    text: 'Align justify',
-                    replaceWith: 'class="text-justify"'
-                },
-                {
-                    name: 'No wrap text',
-                    text: 'No wrap text',
-                    replaceWith: 'class="text-nowrap"'
-                },
-                {
-                    name: 'Text muted',
-                    text: 'Text muted',
-                    replaceWith: 'class="text-muted"'
-                },
-                {
-                    name: 'Text primary',
-                    text: 'Text primary',
-                    replaceWith: 'class="text-primary"'
-                },
-                {
-                    name: 'Text success',
-                    text: 'Text success',
-                    replaceWith: 'class="text-success"'
-                },
-                {
-                    name: 'Text info',
-                    text: 'Text info',
-                    replaceWith: 'class="text-info"'
-                },
-                {
-                    name: 'Text warning',
-                    text: 'Text warning',
-                    replaceWith: 'class="text-warning"'
-                },
-                {
-                    name: 'Text danger',
-                    text: 'Text danger',
-                    replaceWith: 'class="text-danger"'
-                },
-                {
-                    name: 'Background primary',
-                    text: 'Background primary',
-                    replaceWith: 'class="bg-primary"'
-                },
-                {
-                    name: 'Background success',
-                    text: 'Background success',
-                    replaceWith: 'class="bg-success"'
-                },
-                {
-                    name: 'Background info',
-                    text: 'Background info',
-                    replaceWith: 'class="bg-info"'
-                },
-                {
-                    name: 'Background warning',
-                    text: 'Background warning',
-                    replaceWith: 'class="bg-warning"'
-                },
-                {
-                    name: 'Background danger',
-                    text: 'Background danger',
-                    replaceWith: 'class="bg-danger"'
+                    name: 'Intro PlanetaInteligente',
+                    text: 'Intro PlanetaInteligente',
+                    replaceWith: "<div class=\"row\">\n\t<div class=\"col-40 photo-main\">\n\t\t<figure class=\"hey hey2\" style=\"opacity: 1;\">\n\t\t\tIMG\n\t\t\t<figcaption>PIE DE FOTO</figcaption>\n\t\t</figure>\n\t\t<blockquote class=\"featured-sm hey hey2\" style=\"opacity: 1;”>DESTACADO</blockquote>\n\t</div>\n\t<div class=\"col-50\">\n\t\tTEXTO\n\t</div>\n</div>"
                 }
             ]
         },
