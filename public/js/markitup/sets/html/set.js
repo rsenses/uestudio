@@ -224,7 +224,7 @@ mySettings = {
                 {
                     name: 'Intro PlanetaInteligente',
                     text: 'Intro PlanetaInteligente',
-                    replaceWith: "<div class=\"row\">\n\t<div class=\"col-40 photo-main\">\n\t\t<figure class=\"hey hey2\" style=\"opacity: 1;\">\n\t\t\tIMG\n\t\t\t<figcaption>PIE DE FOTO</figcaption>\n\t\t</figure>\n\t\t<blockquote class=\"featured-sm hey hey2\" style=\"opacity: 1;”>DESTACADO</blockquote>\n\t</div>\n\t<div class=\"col-50\">\n\t\tTEXTO\n\t</div>\n</div>"
+                    replaceWith: '<div class="row">\n\t<div class="col-40 photo-main">\n\t\t<figure class="hey hey2" style="opacity: 1;">\n\t\t\tIMG\n\t\t\t<figcaption>PIE DE FOTO</figcaption>\n\t\t</figure>\n\t\t<blockquote class="featured-sm hey hey2" style="opacity: 1;">DESTACADO</blockquote>\n\t</div>\n\t<div class="col-50">\n\t\tTEXTO\n\t</div>\n</div>'
                 }
             ]
         },
