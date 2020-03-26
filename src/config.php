@@ -25,6 +25,10 @@ $GLOBALS['config'] = [
             '506' => 506,
             'th' => 50,
         ],
+        'ods2030' => [
+            '870' => 870,
+            'th' => 50,
+        ],
         'noesfutboleslaliga' => [
             '1056' => 1056,
             '640' => 640,
@@ -212,6 +216,7 @@ $GLOBALS['config'] = [
             // 'otrasmanerasdevivir' => 'Otras Maneras de Vivir',
             // 'paddockclub' => 'Paddock Club',
             // 'pequenosjugadores' => 'Pequeños Jugadores',
+            'ods2030' => 'ODS2030',
             'planetainteligente' => 'Planeta Inteligente',
             'porunusolove' => 'Por un uso Love',
             // 'potenciatupyme' => 'Potencia tu Pyme',
