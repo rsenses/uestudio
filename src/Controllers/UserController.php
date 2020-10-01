@@ -149,7 +149,7 @@ class UserController
     {
         if (isset(Flight::request()->data['Submit']) && empty(Flight::request()->data['name'])) {
             if (CSRF::validate($_POST)) {
-                $email = empty(Flight::request()->data['email']) ? null : (Flight::request()->data['email'] === 'Email') ? null : filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+                $email = empty(Flight::request()->data['email']) ? null : ((Flight::request()->data['email'] === 'Email') ? null : filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
 
                 $password = empty(Flight::request()->data['password']) ? null : filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
