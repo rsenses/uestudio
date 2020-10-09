@@ -45,6 +45,11 @@ $GLOBALS['config'] = [
             '310' => 310,
             'th' => 50,
         ],
+        'ahoramascerca' => [
+            '720' => 720,
+            '310' => 310,
+            'th' => 50,
+        ],
         'nacidosparaserautonomos' => [
             '720' => 720,
             '310' => 310,
@@ -187,6 +192,7 @@ $GLOBALS['config'] = [
     ],
     'enum' => [
         'webs_name' => [
+            'ahoramascerca' => 'Ahora más Cerca',
             'alimentatusalud' => 'Alimenta tu Salud',
             // 'bodegasybebidas' => 'Bodegas y Bebidas',
             'caminosalternativos' => 'Caminos Alternativos',
@@ -233,6 +239,7 @@ $GLOBALS['config'] = [
             'haranhistoria' => 'https://haranhistoria.elmundo.es/',
             'feliziudad' => 'https://feliziudad.marca.com',
             'bodegasybebidas' => 'https://www.bodegasybebidas.fueradeserie.com/',
+            'ahoramascerca' => 'https://ahoramascerca.elmundo.es/',
             'porunusolove' => 'https://porunusolove.elmundo.es/',
             'hablemosdefuturo' => 'https://hablemosdefuturo.expansion.com/',
             'nacidosparaserautonomos' => 'https://nacidosparaserautonomos.elmundo.es/',
