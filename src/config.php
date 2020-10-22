@@ -60,6 +60,11 @@ $GLOBALS['config'] = [
             '310' => 310,
             'th' => 50,
         ],
+        'derechodeempresa' => [
+            '720' => 720,
+            '310' => 310,
+            'th' => 50,
+        ],
         'efectopositivo' => [
             '720' => 720,
             '310' => 310,
@@ -198,6 +203,7 @@ $GLOBALS['config'] = [
             'caminosalternativos' => 'Caminos Alternativos',
             // 'copasamsung' => 'Copa Samsung',
             'correresdevalientes' => '¡Correr es de valientes!',
+            'derechodeempresa' => 'Derecho de Empresa',
             'efectopositivo' => 'Efecto Positivo',
             'electrificate' => 'Electrificate',
             // 'elclubdelabarba' => 'El Club de la Barba',
@@ -241,6 +247,7 @@ $GLOBALS['config'] = [
             'bodegasybebidas' => 'https://www.bodegasybebidas.fueradeserie.com/',
             'ahoramascerca' => 'https://ahoramascerca.elmundo.es/',
             'porunusolove' => 'https://porunusolove.elmundo.es/',
+            'derechodeempresa' => 'https://derechodeempresa.expansion.com/',
             'hablemosdefuturo' => 'https://hablemosdefuturo.expansion.com/',
             'nacidosparaserautonomos' => 'https://nacidosparaserautonomos.elmundo.es/',
             'efectopositivo' => 'https://efectopositivo.elmundo.es/',
