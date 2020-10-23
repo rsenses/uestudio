@@ -39,6 +39,14 @@ mySettings = {
             separator: '---------------'
         },
         {
+            name: 'Heading 2',
+            text: '<i class="fa fa-header"></i><small>2</small>',
+            key: '2',
+            openWith: '<h2(!( class="[![Class]!]")!)>',
+            closeWith: '</h2>',
+            placeHolder: 'Your title here...'
+        },
+        {
             name: 'Heading 3',
             text: '<i class="fa fa-header"></i><small>3</small>',
             key: '3',
