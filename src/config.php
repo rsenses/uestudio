@@ -307,6 +307,7 @@ $GLOBALS['config'] = [
             'Footer' => 'footer',
             'Video' => 'video',
             'Info' => 'info',
+            'Instagram' => 'instagram',
         ],
         'options' => [
             'adrian-salso',
