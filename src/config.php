@@ -17,6 +17,9 @@ $GLOBALS['config'] = [
     //'cdn_url' => '/uploads/images',
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
+        'compartiendoconocimiento' => [
+            'th' => 50,
+        ],
         'haranhistoria' => [
             'th' => 50,
         ],
@@ -202,6 +205,7 @@ $GLOBALS['config'] = [
             // 'bodegasybebidas' => 'Bodegas y Bebidas',
             'caminosalternativos' => 'Caminos Alternativos',
             // 'copasamsung' => 'Copa Samsung',
+            'compartiendoconocimiento' => 'Compartiendo Conocimiento',
             'correresdevalientes' => '¡Correr es de valientes!',
             'derechodeempresa' => 'Derecho de Empresa',
             'efectopositivo' => 'Efecto Positivo',
@@ -282,9 +286,10 @@ $GLOBALS['config'] = [
             'potenciatupyme' => 'https://potenciatupyme.elmundo.es/',
             'therightway' => 'The Right Way',
             'theventurespain' => 'https://www.theventurespain.expansion.com/',
-            'unpaseoporelprado' => 'https://www.unpaseoporelprado.elmundo.es/',
+            'unpaseoporelprado' => 'https://unpaseoporelprado.elmundo.es/',
             'vivirmasymejor' => 'https://www.vivirmasymejor.elmundo.es/',
-            'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
+            'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place',
+            'compartiendoconocimiento' => 'https://compartiendoconocimiento.elmundo.es/'
         ],
         'options_name' => [
             'Tipo de Contenido' => 'type',
@@ -308,6 +313,7 @@ $GLOBALS['config'] = [
             'Video' => 'video',
             'Info' => 'info',
             'Instagram' => 'instagram',
+            'Menú' => 'menu',
         ],
         'options' => [
             'adrian-salso',
