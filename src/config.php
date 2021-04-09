@@ -68,6 +68,11 @@ $GLOBALS['config'] = [
             '310' => 310,
             'th' => 50,
         ],
+        'gastro' => [
+            '720' => 720,
+            '310' => 310,
+            'th' => 50,
+        ],
         'efectopositivo' => [
             '720' => 720,
             '310' => 310,
@@ -218,6 +223,7 @@ $GLOBALS['config'] = [
             // 'estrategiadigital' => 'Estrategia Digital',
             // 'extraordinarios' => 'Extraordinarios',
             'futurosostenible' => 'Futuro Sostenible',
+            'gastro' => 'Gastro',
             'hablemosdefuturo' => 'Hablemos del Futuro',
             'haranhistoria' => 'Harán Historia',
             'impulsodigital' => 'Impulso Digital',
@@ -255,6 +261,7 @@ $GLOBALS['config'] = [
             'hablemosdefuturo' => 'https://hablemosdefuturo.expansion.com/',
             'nacidosparaserautonomos' => 'https://nacidosparaserautonomos.elmundo.es/',
             'efectopositivo' => 'https://efectopositivo.elmundo.es/',
+            'gastro' => 'https://gastro.elmundo.es/metropoli/',
             'electrificate' => 'https://electrificate.elmundo.es/',
             'noesfutboleslaliga' => 'https://noesfutboleslaliga.elmundo.es/',
             'planetainteligente' => 'https://planetainteligente.elmundo.es/',
