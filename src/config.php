@@ -73,6 +73,11 @@ $GLOBALS['config'] = [
             '310' => 310,
             'th' => 50,
         ],
+        'caminodigital' => [
+            '720' => 720,
+            '310' => 310,
+            'th' => 50,
+        ],
         'efectopositivo' => [
             '720' => 720,
             '310' => 310,
@@ -224,6 +229,7 @@ $GLOBALS['config'] = [
             // 'extraordinarios' => 'Extraordinarios',
             'futurosostenible' => 'Futuro Sostenible',
             'gastro' => 'Gastro',
+            'caminodigital' => 'Camino Digital',
             'hablemosdefuturo' => 'Hablemos del Futuro',
             'haranhistoria' => 'Harán Historia',
             'impulsodigital' => 'Impulso Digital',
@@ -262,6 +268,7 @@ $GLOBALS['config'] = [
             'nacidosparaserautonomos' => 'https://nacidosparaserautonomos.elmundo.es/',
             'efectopositivo' => 'https://efectopositivo.elmundo.es/',
             'gastro' => 'https://gastro.elmundo.es/metropoli/',
+            'caminodigital' => 'https://caminodigital.elmundo.es/',
             'electrificate' => 'https://electrificate.elmundo.es/',
             'noesfutboleslaliga' => 'https://noesfutboleslaliga.elmundo.es/',
             'planetainteligente' => 'https://planetainteligente.elmundo.es/',
