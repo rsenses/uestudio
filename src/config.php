@@ -17,6 +17,9 @@ $GLOBALS['config'] = [
     //'cdn_url' => '/uploads/images',
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
+        'laporteriavertical' => [
+            'th' => 50,
+        ],
         'compartiendoconocimiento' => [
             'th' => 50,
         ],
@@ -235,6 +238,7 @@ $GLOBALS['config'] = [
             'impulsodigital' => 'Impulso Digital',
             'innovacionensalud' => 'Innovación en Salud',
             // 'laprevia' => 'La Previa',
+            'laporteriavertical' => 'La Portería Vertical',
             'loquehayquever' => 'Lo que hay que ver',
             // 'mastercard' => 'Mastercard',
             'nacidosparaserautonomos' => 'Nacidos para ser Autónomos',
@@ -303,7 +307,8 @@ $GLOBALS['config'] = [
             'unpaseoporelprado' => 'https://unpaseoporelprado.elmundo.es/',
             'vivirmasymejor' => 'https://www.vivirmasymejor.elmundo.es/',
             'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place',
-            'compartiendoconocimiento' => 'https://compartiendoconocimiento.elmundo.es/'
+            'compartiendoconocimiento' => 'https://compartiendoconocimiento.elmundo.es/',
+            'laporteriavertical' => 'https://laporteriavertical.marca.com/'
         ],
         'options_name' => [
             'Tipo de Contenido' => 'type',
@@ -328,6 +333,7 @@ $GLOBALS['config'] = [
             'Info' => 'info',
             'Instagram' => 'instagram',
             'Menú' => 'menu',
+            'TikTok' => 'tiktok',
         ],
         'options' => [
             'adrian-salso',
