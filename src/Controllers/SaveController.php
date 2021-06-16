@@ -75,7 +75,7 @@ class SaveController
             )
         );
         $subtitle = trim(Flight::request()->data['subtitle']);
-        $content = Flight::request()->data['content'];
+        $content = $this->removeEmoji(Flight::request()->data['content']);
         $facebook = filter_var(trim(Flight::request()->data['facebook']), FILTER_SANITIZE_STRING);
         $description = filter_var(trim(Flight::request()->data['description']), FILTER_SANITIZE_STRING);
         $twitter = filter_var(trim(Flight::request()->data['twitter']), FILTER_SANITIZE_STRING);
@@ -232,5 +232,30 @@ class SaveController
 
         Flight::redirect('/edit/' . $id);
         die;
+    }
+
+    private function removeEmoji($string)
+    {
+        // Match Emoticons
+        $regex_emoticons = '/[\x{1F600}-\x{1F64F}]/u';
+        $clear_string = preg_replace($regex_emoticons, '', $string);
+    
+        // Match Miscellaneous Symbols and Pictographs
+        $regex_symbols = '/[\x{1F300}-\x{1F5FF}]/u';
+        $clear_string = preg_replace($regex_symbols, '', $clear_string);
+    
+        // Match Transport And Map Symbols
+        $regex_transport = '/[\x{1F680}-\x{1F6FF}]/u';
+        $clear_string = preg_replace($regex_transport, '', $clear_string);
+    
+        // Match Miscellaneous Symbols
+        $regex_misc = '/[\x{2600}-\x{26FF}]/u';
+        $clear_string = preg_replace($regex_misc, '', $clear_string);
+    
+        // Match Dingbats
+        $regex_dingbats = '/[\x{2700}-\x{27BF}]/u';
+        $clear_string = preg_replace($regex_dingbats, '', $clear_string);
+    
+        return $clear_string;
     }
 }
