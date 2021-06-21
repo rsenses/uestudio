@@ -233,6 +233,26 @@ mySettings = {
                     name: 'Intro PlanetaInteligente',
                     text: 'Intro PlanetaInteligente',
                     replaceWith: '<div class="row">\n\t<div class="col-40 photo-main">\n\t\t<figure class="hey hey2" style="opacity: 1;">\n\t\t\tIMG\n\t\t\t<figcaption>PIE DE FOTO</figcaption>\n\t\t</figure>\n\t\t<blockquote class="featured-sm hey hey2" style="opacity: 1;">DESTACADO</blockquote>\n\t</div>\n\t<div class="col-50">\n\t\tTEXTO\n\t</div>\n</div>'
+                },
+                {
+                    name: 'Content Orígenes',
+                    text: 'Content Orígenes',
+                    replaceWith: '<div class="content">\n\t\tTEXTO\n\t</div>'
+                },
+                {
+                    name: 'Content MD Orígenes',
+                    text: 'Content MD Orígenes',
+                    replaceWith: '<div class="content-md">\n\t\tTEXTO\n\t</div>'
+                },
+                {
+                    name: 'Destacado LG Orígenes',
+                    text: 'Destacado LG Orígenes',
+                    replaceWith: '<div class="destacado-lg">\n\t\tTEXTO\n\t</div>'
+                },
+                {
+                    name: 'Photo LG Orígenes',
+                    text: 'Photo LG Orígenes',
+                    replaceWith: '<div class="photo-lg">\n\t\tTEXTO\n\t</div>'
                 }
             ]
         },
