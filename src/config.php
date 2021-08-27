@@ -17,6 +17,11 @@ $GLOBALS['config'] = [
     //'cdn_url' => '/uploads/images',
     'cdn_url' => 'https://uecluster.blob.core.windows.net',
     'images' => [
+        'uneteawah' => [
+            '300' => 300,
+            'th' => 50,
+        ],
+
         'laporteriavertical' => [
             'th' => 50,
         ],
@@ -261,6 +266,7 @@ $GLOBALS['config'] = [
             // 'therightway' => 'The Right Way',
             // 'theventurespain' => 'The Venture Spain',
             'unpaseoporelprado' => 'Un Paseo por el Prado',
+            'uneteawah' => 'Únete a la red WAH',
             // 'ventanaalfuturo' => 'Ventana al futuro',
             // 'vivirmasymejor' => 'Vivir Más y Mejor',
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place'
@@ -313,6 +319,7 @@ $GLOBALS['config'] = [
             // 'yodonabeautybrandsplace' => 'YoDona Beauty Brands Place',
             'compartiendoconocimiento' => 'https://compartiendoconocimiento.elmundo.es/',
             'laporteriavertical' => 'https://laporteriavertical.marca.com/',
+            'uneteawah' => 'https://uneteawah.marca.com/',
             'origenes' => 'https://origenes.marca.com/'
         ],
         'options_name' => [
